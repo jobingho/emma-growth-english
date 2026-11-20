@@ -1,0 +1,2375 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<title>Emma 的成长口语 · 美国孩子场景对话</title>
+<style>
+  :root{
+    --bg:#f6f5f1; --card:#ffffff; --ink:#26313a; --ink2:#5f6b74; --ink3:#9aa4ac;
+    --line:#e7e4dc; --brand:#e07a4f; --brand2:#f6e2d7; --blue:#4a7fa8; --blue2:#e7f0f6;
+    --ok:#3a8f6a; --ok2:#e3f2ea; --warn:#c98a1e; --warn2:#fbf1dc; --bad:#c2503f; --bad2:#f9e6e2;
+    --radius:16px; --shadow:0 2px 10px rgba(38,49,58,.06);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Segoe UI",Roboto,sans-serif;
+    font-size:16px;line-height:1.55;-webkit-text-size-adjust:100%}
+  #app{max-width:520px;margin:0 auto;min-height:100vh;padding:0 0 40px}
+  .top{position:sticky;top:0;z-index:20;background:rgba(246,245,241,.94);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);padding:calc(env(safe-area-inset-top) + 12px) 16px 12px}
+  .top .row{display:flex;align-items:center;gap:10px}
+  .top h1{font-size:17px;margin:0;font-weight:600;letter-spacing:.3px}
+  .top .sub{font-size:12px;color:var(--ink3);margin-top:2px}
+  .btn{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
+  .icon-btn{width:34px;height:34px;border-radius:50%;background:var(--card);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-size:17px;flex:none}
+  .wrap{padding:16px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:16px;margin-bottom:14px}
+  .hero{display:flex;gap:14px;align-items:center}
+  .avatar{width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,#f6d9c6,#e07a4f);
+    display:flex;align-items:center;justify-content:center;font-size:30px;flex:none}
+  .hero h2{font-size:19px;margin:0 0 3px}
+  .hero p{margin:0;color:var(--ink2);font-size:13px}
+  .chip{display:inline-block;padding:3px 10px;border-radius:999px;font-size:12px;background:var(--brand2);color:#a44f2e;margin:2px 4px 0 0}
+  .seg{display:flex;gap:8px;margin-bottom:16px}
+  .seg .btn{flex:1;padding:11px;border-radius:12px;background:var(--card);border:1px solid var(--line);
+    font-size:14px;font-weight:500;color:var(--ink2)}
+  .seg .btn.on{background:var(--brand);border-color:var(--brand);color:#fff}
+  .sec-title{font-size:13px;color:var(--ink3);margin:18px 4px 10px;font-weight:600;letter-spacing:.5px}
+  .stage{font-size:12px;color:var(--ink3);margin:16px 4px 8px}
+  .scene-item{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);
+    border-radius:14px;padding:13px 14px;margin-bottom:10px;box-shadow:var(--shadow);width:100%;text-align:left}
+  .scene-item .ic{width:42px;height:42px;border-radius:12px;background:var(--blue2);display:flex;
+    align-items:center;justify-content:center;font-size:22px;flex:none}
+  .scene-item .meta{flex:1;min-width:0}
+  .scene-item .meta b{font-size:15px;display:block}
+  .scene-item .meta span{font-size:12px;color:var(--ink3)}
+  .scene-item .go{font-size:13px;color:var(--brand);font-weight:600;flex:none}
+  .scene-item.lock{opacity:.5}
+  .scene-item.done .ic{background:var(--ok2)}
+  .scene-item.done .go{color:var(--ok)}
+  .banner{background:linear-gradient(135deg,#4a7fa8,#365f80);color:#fff;border-radius:var(--radius);
+    padding:16px;box-shadow:var(--shadow)}
+  .banner b{font-size:15px}
+  .banner p{margin:4px 0 0;font-size:12px;opacity:.9}
+  .banner .btn{margin-top:12px;background:#fff;color:#365f80;border-radius:10px;padding:9px 16px;font-weight:600;font-size:14px}
+  .chat-head{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+  .chat-head .npc-av{width:44px;height:44px;border-radius:50%;background:var(--brand2);display:flex;
+    align-items:center;justify-content:center;font-size:24px;flex:none}
+  .chat-head b{font-size:15px;display:block}
+  .chat-head span{font-size:12px;color:var(--ink3)}
+  .bubble{max-width:86%;padding:12px 14px;border-radius:16px;margin-bottom:12px;font-size:16px;line-height:1.5}
+  .bubble.npc{background:var(--card);border:1px solid var(--line);border-bottom-left-radius:4px}
+  .bubble.me{background:var(--brand);color:#fff;margin-left:auto;border-bottom-right-radius:4px}
+  .bubble .emo{font-size:20px;margin-right:4px}
+  .emo-hint{font-size:12.5px;color:var(--warn);background:var(--warn2);border-radius:10px;padding:7px 11px;margin:-4px 0 12px}
+  .zh-toggle{font-size:12px;color:var(--ink3);margin-top:6px;cursor:pointer;text-decoration:underline dotted}
+  .zh-text{font-size:13px;color:var(--ink2);margin-top:6px}
+  .play-btn{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--blue);
+    background:var(--blue2);border-radius:8px;padding:5px 10px;margin-bottom:8px}
+  .say-area{position:sticky;bottom:0;background:rgba(246,245,241,.96);backdrop-filter:blur(10px);
+    border-top:1px solid var(--line);padding:12px 16px calc(env(safe-area-inset-bottom) + 12px);margin:0 -16px}
+  .opts{display:flex;gap:8px;overflow-x:auto;padding-bottom:10px;margin-bottom:2px}
+  .opts .btn{flex:none;padding:8px 12px;border-radius:999px;background:var(--card);border:1px solid var(--blue);
+    color:var(--blue);font-size:13px;white-space:nowrap}
+  .input-row{display:flex;gap:8px}
+  .input-row input{flex:1;min-width:0;padding:12px 14px;border-radius:12px;border:1px solid var(--line);
+    background:var(--card);font-size:16px;color:var(--ink);outline:none}
+  .input-row input:focus{border-color:var(--brand)}
+  .input-row .send{background:var(--brand);color:#fff;border-radius:12px;padding:0 18px;font-weight:600;font-size:15px}
+  .tip-mic{font-size:11.5px;color:var(--ink3);margin:8px 2px 0;text-align:center}
+  .progress{height:5px;background:var(--line);border-radius:99px;overflow:hidden;margin-bottom:14px}
+  .progress i{display:block;height:100%;background:var(--brand);border-radius:99px;transition:width .3s}
+  .rc-head{text-align:center;padding:6px 0 16px}
+  .rc-head .big{font-size:40px}
+  .rc-head h2{font-size:20px;margin:6px 0 2px}
+  .rc-head p{color:var(--ink2);font-size:13px;margin:0}
+  .rc-row{border-radius:14px;padding:13px 14px;margin-bottom:10px;border:1px solid var(--line);background:var(--card)}
+  .rc-row.ok{background:var(--ok2);border-color:#cfe8da}
+  .rc-row.near{background:var(--warn2);border-color:#f0dcb4}
+  .rc-row.warn{background:var(--warn2);border-color:#f0dcb4}
+  .rc-row.miss{background:var(--bad2);border-color:#f0cfc9}
+  .rc-row.bad{background:var(--bad2);border-color:#f0cfc9}
+  .rc-row .lv{font-size:12px;font-weight:700;letter-spacing:.5px}
+  .rc-row.ok .lv{color:var(--ok)} .rc-row.near .lv{color:var(--warn)} .rc-row.warn .lv{color:var(--warn)}
+  .rc-row.miss .lv{color:var(--bad)} .rc-row.bad .lv{color:var(--bad)}
+  .rc-row .said{font-size:14px;margin:6px 0;color:var(--ink)}
+  .rc-row .native{font-size:14px;color:var(--blue);font-weight:500}
+  .rc-row .why{font-size:12.5px;color:var(--ink2);margin-top:6px}
+  .rc-label{font-size:12px;color:var(--ink3)}
+  .card-title{font-size:14px;font-weight:600;margin:0 0 8px;display:flex;align-items:center;gap:6px}
+  .fillers span{display:inline-block;background:var(--blue2);color:#365f80;border-radius:8px;
+    padding:4px 9px;font-size:13px;margin:0 6px 6px 0}
+  .culture .k{font-size:13px;color:var(--ink2);margin:0;line-height:1.7}
+  .big-btn{display:block;width:100%;padding:14px;border-radius:14px;background:var(--brand);color:#fff;
+    border:0;font-size:16px;font-weight:600;margin-top:8px}
+  .ghost-btn{display:block;width:100%;padding:12px;border-radius:14px;background:var(--card);color:var(--ink2);
+    border:1px solid var(--line);font-size:14px;margin-top:10px}
+  .toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:rgba(38,49,58,.92);
+    color:#fff;padding:10px 18px;border-radius:12px;font-size:14px;z-index:50;opacity:0;transition:opacity .2s;pointer-events:none;max-width:88%;text-align:center}
+  .toast.show{opacity:1}
+  .empty{text-align:center;color:var(--ink3);padding:40px 20px;font-size:14px}
+  .mini-note{font-size:12px;color:var(--ink3);text-align:center;margin-top:14px;line-height:1.6}
+  .lock-note{font-size:12px;color:var(--ink3)}
+  .mode-tag{font-size:11px;padding:2px 8px;border-radius:99px;background:var(--blue2);color:var(--blue);font-weight:600}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============ 人设 ============ */
+const HERO = {
+  name:'Emma', cn:'艾玛', ageStart:4,
+  city:'纽约 · 皇后区', family:'爸爸是会计师，妈妈是社区医院护士，有一个哥哥，养一只金毛',
+  emoji:'👧'
+};
+
+/* ============ 场景数据（全成长线 4–18 岁） ============
+   每个 turn 结构：
+   npc/npcAv/emotion/emoHint/text/zh/options/nativeLine/intents[]/fallback
+   intent: {keys:[], reply:'', emotion:'', emoHint:'', zh:'', quality:'ok|near|miss|bad', hint:'', aff:0, flag:''}
+   场景可选字段：rating=14|16（分级锁门槛）；其余阶段字段统一 stage/age
+*/
+/* 小学 7–10 岁（先做的 13 个） */
+const PRIMARY = [
+  {
+    id:'school', age:7, stage:'小学 7–10', icon:'🎒', title:'第一天上学',
+    desc:'Emma 第一天去新学校，要跟老师和同学自我介绍。',
+    culture:{title:'美国小学的早晨', body:'美国孩子上学第一天，老师会让学生做自我介绍。同学之间打招呼很随意，一句 Hi / Hey 就行；对老师则要礼貌，用 Hello / Good morning。称呼老师用 Ms. + 姓（如 Ms. Lopez），不直呼其名。'},
+    turns:[
+      {
+        npc:'Ms. Lopez', npcAv:'👩‍🏫', emotion:'😊', emoHint:'老师微笑着看你，语速放慢了。',
+        text:'Good morning! What’s your name?', zh:'早上好！你叫什么名字？',
+        options:['I’m Emma.','My name is Emma.','Emma.'],
+        nativeLine:'I’m Emma. Nice to meet you.',
+        intents:[
+          {keys:['i’m emma','im emma','i am emma','my name is emma','emma','i’m','my name'],
+           reply:'Nice to meet you, Emma! We’re so happy you’re here.', emotion:'😊', emoHint:'老师很不客气地欢迎你。',
+           zh:'很高兴认识你，Emma！我们很高兴你在这里。', quality:'ok', hint:'自我介绍时说 I’m Emma 或 My name is Emma 都对；加一句 Nice to meet you 更有礼貌，母语孩子常这么说。', aff:1, flag:'met_teacher'},
+          {keys:['hi','hello','hey','good morning'],
+           reply:'Hi there! And what’s your name?', emotion:'🙂', emoHint:'老师等你补上名字。',
+           zh:'嗨！那你叫什么名字？', quality:'near', hint:'只说 Hi 没回答名字。老师问 What’s your name 时，要接上 I’m + 名字。', aff:0}
+        ],
+        fallback:{text:'Take your time. You can say “I’m Emma.”', emotion:'🙂', emoHint:'老师耐心地给你提示。', zh:'慢慢来，你可以说"I’m Emma."', quality:'miss', hint:'老师问的是名字。用 I’m + 你的名字 来回答，例如 I’m Emma。', aff:0}
+      },
+      {
+        npc:'Ms. Lopez', npcAv:'👩‍🏫', emotion:'🙂', emoHint:'老师在点名册上写字。',
+        text:'How old are you, Emma?', zh:'Emma，你几岁啦？',
+        options:['I’m seven.','Seven.','I’m 7 years old.'],
+        nativeLine:'I’m seven.',
+        intents:[
+          {keys:['i’m seven','im seven','i am seven','seven','7','seven years old','7 years old'],
+           reply:'Seven! You’re in the right class then.', emotion:'😊', emoHint:'老师点点头。',
+           zh:'七岁！那你来对班级了。', quality:'ok', hint:'回答年龄直接说 I’m seven. 就行。I’m 7 years old 语法没错，但日常口语里略显啰嗦。', aff:1},
+          {keys:['i’m fine','good','okay','ok','i don’t know','i dont know'],
+           reply:'That’s okay — you can tell me later.', emotion:'🙂', emoHint:'老师温和地说。',
+           zh:'没关系，你可以待会儿告诉我。', quality:'miss', hint:'How old are you 问的是年龄，不是"你好吗"。要说 I’m + 数字。', aff:0}
+        ],
+        fallback:{text:'You can say “I’m seven.”', emotion:'🙂', emoHint:'老师给了提示。', zh:'你可以说"I’m seven."', quality:'miss', hint:'问年龄用 I’m + 数字回答，例如 I’m seven.', aff:0}
+      },
+      {
+        npc:'Billy', npcAv:'👦', emotion:'😄', emoHint:'同桌男孩凑过来，语气很随意。',
+        text:'Hi! Do you want to sit with me?', zh:'嗨！你想和我坐一起吗？',
+        options:['Sure!','Yes, please.','Yeah, okay.'],
+        nativeLine:'Sure, thanks!',
+        intents:[
+          {keys:['sure','yes please','yeah','okay','ok','yes','of course','i do'],
+           reply:'Cool! I’m Billy. Let’s be desk partners.', emotion:'😄', emoHint:'Billy 很高兴。',
+           zh:'太好了！我是 Billy，我们做同桌吧。', quality:'ok', hint:'同学之间答应邀请，Sure! / Yeah! 很自然。加一句 thanks 更有礼貌。', aff:1, flag:'friend_billy'},
+          {keys:['no','not really','i don’t want','i dont want','leave me alone'],
+           reply:'Oh… okay. Maybe later!', emotion:'😕', emoHint:'Billy 有点失落。',
+           zh:'哦……好吧，那也许下次吧。', quality:'near', hint:'拒绝同学可以委婉一点：No thanks, maybe later. 直接说 leave me alone 会伤人。', aff:-1}
+        ],
+        fallback:{text:'You can just say “Sure!”', emotion:'🙂', emoHint:'Billy 等你回答。', zh:'你可以直接说"Sure!"', quality:'miss', hint:'对方在邀请你。答应就说 Sure! / Yes, please.，拒绝就说 No, thanks.', aff:0}
+      },
+      {
+        npc:'Ms. Lopez', npcAv:'👩‍🏫', emotion:'🙂', emoHint:'老师指向你的课桌。',
+        text:'Do you need help finding your desk?', zh:'需要我帮你找到座位吗？',
+        options:['Yes, please.','No, thank you.','I’m okay, thanks.'],
+        nativeLine:'Yes, please. Thank you!',
+        intents:[
+          {keys:['yes please','yes','i do','please'],
+           reply:'Of course! Follow me.', emotion:'😊', emoHint:'老师在前带路。',
+           zh:'当然！跟我来。', quality:'ok', hint:'接受帮助说 Yes, please. 是地道又礼貌的说法，比单说 Yes 好。', aff:1},
+          {keys:['no thank you','no thanks','i’m okay','im okay','i’m fine','im fine','no'],
+           reply:'All right, it’s right over there.', emotion:'🙂', emoHint:'老师指了指方向。',
+           zh:'好的，就在那边。', quality:'ok', hint:'婉拒帮助说 No, thank you. / I’m okay, thanks. 都很地道。', aff:0}
+        ],
+        fallback:{text:'Just say “Yes, please” or “No, thank you.”', emotion:'🙂', emoHint:'老师等着。', zh:'说"Yes, please"或"No, thank you"就行。', quality:'miss', hint:'这是需要帮助的询问。用 Yes, please. 或 No, thank you. 回答。', aff:0}
+      }
+    ]
+  },
+  {
+    id:'play', age:8, stage:'小学 7–10', icon:'🧸', title:'和邻居小孩玩',
+    desc:'放学后，邻居家的 Timmy 来找你玩，你们要商量玩什么。',
+    culture:{title:'放学后的 playdate', body:'美国孩子放学后常约邻居或同学玩，叫 playdate。邀请时很直接：Wanna play?（Want to 的口语缩略）。表达想玩什么用 Let’s… 或 How about…。如果不想玩某个游戏，通常会说 I don’t feel like it，再补一个替代建议，而不是直接拒绝。'},
+    turns:[
+      {
+        npc:'Timmy', npcAv:'👦', emotion:'😄', emoHint:'邻居男孩抱着玩具跑过来。',
+        text:'Hey! Wanna play with me?', zh:'嘿！想和我一起玩吗？',
+        options:['Sure!','Yeah, let’s play.','What do you want to play?'],
+        nativeLine:'Sure! What do you want to play?',
+        intents:[
+          {keys:['sure','yeah','yes','okay','ok','i do','let’s','lets play'],
+           reply:'Awesome! I got new toy cars.', emotion:'😄', emoHint:'Timmy 眼睛亮了。',
+           zh:'太棒了！我有新的玩具车。', quality:'ok', hint:'答应邀请说 Sure! / Yeah! 很自然。反问一句 What do you want to play? 更像母语孩子。', aff:1, flag:'played_timmy'},
+          {keys:['what do you want','how about','what should we'],
+           reply:'Hmm, I don’t know. You pick!', emotion:'😄', emoHint:'Timmy 把选择权交给你。',
+           zh:'嗯，我不知道，你选吧！', quality:'ok', hint:'反问对方想玩什么也是很好的承接，说明你在参与对话。', aff:1}
+        ],
+        fallback:{text:'Just say “Sure!” or ask “What do you want to play?”', emotion:'🙂', emoHint:'Timmy 等你回答。', zh:'说"Sure!"或问"What do you want to play?"', quality:'miss', hint:'邀请用 Sure! 答应，或反问 What do you want to play?', aff:0}
+      },
+      {
+        npc:'Timmy', npcAv:'👦', emotion:'🙂', emoHint:'Timmy 想了想。',
+        text:'What do you want to play?', zh:'你想玩什么？',
+        options:['Let’s play tag.','How about hide and seek?','I don’t know.'],
+        nativeLine:'Let’s play tag!',
+        intents:[
+          {keys:['let’s','lets','tag','hide and seek','how about','i want to play','we can play'],
+           reply:'Tag! Okay, you’re it first!', emotion:'😄', emoHint:'Timmy 开始跑。',
+           zh:'抓人游戏！好，你先当鬼！', quality:'ok', hint:'提议一起玩用 Let’s + 游戏名，或 How about + 游戏名？，都是地道说法。', aff:1},
+          {keys:['i don’t know','i dont know','anything','up to you','whatever'],
+           reply:'Then I pick. Let’s play cars.', emotion:'🙂', emoHint:'Timmy 自己拿了主意。',
+           zh:'那我选，我们玩车吧。', quality:'near', hint:'I don’t know 可以用，但接着给个建议会更好，比如 I don’t know — how about tag?', aff:0}
+        ],
+        fallback:{text:'You can say “Let’s play tag.”', emotion:'🙂', emoHint:'Timmy 等你说。', zh:'你可以说"Let’s play tag."', quality:'miss', hint:'提议游戏用 Let’s + 游戏名，例如 Let’s play tag.', aff:0}
+      },
+      {
+        npc:'Timmy', npcAv:'👦', emotion:'😕', emoHint:'Timmy 皱了皱眉，语气有点不高兴。',
+        text:'I don’t want to play that. It’s boring.', zh:'我不想玩那个，太无聊了。',
+        options:['Okay, what do you want to play?','Fine, I don’t care.','But it’s fun!'],
+        nativeLine:'Okay, what do you want to play?',
+        intents:[
+          {keys:['okay what','ok what','what do you want','how about','we could','let’s play','lets play','fine'],
+           reply:'Let’s play with my cars instead!', emotion:'😄', emoHint:'Timmy 又开心起来。',
+           zh:'那我们改玩我的车吧！', quality:'ok', hint:'对方否定了提议时，接受并反问 What do you want to play? 是很成熟、地道的接法。', aff:1},
+          {keys:['but it’s fun','but it is fun','no it’s not','boring'],
+           reply:'Hmm, but I still don’t want to.', emotion:'😕', emoHint:'Timmy 别过脸去。',
+           zh:'嗯，但我还是不想玩。', quality:'near', hint:'直接反驳 but it’s fun 会让气氛变僵。先接住对方，再提新方案更自然。', aff:-1}
+        ],
+        fallback:{text:'Try “Okay, what do you want to play?”', emotion:'🙂', emoHint:'Timmy 看着你。', zh:'试试"Okay, what do you want to play?"', quality:'miss', hint:'对方否定了游戏。先接受 Okay…，再问 What do you want to play?', aff:0}
+      },
+      {
+        npc:'Timmy', npcAv:'👦', emotion:'😊', emoHint:'Timmy 从口袋掏出饼干。',
+        text:'Want some of my snacks?', zh:'要吃点我的零食吗？',
+        options:['Yes, please! Thanks.','Sure, thanks!','No, I’m good.'],
+        nativeLine:'Yes, please! Thanks.',
+        intents:[
+          {keys:['yes please','sure thanks','sure','yes','thanks','i’d love','id love'],
+           reply:'Here you go! These are my favorite.', emotion:'😄', emoHint:'Timmy 把饼干递给你。',
+           zh:'给你！这是我最喜欢的。', quality:'ok', hint:'接受东西说 Yes, please! Thanks. 最地道。单说 Yes 也可以但略生硬。', aff:1, flag:'shared_snack'},
+          {keys:['no','i’m good','im good','no thanks','not hungry'],
+           reply:'Okay, more for me!', emotion:'😄', emoHint:'Timmy 自己吃了。',
+           zh:'好吧，那我多吃点！', quality:'ok', hint:'婉拒说 No, thanks. / I’m good. 都很自然，I’m good 是口语高频表达。', aff:0}
+        ],
+        fallback:{text:'Say “Yes, please!” or “No, thanks.”', emotion:'🙂', emoHint:'Timmy 举着饼干。', zh:'说"Yes, please!"或"No, thanks."', quality:'miss', hint:'接受用 Yes, please.，婉拒用 No, thanks. / I’m good.', aff:0}
+      }
+    ]
+  },
+  {
+    id:'birthday', age:9, stage:'小学 7–10', icon:'🎂', title:'生日派对',
+    desc:'今天是 Emma 的生日，朋友们来家里庆祝，要收礼物、吹蜡烛。',
+    culture:{title:'美国生日派对', body:'美国孩子生日会唱 Happy Birthday，然后许愿吹蜡烛——愿望说出来就不灵了（make a wish）。收到礼物通常当面打开并道谢，就算不喜欢也要说 Thank you！说 I love it 是礼貌的客套。'},
+    turns:[
+      {
+        npc:'Chloe', npcAv:'👧', emotion:'😊', emoHint:'好朋友捧着礼物走过来。',
+        text:'Happy birthday! This is for you.', zh:'生日快乐！这是给你的。',
+        options:['Thank you so much!','Wow, thank you!','Thanks!'],
+        nativeLine:'Thank you so much! I love it.',
+        intents:[
+          {keys:['thank you so much','thank you','thanks','wow','i love it','ilove it','so nice'],
+           reply:'Open it! I think you’ll like it.', emotion:'😄', emoHint:'Chloe 期待地看着。',
+           zh:'打开看看！我想你会喜欢的。', quality:'ok', hint:'收到礼物先道谢，Thank you so much! I love it. 是母语孩子的标准反应，即使还没拆开。', aff:1},
+          {keys:['happy birthday','hi','hello','what is it','what’s this'],
+           reply:'It’s a surprise — just open it!', emotion:'😄', emoHint:'Chloe 笑了。',
+           zh:'是个惊喜——快打开吧！', quality:'near', hint:'别人祝你生日快乐并送礼时，先说 Thank you，再拆开，别急着问是什么。', aff:0}
+        ],
+        fallback:{text:'Say “Thank you so much!”', emotion:'🙂', emoHint:'Chloe 等着。', zh:'说"Thank you so much!"', quality:'miss', hint:'收到礼物第一句是道谢：Thank you so much!', aff:0}
+      },
+      {
+        npc:'Mom', npcAv:'👩', emotion:'😊', emoHint:'妈妈端着蛋糕走出来。',
+        text:'How old are you now, Emma?', zh:'Emma，你现在几岁啦？',
+        options:['I’m nine!','Nine.','I’m 9 years old now.'],
+        nativeLine:'I’m nine now!',
+        intents:[
+          {keys:['i’m nine','im nine','nine','9','i’m 9','im 9','nine years old'],
+           reply:'Nine already! My big girl.', emotion:'😊', emoHint:'妈妈笑着摸你的头。',
+           zh:'已经九岁了！我的大姑娘。', quality:'ok', hint:'说年龄 I’m nine now! 里的 now 很有画面感，是母语者爱用的小词。', aff:1},
+          {keys:['i’m fine','im fine','good','okay','ten','8','eight'],
+           reply:'Silly! You’re nine today.', emotion:'😄', emoHint:'妈妈笑着纠正。',
+           zh:'小傻瓜，你今天九岁啦。', quality:'miss', hint:'How old are you 问年龄。今天是九岁生日，说 I’m nine now!', aff:0}
+        ],
+        fallback:{text:'Say “I’m nine now!”', emotion:'🙂', emoHint:'妈妈等着。', zh:'说"I’m nine now!"', quality:'miss', hint:'用 I’m + 数字 回答年龄，例如 I’m nine now!', aff:0}
+      },
+      {
+        npc:'Chloe', npcAv:'👧', emotion:'🎉', emoHint:'大家围到蛋糕旁，灯关了。',
+        text:'Make a wish and blow out the candles!', zh:'许个愿，然后吹蜡烛！',
+        options:['Okay!','I’m making a wish!','Wait, I need a photo first!'],
+        nativeLine:'Okay! …Wish made!',
+        intents:[
+          {keys:['okay','ok','i’m making a wish','im making a wish','i wish','yes','sure'],
+           reply:'Yay! Happy birthday, Emma!', emotion:'🎉', emoHint:'大家鼓掌。',
+           zh:'耶！生日快乐，Emma！', quality:'ok', hint:'照做时说 Okay! 或 I’m making a wish! 都很自然。注意愿望不能说出来哦。', aff:1},
+          {keys:['wait','photo','camera','hold on'],
+           reply:'Hurry, the candles are melting!', emotion:'😄', emoHint:'Chloe 催你。',
+           zh:'快点，蜡烛要化啦！', quality:'near', hint:'想拍照可以说 Wait, let me take a photo first!，但别让蜡烛等太久。', aff:0}
+        ],
+        fallback:{text:'Just say “Okay!” and make a wish.', emotion:'🙂', emoHint:'大家等着。', zh:'说"Okay!"然后许愿。', quality:'miss', hint:'大家在等你许愿吹蜡烛，说 Okay! 就好。', aff:0}
+      },
+      {
+        npc:'Mom', npcAv:'👩', emotion:'😊', emoHint:'妈妈把礼物推到你面前。',
+        text:'Do you want to open your presents now?', zh:'你现在想拆礼物吗？',
+        options:['Yes! I can’t wait.','Sure, let’s do it.','Maybe later.'],
+        nativeLine:'Yes! I can’t wait.',
+        intents:[
+          {keys:['yes i can’t wait','yes i cant wait','i can’t wait','icant wait','sure let’s','sure lets','yes','i do','open it'],
+           reply:'Go ahead! Take your time.', emotion:'😊', emoHint:'妈妈把剪刀递给你。',
+           zh:'拆吧！慢慢来。', quality:'ok', hint:'I can’t wait. 是表达期待的高频地道句，比 Yes 生动多了。', aff:1},
+          {keys:['maybe later','later','no','in a minute'],
+           reply:'Okay, open them whenever you’re ready.', emotion:'🙂', emoHint:'妈妈点点头。',
+           zh:'好，你准备好了再拆。', quality:'ok', hint:'婉拒用 Maybe later. / In a minute. 都很自然。', aff:0}
+        ],
+        fallback:{text:'Say “Yes! I can’t wait.”', emotion:'🙂', emoHint:'妈妈等着。', zh:'说"Yes! I can’t wait."', quality:'miss', hint:'表达期待可以说 I can’t wait.，很地道。', aff:0}
+      }
+    ]
+  },
+  {
+    id:'lunch', age:9, stage:'小学 7–10', icon:'🥪', title:'忘带午餐',
+    desc:'Emma 忘了带午餐，老师发现了，同学愿意分给她一点。',
+    culture:{title:'学校午餐与求助', body:'美国小学孩子多自带午餐（lunch box），也有学校午餐。忘带东西时，跟老师实话实说并道歉是常态，老师通常会帮忙联系家长。同学之间分食物很常见，接受时记得道谢。解释用 I forgot…，道歉用 I’m sorry。'},
+    turns:[
+      {
+        npc:'Ms. Lopez', npcAv:'👩‍🏫', emotion:'😐', emoHint:'老师走过来，语气认真但不凶。',
+        text:'Emma, where’s your lunch today?', zh:'Emma，你今天的午餐呢？',
+        options:['I forgot it at home. I’m sorry.','I don’t have it.','I left it at home.'],
+        nativeLine:'I forgot it at home. I’m sorry.',
+        intents:[
+          {keys:['i forgot','iforgot','left it at home','i don’t have','i dont have','i’m sorry','im sorry','sorry'],
+           reply:'That’s okay, these things happen. Let’s figure it out.', emotion:'🙂', emoHint:'老师语气缓和下来。',
+           zh:'没关系，这种事难免。我们来想想办法。', quality:'ok', hint:'忘带东西实话实说：I forgot it at home. 加一句 I’m sorry. 更得体。', aff:1, flag:'honest_lunch'},
+          {keys:['i don’t know','i dont know','at home','home','i ate it'],
+           reply:'So you left it at home?', emotion:'😐', emoHint:'老师想确认。',
+           zh:'所以你落在家里了？', quality:'near', hint:'说清楚一点：I forgot it at home.（我忘在家里了）比单说 at home 完整。', aff:0}
+        ],
+        fallback:{text:'You can say “I forgot it at home. I’m sorry.”', emotion:'🙂', emoHint:'老师等着。', zh:'你可以说"I forgot it at home. I’m sorry."', quality:'miss', hint:'实话实说：I forgot it at home. 再加一句道歉 I’m sorry.', aff:0}
+      },
+      {
+        npc:'Ms. Lopez', npcAv:'👩‍🏫', emotion:'🙂', emoHint:'老师拿出手机。',
+        text:'Do you want me to call your mom?', zh:'要我给你妈妈打电话吗？',
+        options:['Yes, please. Thank you.','No, it’s okay.','Yes, can you?'],
+        nativeLine:'Yes, please. Thank you.',
+        intents:[
+          {keys:['yes please','yes','can you','please','i do','that would be great'],
+           reply:'Of course. I’ll call her at lunch time.', emotion:'🙂', emoHint:'老师记下了。',
+           zh:'当然，午饭时间我给她打。', quality:'ok', hint:'接受提议说 Yes, please. Thank you. 礼貌又地道。', aff:1},
+          {keys:['no it’s okay','no its okay','no thanks','it’s fine','its fine','no'],
+           reply:'All right. Billy has extra food if you need it.', emotion:'🙂', emoHint:'老师指了指 Billy。',
+           zh:'好的。如果你需要，Billy 有多余的食物。', quality:'ok', hint:'婉拒说 No, it’s okay. / I’m fine, thanks. 都很自然。', aff:0}
+        ],
+        fallback:{text:'Say “Yes, please” or “No, it’s okay.”', emotion:'🙂', emoHint:'老师等你说。', zh:'说"Yes, please"或"No, it’s okay."', quality:'miss', hint:'接受用 Yes, please.，婉拒用 No, it’s okay.', aff:0}
+      },
+      {
+        npc:'Billy', npcAv:'👦', emotion:'😊', emoHint:'Billy 把三明治推过来一半。',
+        text:'I have extra. Do you want some?', zh:'我有多余的，你要一点吗？',
+        options:['Really? Thank you so much!','Yes, please. Thanks!','No, I’m okay.'],
+        nativeLine:'Really? Thank you so much!',
+        intents:[
+          {keys:['really thank','really thanks','thank you so much','yes please','thanks','yes','i’d love','id love'],
+           reply:'No problem! We’re friends, right?', emotion:'😄', emoHint:'Billy 咧嘴笑。',
+           zh:'没事！我们是朋友嘛，对吧？', quality:'ok', hint:'惊喜又感激时说 Really? Thank you so much! 非常地道，Really? 带出意外感。', aff:1, flag:'thanked_billy'},
+          {keys:['no i’m okay','no im okay','no thanks','i’m good','im good','no'],
+           reply:'Okay, but tell me if you change your mind.', emotion:'🙂', emoHint:'Billy 收回三明治。',
+           zh:'好吧，但你要是改主意就告诉我。', quality:'ok', hint:'婉拒说 No, I’m okay. Thanks. 既清楚又不伤人。', aff:0}
+        ],
+        fallback:{text:'Say “Really? Thank you so much!”', emotion:'🙂', emoHint:'Billy 举着三明治。', zh:'说"Really? Thank you so much!"', quality:'miss', hint:'接受并道谢：Thank you so much!', aff:0}
+      },
+      {
+        npc:'Ms. Lopez', npcAv:'👩‍🏫', emotion:'🙂', emoHint:'放学前老师提醒你。',
+        text:'Remember to bring your lunch tomorrow, okay?', zh:'记得明天带午餐，好吗？',
+        options:['I will. Thank you.','Yes, I will.','Okay, I won’t forget.'],
+        nativeLine:'I will. Thank you for helping today.',
+        intents:[
+          {keys:['i will','yes i will','i won’t forget','i wont forget','okay i will','thank you','thanks'],
+           reply:'Good. Have a great afternoon, Emma!', emotion:'😊', emoHint:'老师挥挥手。',
+           zh:'好，下午愉快，Emma！', quality:'ok', hint:'保证下次做到说 I will. 再加 Thank you for helping today. 显得很懂事。', aff:1},
+          {keys:['okay','ok','yes','sure','i know'],
+           reply:'Thanks, Emma. See you tomorrow!', emotion:'🙂', emoHint:'老师点点头。',
+           zh:'谢谢，Emma，明天见！', quality:'near', hint:'单说 Okay 可以，但加上 I will. 或 Thank you 会更完整、更有礼貌。', aff:0}
+        ],
+        fallback:{text:'Say “I will. Thank you.”', emotion:'🙂', emoHint:'老师看着你。', zh:'说"I will. Thank you."', quality:'miss', hint:'回应提醒说 I will.（我会的）再加感谢更得体。', aff:0}
+      }
+    ]
+  },
+  {
+    id:'group', age:10, stage:'小学 7–10', icon:'📊', title:'小组作业',
+    desc:'老师安排小组作业，Emma 和 Billy 一组，要商量分工。',
+    culture:{title:'美国课堂的小组合作', body:'美国课堂很重视 group project（小组作业），成绩常按小组一起算。分工时会说 Let’s split the work（我们分一下工）。想做某部分用 I can do…，提议用 How about…。团队合作里表达"我来做这部分"是加分项，老师看重 participation（参与度）。'},
+    turns:[
+      {
+        npc:'Billy', npcAv:'👦', emotion:'🙂', emoHint:'Billy 拿着作业单凑过来。',
+        text:'We have to do a project together. Want to be partners?', zh:'我们得一起做个作业，想当搭档吗？',
+        options:['Sure, I’d love to.','Yeah, let’s do it.','Okay, sounds good.'],
+        nativeLine:'Sure, I’d love to.',
+        intents:[
+          {keys:['sure i’d love','sure id love','i’d love to','id love to','sure','yeah let’s','yeah lets','sounds good','yes'],
+           reply:'Great! We make a good team.', emotion:'😄', emoHint:'Billy 击掌。',
+           zh:'太好了！我们组队准没错。', quality:'ok', hint:'答应搭档邀请说 Sure, I’d love to. 比单说 Yes 热情得多，是地道表达。', aff:1, flag:'group_partner'},
+          {keys:['no','not really','i don’t want','i dont want'],
+           reply:'Aw, okay. I’ll ask someone else.', emotion:'😕', emoHint:'Billy 走开了。',
+           zh:'噢，好吧，我问问别人。', quality:'near', hint:'拒绝搭档可以委婉些：Maybe next time! 直接说 No 会显得不友好。', aff:-1}
+        ],
+        fallback:{text:'Say “Sure, I’d love to.”', emotion:'🙂', emoHint:'Billy 等着。', zh:'说"Sure, I’d love to."', quality:'miss', hint:'答应邀请用 Sure, I’d love to. 很地道。', aff:0}
+      },
+      {
+        npc:'Billy', npcAv:'👦', emotion:'😅', emoHint:'Billy 挠挠头，有点不好意思。',
+        text:'I don’t want to do the writing. Can you do it?', zh:'我不想写字部分，你能做吗？',
+        options:['Okay, I can do the writing.','How about we split it?','No way, you do it.'],
+        nativeLine:'Okay, I can do the writing. And you can do the drawing.',
+        intents:[
+          {keys:['okay i can','i can do','sure i can','yes i can','i’ll do','ill do','okay','sure'],
+           reply:'Thanks! I’ll do the drawing then.', emotion:'😄', emoHint:'Billy 松了口气。',
+           zh:'谢啦！那我来画画。', quality:'ok', hint:'主动承担说 I can do the writing. 是很好的合作态度。再加一句安排对方做什么更棒。', aff:1},
+          {keys:['how about we split','split it','let’s split','lets split','we should both','half'],
+           reply:'Hmm, I’m not good at writing though.', emotion:'😅', emoHint:'Billy 有点犹豫。',
+           zh:'嗯，不过我不太擅长写字。', quality:'ok', hint:'想公平分工说 How about we split it? 很地道，但对方可能确实有困难，可以再商量。', aff:0},
+          {keys:['no way','you do it','no i won’t','no i wont','do it yourself'],
+           reply:'Fine, I’ll do it all by myself.', emotion:'😕', emoHint:'Billy 不太高兴。',
+           zh:'行吧，那我一个人全做了。', quality:'near', hint:'No way 太生硬。合作时可以说 I’d rather not, but I can help with… 更得体。', aff:-1}
+        ],
+        fallback:{text:'Try “Okay, I can do the writing.”', emotion:'🙂', emoHint:'Billy 等你说。', zh:'试试"Okay, I can do the writing."', quality:'miss', hint:'答应帮忙说 I can do… 例如 I can do the writing.', aff:0}
+      },
+      {
+        npc:'Billy', npcAv:'👦', emotion:'😄', emoHint:'Billy 画完了，凑过来看。',
+        text:'I finished my part. Thanks for helping!', zh:'我这部分做完了，谢谢你帮忙！',
+        options:['You’re welcome!','No problem!','Sure, anytime.'],
+        nativeLine:'You’re welcome!',
+        intents:[
+          {keys:['you’re welcome','youre welcome','no problem','sure anytime','anytime','not at all','my pleasure'],
+           reply:'Let’s show Ms. Lopez!', emotion:'😄', emoHint:'Billy 举起作业。',
+           zh:'我们给老师看吧！', quality:'ok', hint:'回应感谢说 You’re welcome! / No problem! 都是高频地道说法。', aff:1},
+          {keys:['thank you','thanks','yes','okay'],
+           reply:'Wait, I should thank you!', emotion:'😄', emoHint:'Billy 笑了。',
+           zh:'等等，该我说谢谢才对！', quality:'near', hint:'对方说 Thanks 时，回 You’re welcome 或 No problem，不要也说 Thank you。', aff:0}
+        ],
+        fallback:{text:'Say “You’re welcome!”', emotion:'🙂', emoHint:'Billy 等着。', zh:'说"You’re welcome!"', goal:'', quality:'miss', hint:'回应感谢说 You’re welcome! 或 No problem!', aff:0}
+      },
+      {
+        npc:'Ms. Lopez', npcAv:'👩‍🏫', emotion:'😊', emoHint:'老师走过来检查小组作业。',
+        text:'Emma, how is your group doing?', zh:'Emma，你们小组做得怎么样？',
+        options:['Good! We’re almost done.','Great, thanks!','We finished it.'],
+        nativeLine:'Good! We’re almost done.',
+        intents:[
+          {keys:['good we’re','good were','almost done','great thanks','we finished','we’re done','were done','i’m good','im good','good'],
+           reply:'Wonderful work, you two!', emotion:'😊', emoHint:'老师竖起大拇指。',
+           zh:'做得真棒，你们俩！', quality:'ok', hint:'汇报进度说 We’re almost done.（我们快做完了）很地道，老师也爱听积极的回答。', aff:1},
+          {keys:['fine','okay','i don’t know','i dont know','bad','not good'],
+           reply:'Do you need any help?', emotion:'🙂', emoHint:'老师关心地问。',
+           zh:'需要帮忙吗？', quality:'near', hint:'汇报时说具体进度更好：We’re almost done. 单说 fine / I don’t know 显得没参与。', aff:0}
+        ],
+        fallback:{text:'Try “Good! We’re almost done.”', emotion:'🙂', emoHint:'老师等着。', zh:'试试"Good! We’re almost done."', quality:'miss', hint:'汇报进度说 We’re almost done.，既积极又具体。', aff:0}
+      }
+    ]
+  },
+  {
+    id:'teased', age:9, stage:'小学 7–10', icon:'😜', title:'被同学调侃',
+    desc:'同学 Ryan 拿 Emma 的鞋开玩笑，要学会温和回击又不伤和气。',
+    culture:{title:'校园玩笑与调侃', body:'美国孩子之间常互相开玩笑（teasing），大多是善意的。被调侃时可以轻松回击（I like them / Whatever）或直接说 Stop it。如果真觉得受伤，说 That hurt my feelings 是被鼓励的。要区分玩笑和霸凌：反复、恶意的才算霸凌，要告诉老师。'},
+    turns:[
+      {
+        npc:'Ryan', npcAv:'👦', emotion:'😜', emoHint:'Ryan 咧嘴笑着，语气像在开玩笑。',
+        text:'Hey Emma, your shoes are so weird!', zh:'嘿 Emma，你的鞋好怪啊！',
+        options:['Thanks, I like them.','Whatever.','Why do you say that?'],
+        nativeLine:'Thanks, I like them.',
+        intents:[
+          {keys:['thanks i like','i like them','i like','thanks','whatever','who cares','so what'],
+           reply:'Just kidding! Cool shoes, actually.', emotion:'😄', emoHint:'Ryan 笑得更开心了。',
+           zh:'开玩笑的！其实挺酷的。', quality:'ok', hint:'被善意调侃时轻松回一句 I like them. 或 Whatever. 显得自信又不怯场，母语孩子常这么处理。', aff:1, flag:'stood_up'},
+          {keys:['why do you','why','what do you mean','why say'],
+           reply:'I’m just joking! Don’t take it seriously.', emotion:'🙂', emoHint:'Ryan 耸耸肩。',
+           zh:'我开玩笑的！别当真。', quality:'near', hint:'问 Why? 也行，但轻松带过更像母语孩子；一直追问容易让玩笑变尴尬。', aff:0}
+        ],
+        fallback:{text:'Try “Thanks, I like them.”', emotion:'🙂', emoHint:'Ryan 等着你的反应。', zh:'试试"Thanks, I like them."', quality:'miss', hint:'被善意调侃可以自信回应 I like them. 或 Whatever.，不用慌。', aff:0}
+      },
+      {
+        npc:'Ryan', npcAv:'👦', emotion:'😏', emoHint:'Ryan 挑了挑眉。',
+        text:'What, you can’t take a joke?', zh:'怎么，开不起玩笑吗？',
+        options:['I can. It’s just not funny.','Very funny.','Stop it.'],
+        nativeLine:'Very funny.',
+        intents:[
+          {keys:['it’s just not funny','its just not funny','not funny','very funny','i can','stop it','cut it out'],
+           reply:'Okay, okay. I’ll stop.', emotion:'😅', emoHint:'Ryan 举起双手投降。',
+           zh:'好好好，我不说了。', quality:'ok', hint:'温和回击可以说 It’s just not funny. 或反讽的 Very funny.；Stop it / Cut it out 语气更硬，会明确让他停。', aff:1},
+          {keys:['shut up','leave me alone','i hate you'],
+           reply:'Whoa, no need to be mean.', emotion:'😕', emoHint:'Ryan 收起笑容。',
+           zh:'哇，没必要这么凶吧。', quality:'near', hint:'Shut up 很伤人，连母语孩子听了也会觉得过分。想让他停，说 Stop it. 就够有力。', aff:-1}
+        ],
+        fallback:{text:'Try “Very funny.” or “Stop it.”', emotion:'🙂', emoHint:'Ryan 还在等。', zh:'试试"Very funny."或"Stop it."', quality:'miss', hint:'轻松反讽 Very funny. 或明确制止 Stop it. 都比沉默好。', aff:0}
+      },
+      {
+        npc:'Ryan', npcAv:'👦', emotion:'😅', emoHint:'Ryan 语气软了下来。',
+        text:'I was just kidding, don’t be mad.', zh:'我只是开玩笑，别生气哈。',
+        options:['I’m not mad.','It’s okay.','You hurt my feelings.'],
+        nativeLine:'I’m not mad. It’s okay.',
+        intents:[
+          {keys:['i’m not mad','im not mad','it’s okay','its okay','no worries','forget it','it’s fine','its fine'],
+           reply:'Phew! You’re cool, Emma.', emotion:'😄', emoHint:'Ryan 松了口气。',
+           zh:'呼！你真够意思，Emma。', quality:'ok', hint:'接受对方的和解说 I’m not mad. / It’s okay. 很地道，显得大度。', aff:1},
+          {keys:['you hurt my feelings','hurt my feelings','that hurt','that really hurt'],
+           reply:'Aw, I’m sorry. I didn’t mean it.', emotion:'😔', emoHint:'Ryan 认真起来。',
+           zh:'哎呀对不起，我不是故意的。', quality:'ok', hint:'说出感受 That hurt my feelings.（这伤到我了）是母语孩子被鼓励的表达，比闷在心里健康。', aff:0}
+        ],
+        fallback:{text:'Say “I’m not mad.” or “That hurt my feelings.”', emotion:'🙂', emoHint:'Ryan 看着你。', zh:'说"I’m not mad."或"That hurt my feelings."', quality:'miss', hint:'要么大度说 I’m not mad.，要么诚实说 That hurt my feelings.。', aff:0}
+      },
+      {
+        npc:'Ryan', npcAv:'👦', emotion:'😄', emoHint:'Ryan 想拉你一起玩。',
+        text:'Want to play basketball at recess?', zh:'课间想一起打篮球吗？',
+        options:['Sure!','Yeah, let’s go.','No thanks.'],
+        nativeLine:'Sure! That sounds fun.',
+        intents:[
+          {keys:['sure','yeah','yes','let’s','lets','i do','sounds fun'],
+           reply:'Awesome, you’re on my team!', emotion:'😄', emoHint:'Ryan 把球递给你。',
+           zh:'太好了，你加入我这队！', quality:'ok', hint:'接受邀请 Sure! / Yeah, let’s go. 简洁自然；加一句 That sounds fun. 更热情。', aff:1},
+          {keys:['no thanks','no','not now','maybe later'],
+           reply:'Okay, maybe next time!', emotion:'🙂', emoHint:'Ryan 点点头。',
+           zh:'好，那下次吧！', quality:'ok', hint:'婉拒说 No thanks. / Maybe later. 既清楚又不伤人。', aff:0}
+        ],
+        fallback:{text:'Say “Sure!” or “No thanks.”', emotion:'🙂', emoHint:'Ryan 等着。', zh:'说"Sure!"或"No thanks."', quality:'miss', hint:'接受用 Sure!，婉拒用 No thanks.。', aff:0}
+      }
+    ]
+  },
+  {
+    id:'apology', age:9, stage:'小学 7–10', icon:'💔', title:'做错事道歉',
+    desc:'Emma 弄坏了朋友最爱的笔，要真诚道歉并弥补。',
+    culture:{title:'美国孩子怎么道歉', body:'美国文化里真诚道歉通常含三部分：承认错误（I broke it）、表达歉意（I’m sorry）、提出弥补（I’ll buy you a new one.）。被道歉一方如果还没消气，可以说 I’m still a little mad.；对方回应 I understand. Take your time. 是成熟的表现。'},
+    turns:[
+      {
+        npc:'Chloe', npcAv:'👧', emotion:'😠', emoHint:'Chloe 拿着断掉的笔，快哭了。',
+        text:'Emma! You broke my favorite marker!', zh:'Emma！你弄坏了我最喜欢的笔！',
+        options:['I’m so sorry!','I didn’t mean to.','It’s not my fault.'],
+        nativeLine:'I’m so sorry. I didn’t mean to.',
+        intents:[
+          {keys:['i’m so sorry','im so sorry','i’m sorry','im sorry','sorry','i didn’t mean','i didnt mean'],
+           reply:'I know... but thanks for saying sorry.', emotion:'😟', emoHint:'Chloe 语气缓和了些。',
+           zh:'我知道……但谢谢你道歉。', quality:'ok', hint:'做错事第一句 I’m so sorry. 加 I didn’t mean to.（我不是故意的）显得真诚。', aff:1, flag:'apologized'},
+          {keys:['not my fault','it’s not my fault','its not my fault','you did it'],
+           reply:'Well, it was in your hand.', emotion:'😠', emoHint:'Chloe 更生气了。',
+           zh:'哼，它刚才在你手里。', quality:'miss', hint:'推卸责任（It’s not my fault）会让朋友更火。先道歉 I’m sorry, I broke it. 才是正解。', aff:-1}
+        ],
+        fallback:{text:'Say “I’m so sorry.”', emotion:'🙂', emoHint:'Chloe 等着。', zh:'说"I’m so sorry."', quality:'miss', hint:'先真诚道歉 I’m so sorry.，再解释。', aff:0}
+      },
+      {
+        npc:'Chloe', npcAv:'👧', emotion:'🥺', emoHint:'Chloe 低头看着断笔。',
+        text:'It was my favorite one.', zh:'那是我最喜欢的一支。',
+        options:['I’ll buy you a new one.','I feel really bad.','Sorry, I can’t do anything.'],
+        nativeLine:'I’ll buy you a new one. I feel terrible.',
+        intents:[
+          {keys:['i’ll buy','ill buy','i can buy','i’ll get you','ill get you','i feel bad','i feel really bad','i feel terrible'],
+           reply:'Really? Thank you. That means a lot.', emotion:'😊', emoHint:'Chloe 抬起头。',
+           zh:'真的吗？谢谢你，这对我很重要。', quality:'ok', hint:'提出弥补 I’ll buy you a new one. 是很有担当的表达，能让朋友感到被重视。', aff:1},
+          {keys:['i can’t','icant','nothing i can do','sorry i can’t'],
+           reply:'Hmm, okay.', emotion:'😕', emoHint:'Chloe 有点失望。',
+           zh:'嗯，好吧。', quality:'near', hint:'即使没法赔，说 I feel really bad.（我很难受）也比 Sorry, I can’t do anything 更让人舒服。', aff:0}
+        ],
+        fallback:{text:'Try “I’ll buy you a new one.”', emotion:'🙂', emoHint:'Chloe 看着你。', zh:'试试"I’ll buy you a new one."', quality:'miss', hint:'提出弥补，或至少说 I feel really bad.。', aff:0}
+      },
+      {
+        npc:'Chloe', npcAv:'👧', emotion:'😔', emoHint:'Chloe 还在难过。',
+        text:'I’m still a little mad at you.', zh:'我还是有点生你的气。',
+        options:['I understand. Take your time.','But I said sorry!','Don’t be mad.'],
+        nativeLine:'I understand. Take your time.',
+        intents:[
+          {keys:['i understand','take your time','i get it','that’s okay','its okay','i’ll wait','ill wait'],
+           reply:'Thanks for understanding.', emotion:'🙂', emoHint:'Chloe 表情放松了。',
+           zh:'谢谢你理解。', quality:'ok', hint:'对方还在生气时，说 I understand. Take your time.（我理解，你慢慢来）是成熟又体贴的回应。', aff:1},
+          {keys:['but i said sorry','i already said sorry','don’t be mad','dont be mad'],
+           reply:'I know, but I’m still upset.', emotion:'😔', emoHint:'Chloe 别过脸。',
+           zh:'我知道，但我还是难受。', quality:'near', hint:'道歉后对方仍生气很正常。别急着说 Don’t be mad，给对方一点时间更好。', aff:0}
+        ],
+        fallback:{text:'Try “I understand. Take your time.”', emotion:'🙂', emoHint:'Chloe 没说话。', zh:'试试"I understand. Take your time."', quality:'miss', hint:'给对方时间：I understand. Take your time.。', aff:0}
+      },
+      {
+        npc:'Chloe', npcAv:'👧', emotion:'😊', emoHint:'Chloe 终于笑了。',
+        text:'Okay... I forgive you. Let’s be friends.', zh:'好吧……我原谅你了，我们还是朋友。',
+        options:['Thank you so much!','Yay! Best friends again.','I knew it.'],
+        nativeLine:'Thank you so much! Best friends again.',
+        intents:[
+          {keys:['thank you so much','thanks','thank you','yay','best friends','i’m glad','im glad'],
+           reply:'Yay! Let’s go play.', emotion:'😄', emoHint:'Chloe 拉住你的手。',
+           zh:'耶！我们去玩吧。', quality:'ok', hint:'被原谅后说 Thank you so much! 或 Best friends again. 真诚又自然。', aff:1},
+          {keys:['i knew it','of course','obviously'],
+           reply:'Hmm, okay.', emotion:'😐', emoHint:'Chloe 收回笑容。',
+           zh:'嗯，好吧。', quality:'near', hint:'I knew it 显得你在施压对方原谅。被原谅时表达感谢更得体。', aff:-1}
+        ],
+        fallback:{text:'Say “Thank you so much!”', emotion:'🙂', emoHint:'Chloe 看着你。', zh:'说"Thank you so much!"', quality:'miss', hint:'被原谅时说 Thank you so much!。', aff:0}
+      }
+    ]
+  },
+  {
+    id:'decline', age:10, stage:'小学 7–10', icon:'🙅', title:'拒绝邀约',
+    desc:'Billy 邀 Emma 放学去他家，但 Emma 今天不行，要学会礼貌拒绝。',
+    culture:{title:'美国孩子如何拒绝邀请', body:'美国人拒绝邀请时习惯先肯定再转折：I’d love to, but... 或 That sounds fun, but I can’t.。直接说 No 会显得不友好。给个简单理由，再说 Maybe next time，是标准的礼貌组合。'},
+    turns:[
+      {
+        npc:'Billy', npcAv:'👦', emotion:'😄', emoHint:'Billy 兴奋地跑过来。',
+        text:'Do you want to come to my house after school?', zh:'放学后想来我家玩吗？',
+        options:['I’d love to, but I can’t today.','No.','Sure!'],
+        nativeLine:'I’d love to, but I can’t today.',
+        intents:[
+          {keys:['i’d love to but','id love to but','but i can’t','but i cant','can’t today','cant today','i wish i could','that sounds fun but'],
+           reply:'Aw, that’s too bad. Maybe next time!', emotion:'🙂', emoHint:'Billy 有点失望但笑了。',
+           zh:'啊太可惜了，那下次吧！', quality:'ok', hint:'婉拒的黄金句式：I’d love to, but I can’t today.（我很想去，但今天不行）既礼貌又清楚。', aff:1, flag:'declined_polite'},
+          {keys:['no','not really','i don’t want','i dont want'],
+           reply:'Oh... okay.', emotion:'😕', emoHint:'Billy 失落地走开。',
+           zh:'哦……好吧。', quality:'near', hint:'单说 No 太生硬。加 I’d love to, but... 或一句理由，对方好受很多。', aff:-1},
+          {keys:['sure','yes','i do','yeah','i’d love to','id love to'],
+           reply:'Awesome! I’ll tell my mom!', emotion:'😄', emoHint:'Billy 开心极了。',
+           zh:'太棒了！我告诉我妈妈！', quality:'ok', hint:'接受邀请 Sure! / I’d love to! 都很自然。', aff:1}
+        ],
+        fallback:{text:'Try “I’d love to, but I can’t today.”', emotion:'🙂', emoHint:'Billy 等着。', zh:'试试"I’d love to, but I can’t today."', quality:'miss', hint:'礼貌拒绝用 I’d love to, but...。', aff:0}
+      },
+      {
+        npc:'Billy', npcAv:'👦', emotion:'🙂', emoHint:'Billy 追问原因。',
+        text:'Why not? It’ll be fun.', zh:'为什么不行呀？会很好玩的。',
+        options:['I have to help my mom.','I just can’t, sorry.','Because I said no.'],
+        nativeLine:'I have to help my mom.',
+        intents:[
+          {keys:['i have to','i need to','my mom','i’ve got','ive got','i promised'],
+           reply:'Okay, that’s cool. Hope you can next time.', emotion:'🙂', emoHint:'Billy 点点头。',
+           zh:'好吧，没关系。希望你下次能来。', quality:'ok', hint:'拒绝时给个简单理由（I have to help my mom.）会让对方更容易接受。', aff:1},
+          {keys:['i just can’t','just cant','i can’t say','no reason','i just cant','because i said no','said no'],
+           reply:'Hmm, all right.', emotion:'😐', emoHint:'Billy 半信半疑。',
+           zh:'嗯，那好吧。', quality:'near', hint:'不方便说理由可以讲 I can’t say, sorry.；但 Because I said no 听起来像在赌气。', aff:0}
+        ],
+        fallback:{text:'Try “I have to help my mom.”', emotion:'🙂', emoHint:'Billy 等你说。', zh:'试试"I have to help my mom."', quality:'miss', hint:'给个简单理由，比如 I have to help my mom.。', aff:0}
+      },
+      {
+        npc:'Billy', npcAv:'👦', emotion:'🙂', emoHint:'Billy 接受了这个结果。',
+        text:'Okay, maybe another time.', zh:'好吧，那下次吧。',
+        options:['Definitely! Thanks for understanding.','Yeah, whatever.','Maybe.'],
+        nativeLine:'Definitely! Thanks for understanding.',
+        intents:[
+          {keys:['definitely','thanks for understanding','for sure','absolutely','i’d love to next time','id love to next time','sounds good'],
+           reply:'Cool! I’ll ask you again soon.', emotion:'😄', emoHint:'Billy 挥挥手。',
+           zh:'好！下次再叫你。', quality:'ok', hint:'对方体谅时回一句 Thanks for understanding. 很暖，也让友谊更牢。', aff:1},
+          {keys:['whatever','maybe','yeah fine','i guess'],
+           reply:'Okay...', emotion:'😐', emoHint:'Billy 转身走了。',
+           zh:'好吧……', quality:'near', hint:'Yeah, whatever 显得敷衍。想维持关系可以说 Definitely! 或 Next time for sure.。', aff:-1}
+        ],
+        fallback:{text:'Try “Definitely! Thanks for understanding.”', emotion:'🙂', emoHint:'Billy 看着你。', zh:'试试"Definitely! Thanks for understanding."', quality:'miss', hint:'热情回应 Definitely! 或 For sure!。', aff:0}
+      },
+      {
+        npc:'Billy', npcAv:'👦', emotion:'🙂', emoHint:'Billy 又来找你确认。',
+        text:'Hey, are we still on for the movie Friday?', zh:'喂，周五看电影还算数吗？',
+        options:['Yes! I’ll be there.','I’m not sure yet.','No.'],
+        nativeLine:'Yes! I’ll be there.',
+        intents:[
+          {keys:['yes i’ll','yes ill','i’ll be there','ill be there','for sure','yes','i am','definitely'],
+           reply:'Great, see you Friday!', emotion:'😄', emoHint:'Billy 比了个赞。',
+           zh:'太好，周五见！', quality:'ok', hint:'确认约定说 I’ll be there! / For sure! 简洁地道。', aff:1},
+          {keys:['not sure','i’m not sure','im not sure','maybe','i’ll let you know','ill let you know'],
+           reply:'Okay, let me know by Thursday.', emotion:'🙂', emoHint:'Billy 点点头。',
+           zh:'好，周四前告诉我。', quality:'ok', hint:'不确定时说 I’m not sure yet. I’ll let you know.（我还不确定，回头告诉你）很清楚。', aff:0},
+          {keys:['no','can’t make it','cant make it','i can’t','icant'],
+           reply:'Oh, okay. I’ll ask someone else.', emotion:'😕', emoHint:'Billy 有点失望。',
+           zh:'哦好吧，那我问问别人。', quality:'near', hint:'不想去可以说 I can’t make it this time. Maybe next week?，比单说 No 更照顾对方感受。', aff:-1}
+        ],
+        fallback:{text:'Say “Yes! I’ll be there.”', emotion:'🙂', emoHint:'Billy 等着。', zh:'说"Yes! I’ll be there."', quality:'miss', hint:'确认用 I’ll be there!，不确定用 I’m not sure yet.。', aff:0}
+      }
+    ]
+  },
+  {
+    id:'makeup', age:10, stage:'小学 7–10', icon:'🤝', title:'和朋友吵架和好',
+    desc:'Chloe 因为 Emma 没帮忙而生气，两人冷战，要主动修复友谊。',
+    culture:{title:'朋友吵架后怎么和好', body:'美国孩子吵架后的常见和好流程：一方承认错误（I’m sorry, you’re right）、另一方说出感受（I was hurt）、再提出补偿（I’ll make it up to you.）。被鼓励的表达是 I see why you’re hurt（我理解你为什么难过），而不是 Don’t be so sensitive（别那么敏感）。'},
+    turns:[
+      {
+        npc:'Chloe', npcAv:'👧', emotion:'😠', emoHint:'Chloe 双臂交叉，不看 Emma。',
+        text:'I’m not talking to you anymore!', zh:'我再也不跟你说话了！',
+        options:['Why? What happened?','Fine, whatever.','I’m sorry!'],
+        nativeLine:'Why? What happened?',
+        intents:[
+          {keys:['why','what happened','what did i do','tell me','i don’t know why','i dont know why'],
+           reply:'You said you’d help me with the project and you didn’t.', emotion:'😠', emoHint:'Chloe 终于说出来了。',
+           zh:'你说好帮我做作业的，结果没有。', quality:'ok', hint:'朋友生气时先问 What happened? / What did I do?，表示你在乎，是对的第一步。', aff:1},
+          {keys:['fine whatever','fine','whatever','okay then'],
+           reply:'...Fine.', emotion:'😡', emoHint:'Chloe 转过身去。',
+           zh:'……行吧。', quality:'near', hint:'Fine, whatever 会让冷战升级。即使自己也生气，说 I want to fix this. 更有用。', aff:-1},
+          {keys:['i’m sorry','im sorry','sorry'],
+           reply:'You don’t even know why I’m mad.', emotion:'😠', emoHint:'Chloe 翻了个白眼。',
+           zh:'你都不知道我为什么生气。', quality:'near', hint:'还不知道原因就道歉效果有限。先问 What’s wrong? 更实在。', aff:0}
+        ],
+        fallback:{text:'Try “What happened?”', emotion:'🙂', emoHint:'Chloe 不说话。', zh:'试试"What happened?"', quality:'miss', hint:'先温和地问 What happened? 或 What did I do?。', aff:0}
+      },
+      {
+        npc:'Chloe', npcAv:'👧', emotion:'😤', emoHint:'Chloe 委屈地说。',
+        text:'You said you would help me and you didn’t!', zh:'你说好帮我的，结果没帮！',
+        options:['I forgot. I’m really sorry.','I was busy.','You’re not my boss.'],
+        nativeLine:'You’re right. I forgot. I’m really sorry.',
+        intents:[
+          {keys:['i forgot','i’m really sorry','im really sorry','you’re right','youre right','i messed up','i’m sorry i forgot'],
+           reply:'I guess you did forget... I was really counting on you.', emotion:'😟', emoHint:'Chloe 语气软了。',
+           zh:'我想你是忘了……我真的很指望你。', quality:'ok', hint:'承认错误 You’re right, I forgot. I’m really sorry. 比找借口更容易让朋友消气。', aff:1, flag:'made_up'},
+          {keys:['i was busy','i had to','not my fault'],
+           reply:'But you promised!', emotion:'😠', emoHint:'Chloe 更委屈了。',
+           zh:'可你答应过的！', quality:'near', hint:'I was busy 听起来像借口。先承认再解释：I’m sorry, I got busy and forgot.。', aff:0},
+          {keys:['not my boss','you can’t tell me','you cant tell me','whatever'],
+           reply:'Wow. Okay, forget it.', emotion:'😡', emoHint:'Chloe 气得脸都红了。',
+           zh:'哇，行吧，当我没说。', quality:'bad', hint:'You’re not my boss 是挑衅，会让友谊受伤。朋友有理由生气时先接住情绪。', aff:-1}
+        ],
+        fallback:{text:'Try “You’re right, I forgot. I’m sorry.”', emotion:'🙂', emoHint:'Chloe 盯着你。', zh:'试试"You’re right, I forgot. I’m sorry."', quality:'miss', hint:'先承认 You’re right，再道歉。', aff:0}
+      },
+      {
+        npc:'Chloe', npcAv:'👧', emotion:'😔', emoHint:'Chloe 小声说。',
+        text:'Well... I guess I’m a little hurt.', zh:'嗯……我其实有点受伤。',
+        options:['I understand. I’ll make it up to you.','Don’t be so sensitive.','Me too.'],
+        nativeLine:'I understand. I’ll make it up to you.',
+        intents:[
+          {keys:['i understand','make it up to you','i’ll make','ill make','that’s fair','its fair','i get it'],
+           reply:'Okay... that actually helps.', emotion:'🙂', emoHint:'Chloe 点点头。',
+           zh:'好吧……这话听着舒服多了。', quality:'ok', hint:'对方说出受伤时，I understand. I’ll make it up to you.（我理解，我会补回来）是成熟的修复。', aff:1},
+          {keys:['don’t be so sensitive','dont be so sensitive','you’re too sensitive','too sensitive','it’s not a big deal','its not a big deal'],
+           reply:'It IS a big deal to me.', emotion:'😠', emoHint:'Chloe 又生气了。',
+           zh:'这对我就是件大事！', quality:'bad', hint:'Don’t be so sensitive 是否定对方感受，会让矛盾变大。说 I see why you’re hurt 更好。', aff:-1},
+          {keys:['me too','i’d be mad too','id be mad too','i would too'],
+           reply:'Hmm, okay. Thanks.', emotion:'🙂', emoHint:'Chloe 表情缓和。',
+           zh:'嗯，好吧，谢谢。', quality:'ok', hint:'Me too. / I’d be mad too. 表示换位思考，也是很好的回应。', aff:1}
+        ],
+        fallback:{text:'Try “I understand. I’ll make it up to you.”', emotion:'🙂', emoHint:'Chloe 等着。', zh:'试试"I understand. I’ll make it up to you."', quality:'miss', hint:'表达理解：I understand. 并提出补偿。', aff:0}
+      },
+      {
+        npc:'Chloe', npcAv:'👧', emotion:'😊', emoHint:'Chloe 伸出手。',
+        text:'Okay. I forgive you. Friends again?', zh:'好吧，我原谅你了，还做朋友吗？',
+        options:['Always! Best friends.','Yeah, I guess.','Thank you for forgiving me.'],
+        nativeLine:'Always! Best friends.',
+        intents:[
+          {keys:['always','best friends','of course','yes please','i’d love that','id love that','absolutely'],
+           reply:'Yay! Let’s go get ice cream!', emotion:'😄', emoHint:'Chloe 拉你起来。',
+           zh:'耶！我们去吃冰淇淋吧！', quality:'ok', hint:'和好时说 Always! Best friends. 很暖，是母语孩子爱用的话。', aff:1},
+          {keys:['thank you for forgiving','thanks for forgiving','thank you','i appreciate it'],
+           reply:'Aw, you’re welcome. Let’s move on.', emotion:'😊', emoHint:'Chloe 笑了。',
+           zh:'哎呀不客气，翻篇啦。', quality:'ok', hint:'Thank you for forgiving me. 是认真又得体的和好说法。', aff:1},
+          {keys:['yeah i guess','i guess','fine'],
+           reply:'Okay...', emotion:'😐', emoHint:'Chloe 收回手。',
+           zh:'好吧……', quality:'near', hint:'Yeah, I guess 听起来不够真心。朋友和好值得一个热情的回答。', aff:-1}
+        ],
+        fallback:{text:'Say “Always! Best friends.”', emotion:'🙂', emoHint:'Chloe 等着。', zh:'说"Always! Best friends."', quality:'miss', hint:'热情和好：Always! Best friends.。', aff:0}
+      }
+    ]
+  },
+  {
+    id:'homework', age:10, stage:'小学 7–10', icon:'📝', title:'解释没交作业',
+    desc:'Emma 忘记带作业，要向老师诚实解释并给出补救方案。',
+    culture:{title:'美国课堂的作业与诚实', body:'美国老师很看重 honesty（诚实）。忘带作业直接说 I forgot it at home. 并给出补救 I’ll bring it tomorrow. 比编借口更被认可。编造借口（如 dog ate my homework）反而是玩笑梗，老师一听就知道。'},
+    turns:[
+      {
+        npc:'Ms. Lopez', npcAv:'👩‍🏫', emotion:'😐', emoHint:'老师翻着点名册，语气平静。',
+        text:'Emma, where’s your homework today?', zh:'Emma，你今天的作业呢？',
+        options:['I forgot it at home. I’ll bring it tomorrow.','I didn’t do it.','My dog ate it.'],
+        nativeLine:'I forgot it at home. I’ll bring it tomorrow.',
+        intents:[
+          {keys:['i forgot','iforgot','left it at home','i’ll bring','ill bring','bring it tomorrow','forgot it at home'],
+           reply:'All right. Please remember tomorrow.', emotion:'🙂', emoHint:'老师点点头。',
+           zh:'好吧，明天记得带来。', quality:'ok', hint:'诚实解释 + 补救方案是最佳组合：I forgot it at home. I’ll bring it tomorrow.', aff:1, flag:'honest_homework'},
+          {keys:['i didn’t do','i didnt do','i didn’t finish','i didnt finish','no'],
+           reply:'I see. You can still do it now, during recess.', emotion:'😐', emoHint:'老师递给你一张空白纸。',
+           zh:'我知道了，你可以课间补做。', quality:'near', hint:'没做也要诚实。说 I didn’t finish it. Can I do it now? 比沉默或编借口好。', aff:0},
+          {keys:['dog ate','my dog','cat ate'],
+           reply:'The dog ate it? Really, Emma?', emotion:'😕', emoHint:'老师挑了挑眉。',
+           zh:'狗吃了？真的吗，Emma？', quality:'bad', hint:'"My dog ate it" 是英语里的经典玩笑借口，老师一听就知道是编的，反而更不诚信。', aff:-1}
+        ],
+        fallback:{text:'Try “I forgot it at home. I’ll bring it tomorrow.”', emotion:'🙂', emoHint:'老师等着。', zh:'试试"I forgot it at home. I’ll bring it tomorrow."', quality:'miss', hint:'诚实说明并给补救方案。', aff:0}
+      },
+      {
+        npc:'Ms. Lopez', npcAv:'👩‍🏫', emotion:'🙂', emoHint:'老师语气缓和了。',
+        text:'Do you need help with the homework?', zh:'作业需要帮忙吗？',
+        options:['Yes, please. I don’t understand it.','No, I’m okay.','Maybe.'],
+        nativeLine:'Yes, please. I don’t understand it.',
+        intents:[
+          {keys:['yes please','i don’t understand','i dont understand','i need help','can you help','a little help'],
+           reply:'Of course. Let’s look at it together after class.', emotion:'😊', emoHint:'老师笑了。',
+           zh:'当然，下课我们一起看。', quality:'ok', hint:'求助并说清哪里不懂 I don’t understand it. 是主动学习的好表现，老师很喜欢。', aff:1},
+          {keys:['no i’m okay','no im okay','no thanks','i’m good','im good','no','maybe'],
+           reply:'Okay, come to me if you change your mind.', emotion:'🙂', emoHint:'老师点点头。',
+           zh:'好，改主意了来找我。', quality:'ok', hint:'婉拒帮助说 No, I’m okay. Thanks. 很自然；Maybe 有点含糊，说清楚要不要更好。', aff:0}
+        ],
+        fallback:{text:'Say “Yes, please” or “No, I’m okay.”', emotion:'🙂', emoHint:'老师等你说。', zh:'说"Yes, please"或"No, I’m okay."', quality:'miss', hint:'接受帮助 Yes, please.，婉拒 No, I’m okay.。', aff:0}
+      },
+      {
+        npc:'Ms. Lopez', npcAv:'👩‍🏫', emotion:'🙂', emoHint:'老师提醒你。',
+        text:'Remember to check your backpack before you leave.', zh:'记得走之前检查一下书包。',
+        options:['I will. Thank you.','Okay, I’ll try.','Whatever.'],
+        nativeLine:'I will. Thank you for reminding me.',
+        intents:[
+          {keys:['i will','i’ll try','ill try','thank you','thanks i will','okay i will'],
+           reply:'Good habit to have!', emotion:'😊', emoHint:'老师竖起大拇指。',
+           zh:'这是个好习惯！', quality:'ok', hint:'回应提醒说 I will. Thank you. 很得体；加 for reminding me 更完整。', aff:1},
+          {keys:['whatever','i know','okay','ok','yes'],
+           reply:'Just a friendly reminder.', emotion:'🙂', emoHint:'老师笑了笑。',
+           zh:'只是友情提醒啦。', quality:'near', hint:'Whatever 语气很敷衍，对老师不礼貌。说 I will. Thanks. 就好。', aff:-1}
+        ],
+        fallback:{text:'Say “I will. Thank you.”', emotion:'🙂', emoHint:'老师等着。', zh:'说"I will. Thank you."', quality:'miss', hint:'回应提醒：I will. Thank you.。', aff:0}
+      },
+      {
+        npc:'Ms. Lopez', npcAv:'👩‍🏫', emotion:'😊', emoHint:'放学前老师总结。',
+        text:'You handled that well, Emma. Proud of you.', zh:'你处理得很好，Emma，为你骄傲。',
+        options:['Thank you so much!','I try my best.','It was nothing.'],
+        nativeLine:'Thank you so much. I’ll do better.',
+        intents:[
+          {keys:['thank you so much','thank you','thanks','i try my best','i’ll do better','ill do better'],
+           reply:'That’s the spirit! Have a great day.', emotion:'😊', emoHint:'老师挥挥手。',
+           zh:'就是这个劲头！今天愉快。', quality:'ok', hint:'被表扬时说 Thank you so much. I’ll do better. 既谦逊又积极，很地道。', aff:1},
+          {keys:['it was nothing','no big deal','whatever'],
+           reply:'It matters, Emma. Own it!', emotion:'🙂', emoHint:'老师认真地说。',
+           zh:'这很重要，Emma，大方接受！', quality:'near', hint:'It was nothing 会显得否认自己的努力。母语文化里被表扬可以大方说 Thank you.。', aff:0}
+        ],
+        fallback:{text:'Say “Thank you so much!”', emotion:'🙂', emoHint:'老师看着你。', zh:'说"Thank you so much!"', quality:'miss', hint:'被表扬大方道谢：Thank you so much.。', aff:0}
+      }
+    ]
+  },
+  {
+    id:'askhelp', age:8, stage:'小学 7–10', icon:'🙋', title:'委婉求助',
+    desc:'Emma 够不到高处的东西，要学会礼貌地请人帮忙。',
+    culture:{title:'美国孩子怎么求助', body:'求助时用 Could you…? / Can you…? 比直接说 Help! 更礼貌。句尾加 please 是基本礼貌。别人答应后记得说 Thanks!。美式口语里 Could you give me a hand?（能搭把手吗）是很地道的说法。'},
+    turns:[
+      {
+        npc:'Billy', npcAv:'👦', emotion:'🙂', emoHint:'Billy 正好路过。',
+        text:'Hey Emma, what are you doing?', zh:'嘿 Emma，你在干嘛？',
+        options:['I can’t reach this. Can you help me?','Help me!','Nothing.'],
+        nativeLine:'I can’t reach this. Can you help me?',
+        intents:[
+          {keys:['can you help','could you help','i can’t reach','i cant reach','can you get','give me a hand','could you'],
+           reply:'Sure! What do you need?', emotion:'😄', emoHint:'Billy 凑过来。',
+           zh:'当然！你需要什么？', quality:'ok', hint:'求助说 I can’t reach this. Can you help me? 清楚又礼貌；Could you give me a hand? 更地道。', aff:1, flag:'asked_politely'},
+          {keys:['help me','help!'],
+           reply:'Whoa, okay, what’s wrong?', emotion:'😮', emoHint:'Billy 被吓了一跳。',
+           zh:'哇，怎么了？', quality:'near', hint:'Help! 听着像紧急求救。小事用 Can you help me? 或 Could you give me a hand? 更合适。', aff:0},
+          {keys:['nothing','i’m fine','im fine','no'],
+           reply:'Okay, just checking!', emotion:'🙂', emoHint:'Billy 走开了。',
+           zh:'好，我就问问！', quality:'miss', hint:'你需要帮忙，别客气。说 Can you help me? 就好。', aff:0}
+        ],
+        fallback:{text:'Try “Can you help me?”', emotion:'🙂', emoHint:'Billy 等着。', zh:'试试"Can you help me?"', quality:'miss', hint:'礼貌求助用 Can you help me?。', aff:0}
+      },
+      {
+        npc:'Billy', npcAv:'👦', emotion:'😄', emoHint:'Billy 伸手去够。',
+        text:'Is this what you need?', zh:'是这个吗？',
+        options:['Yes, please. Thank you!','Yeah, that one.','No, wrong one.'],
+        nativeLine:'Yes, please. That’s it. Thank you!',
+        intents:[
+          {keys:['yes please','thank you','that’s it','thats it','yes that','yeah that','perfect'],
+           reply:'Here you go!', emotion:'😄', emoHint:'Billy 把东西递给你。',
+           zh:'给你！', quality:'ok', hint:'别人帮到你时说 Yes, please. Thank you! 礼貌又自然。', aff:1},
+          {keys:['wrong','no that','not that','nope'],
+           reply:'Oops, which one then?', emotion:'🙂', emoHint:'Billy 又伸手。',
+           zh:'哎呀，那是哪个？', quality:'ok', hint:'拿错了可以直接说 No, that’s not it. It’s the blue one. 加上具体描述更高效。', aff:0}
+        ],
+        fallback:{text:'Say “Yes, please. Thank you!”', emotion:'🙂', emoHint:'Billy 举着东西。', zh:'说"Yes, please. Thank you!"', quality:'miss', hint:'拿到后说 Yes, please. Thank you!。', aff:0}
+      },
+      {
+        npc:'Billy', npcAv:'👦', emotion:'🙂', emoHint:'Billy 准备走了。',
+        text:'Anything else I can help with?', zh:'还有什么要帮忙的吗？',
+        options:['No, that’s everything. Thanks!','Yes, more help.','You can go now.'],
+        nativeLine:'No, that’s everything. Thanks!',
+        intents:[
+          {keys:['no that’s','no thats','that’s everything','thats everything','no thanks','i’m good','im good','no i’m all set'],
+           reply:'No problem! See you around.', emotion:'😄', emoHint:'Billy 挥挥手。',
+           zh:'没事！回头见。', quality:'ok', hint:'婉拒更多帮助说 No, that’s everything. Thanks! 或 I’m good, thanks. 都很地道。', aff:1},
+          {keys:['you can go','bye','ok go'],
+           reply:'Oh... okay, bye.', emotion:'😐', emoHint:'Billy 愣了一下。',
+           zh:'哦……好吧，拜拜。', quality:'near', hint:'You can go now 听起来像在下逐客令。说 No, I’m good. Thanks! 更礼貌。', aff:-1},
+          {keys:['yes more help','more help','yes please','another thing','one more thing'],
+           reply:'Sure, what else do you need?', emotion:'🙂', emoHint:'Billy 停下来听。',
+           zh:'当然，还需要什么？', quality:'ok', hint:'还需要帮忙可以说 Yes, please. Actually, could you help with one more thing?，说明具体需求更高效。', aff:0}
+        ],
+        fallback:{text:'Say “No, that’s everything. Thanks!”', emotion:'🙂', emoHint:'Billy 等着。', zh:'说"No, that’s everything. Thanks!"', quality:'miss', hint:'婉拒：No, that’s everything. Thanks!。', aff:0}
+      },
+      {
+        npc:'Billy', npcAv:'👦', emotion:'😄', emoHint:'Billy 临走前说。',
+        text:'Next time just ask, okay? That’s what friends are for.', zh:'下次直接说就行，朋友就是干这个的嘛。',
+        options:['Thanks, Billy! I will.','Okay, whatever.','I know.'],
+        nativeLine:'Thanks, Billy! I will.',
+        intents:[
+          {keys:['thanks billy','thank you','thanks i will','i will','i’ll ask','ill ask','sounds good'],
+           reply:'Anytime!', emotion:'😄', emoHint:'Billy 笑着跑开。',
+           zh:'随时找我就行！', quality:'ok', hint:'朋友帮忙后说 Thanks! I will. 温暖自然；Anytime 是对方常用的地道回应。', aff:1},
+          {keys:['whatever','i know','okay','fine'],
+           reply:'Just sayin’!', emotion:'🙂', emoHint:'Billy 耸耸肩。',
+           zh:'我就说说！', quality:'near', hint:'Whatever 语气冷淡。朋友的好意值得一句真诚的 Thanks!。', aff:-1}
+        ],
+        fallback:{text:'Say “Thanks, Billy! I will.”', emotion:'🙂', emoHint:'Billy 看着你。', zh:'说"Thanks, Billy! I will."', quality:'miss', hint:'真诚感谢：Thanks! I will.。', aff:0}
+      }
+    ]
+  },
+  {
+    id:'order', age:10, stage:'小学 7–10', icon:'🍔', title:'餐厅点餐',
+    desc:'Emma 和朋友去餐厅，要学会自己点餐、回答服务员的问题。',
+    culture:{title:'美国餐厅点餐礼仪', body:'服务员常先问 Can I get you something to drink?（要喝点什么吗）。点餐用 I’ll have… 或 Can I get…，比 I want… 礼貌。句尾加 please 是基本礼貌。坐下后服务员会问 Are you ready to order?（可以点餐了吗）。美式餐厅给小费（tip）约 15–20%。'},
+    turns:[
+      {
+        npc:'Waitress', npcAv:'👩‍🍳', emotion:'😊', emoHint:'服务员拿着菜单走过来。',
+        text:'Hi there! Can I get you something to drink?', zh:'你好！要喝点什么吗？',
+        options:['Can I get a lemonade, please?','Water.','I want juice.'],
+        nativeLine:'Can I get a lemonade, please?',
+        intents:[
+          {keys:['can i get','i’ll have','ill have','a lemonade','water please','juice please','can i have','i would like'],
+           reply:'Sure thing! And are you ready to order?', emotion:'😊', emoHint:'服务员记下来。',
+           zh:'好的！可以点餐了吗？', quality:'ok', hint:'点饮料用 Can I get a lemonade, please? 或 I’ll have water, thanks. 很地道；单说 Water 略生硬。', aff:1, flag:'ordered_politely'},
+          {keys:['i want','juice','water','lemonade'],
+           reply:'Great, coming right up!', emotion:'🙂', emoHint:'服务员点点头。',
+           zh:'好，马上来！', quality:'near', hint:'I want juice 语法对但有点生硬。说 I’ll have juice, please. 或 Can I get juice? 更像母语孩子。', aff:0}
+        ],
+        fallback:{text:'Try “Can I get a lemonade, please?”', emotion:'🙂', emoHint:'服务员等着。', zh:'试试"Can I get a lemonade, please?"', quality:'miss', hint:'点餐用 Can I get…，句尾加 please。', aff:0}
+      },
+      {
+        npc:'Waitress', npcAv:'👩‍🍳', emotion:'😊', emoHint:'服务员递来菜单。',
+        text:'Are you ready to order?', zh:'可以点餐了吗？',
+        options:['Yes, I’ll have a burger and fries.','Wait, I need a minute.','What do you have?'],
+        nativeLine:'Yes, I’ll have a burger and fries, please.',
+        intents:[
+          {keys:['i’ll have','ill have','i would like','can i get','a burger','a sandwich','i’ll take','ill take'],
+           reply:'Great choice! Anything else?', emotion:'😊', emoHint:'服务员写着单。',
+           zh:'好眼光！还要别的吗？', quality:'ok', hint:'点主菜说 I’ll have a burger and fries, please. 是最标准的说法，加 please 更礼貌。', aff:1},
+          {keys:['wait','i need a minute','one second','not yet','what do you have','what’s good'],
+           reply:'No problem, take your time.', emotion:'🙂', emoHint:'服务员退开一步。',
+           zh:'没问题，慢慢看。', quality:'ok', hint:'还没想好说 Wait, I need a minute. 或 What’s good?（有什么推荐的）都很自然。', aff:0}
+        ],
+        fallback:{text:'Try “I’ll have a burger, please.”', emotion:'🙂', emoHint:'服务员等着。', zh:'试试"I’ll have a burger, please."', quality:'miss', hint:'点餐用 I’ll have…，加 please。', aff:0}
+      },
+      {
+        npc:'Waitress', npcAv:'👩‍🍳', emotion:'😊', emoHint:'服务员端来食物。',
+        text:'Here’s your food. Enjoy!', zh:'这是您的食物，请用！',
+        options:['Thank you! It looks great.','Thanks.','Okay.'],
+        nativeLine:'Thank you! It looks delicious.',
+        intents:[
+          {keys:['thank you','thanks','it looks','looks great','looks delicious','yay','smells good'],
+           reply:'Let me know if you need anything!', emotion:'😊', emoHint:'服务员微笑着离开。',
+           zh:'有需要随时叫我！', quality:'ok', hint:'上菜后说 Thank you! It looks delicious. 是自然的回应，夸一句食物让气氛更好。', aff:1},
+          {keys:['okay','ok','yes','fine'],
+           reply:'Enjoy your meal!', emotion:'🙂', emoHint:'服务员走开了。',
+           zh:'祝您用餐愉快！', quality:'near', hint:'单说 Okay 有点冷淡。加一句 Thank you! 或 It looks great. 更礼貌。', aff:0}
+        ],
+        fallback:{text:'Say “Thank you! It looks great.”', emotion:'🙂', emoHint:'服务员看着你。', zh:'说"Thank you! It looks great."', quality:'miss', hint:'上菜后说 Thank you!。', aff:0}
+      },
+      {
+        npc:'Waitress', npcAv:'👩‍🍳', emotion:'😊', emoHint:'服务员来收账单。',
+        text:'Would you like anything else?', zh:'还需要别的吗？',
+        options:['No, thank you. Can I have the check, please?','No.','Yes, more water.'],
+        nativeLine:'No, thank you. Can I have the check, please?',
+        intents:[
+          {keys:['no thank you','can i have the check','can we get the check','the check please','the bill','just the check','no i’m good','no im good'],
+           reply:'Of course, here’s your check.', emotion:'😊', emoHint:'服务员递上账单。',
+           zh:'好的，这是您的账单。', quality:'ok', hint:'结账说 Can I have the check, please?（美式用 check，英式用 bill）非常地道。', aff:1},
+          {keys:['no','yes more water','another water','more water'],
+           reply:'Coming right up!', emotion:'🙂', emoHint:'服务员点点头。',
+           zh:'马上来！', quality:'near', hint:'不需要就说 No, thank you.；要加水说 Could I get more water, please? 更礼貌。', aff:0}
+        ],
+        fallback:{text:'Try “Can I have the check, please?”', emotion:'🙂', emoHint:'服务员等着。', zh:'试试"Can I have the check, please?"', quality:'miss', hint:'结账用 Can I have the check, please?。', aff:0}
+      }
+    ]
+  },
+  {
+    id:'greet', age:7, stage:'小学 7–10', icon:'👋', title:'打招呼闲聊',
+    desc:'上学路上遇到邻居，要学会自然打招呼并接住闲聊。',
+    culture:{title:'美式打招呼与闲聊', body:'美国孩子打招呼很随意：Hi / Hey / What’s up? / How’s it going?。这些是问候语，不是在问具体问题，回一句 Good! / Not much! 就行，不用认真汇报。Do you want to know what’s up? 理解成"最近咋样"即可。告别常说 See ya! / Later!。'},
+    turns:[
+      {
+        npc:'Timmy', npcAv:'👦', emotion:'😄', emoHint:'邻居 Timmy 背着书包跑过来。',
+        text:'Hey Emma! What’s up?', zh:'嘿 Emma！最近咋样？',
+        options:['Not much! You?','Hi! I’m good.','I’m seven.'],
+        nativeLine:'Not much! How about you?',
+        intents:[
+          {keys:['not much','nothing much','how about you','what about you','i’m good','im good','good thanks','pretty good','hey','hi'],
+           reply:'Not much! Let’s walk to school together.', emotion:'😄', emoHint:'Timmy 跟上你。',
+           zh:'也没啥！我们一起走去学校吧。', quality:'ok', hint:'What’s up? 是问候不是真问题，回 Not much! / I’m good! 再反问 How about you? 最自然。', aff:1, flag:'greeted_naturally'},
+          {keys:['i’m seven','im seven','seven','my name is'],
+           reply:'Haha, I know! I mean, how are you?', emotion:'😂', emoHint:'Timmy 笑出声。',
+           zh:'哈哈我知道！我是问你好不好。', quality:'miss', hint:'What’s up? 不是问年龄或名字，是"最近怎么样"。回 Not much! 或 I’m good!。', aff:0}
+        ],
+        fallback:{text:'Try “Not much! How about you?”', emotion:'🙂', emoHint:'Timmy 等着。', zh:'试试"Not much! How about you?"', quality:'miss', hint:'What’s up? 回 Not much! 或 I’m good!。', aff:0}
+      },
+      {
+        npc:'Timmy', npcAv:'👦', emotion:'🙂', emoHint:'Timmy 边走边问。',
+        text:'How was your weekend?', zh:'周末过得怎么样？',
+        options:['It was great! I played outside.','Good.','I don’t know.'],
+        nativeLine:'It was great! I played outside with my dog.',
+        intents:[
+          {keys:['it was great','it was good','great','good','fun','i played','we went','awesome','pretty good'],
+           reply:'Nice! I went to the park with my dad.', emotion:'😄', emoHint:'Timmy 晃了晃手。',
+           zh:'不错！我和爸爸去了公园。', quality:'ok', hint:'回答周末说 It was great! I played outside. 加一句做了什么，闲聊就接上了。', aff:1},
+          {keys:['i don’t know','i dont know','nothing','bad','okay'],
+           reply:'That’s okay. Mine was pretty fun.', emotion:'🙂', emoHint:'Timmy 自己说起来。',
+           zh:'没关系，我周末挺好玩的。', quality:'near', hint:'Good. 能用，但加一句细节（I played…）对话更自然；I don’t know 有点冷场。', aff:0}
+        ],
+        fallback:{text:'Try “It was great! I played outside.”', emotion:'🙂', emoHint:'Timmy 等着。', zh:'试试"It was great! I played outside."', quality:'miss', hint:'回答加一点细节，闲聊更自然。', aff:0}
+      },
+      {
+        npc:'Timmy', npcAv:'👦', emotion:'😄', emoHint:'Timmy 突然想起什么。',
+        text:'Oh, I got a new puppy! You should come see it.', zh:'对了，我养了只小狗！你该来看看。',
+        options:['Really? That’s so cool! I’d love to.','Wow!','No, thanks.'],
+        nativeLine:'Really? That’s so cool! I’d love to see it.',
+        intents:[
+          {keys:['really','that’s so cool','thats so cool','so cool','cool','i’d love','id love','awesome','no way','wow'],
+           reply:'Awesome! Come over after school!', emotion:'😄', emoHint:'Timmy 兴奋地跳了一下。',
+           zh:'太棒了！放学后来我家！', quality:'ok', hint:'听到好消息时 Really? That’s so cool! 是母语孩子的自然反应；I’d love to. 表达很想去。', aff:1},
+          {keys:['no thanks','no','maybe','not interested'],
+           reply:'Oh... okay. Maybe another time.', emotion:'😕', emoHint:'Timmy 有点失落。',
+           zh:'哦……好吧，那下次。', quality:'near', hint:'朋友分享开心事，就算去不了也可以说 I’d love to, but maybe tomorrow. 更暖。', aff:-1}
+        ],
+        fallback:{text:'Try “Really? That’s so cool!”', emotion:'🙂', emoHint:'Timmy 看着你。', zh:'试试"Really? That’s so cool!"', quality:'miss', hint:'表达惊喜：Really? That’s so cool!。', aff:0}
+      },
+      {
+        npc:'Timmy', npcAv:'👦', emotion:'😄', emoHint:'到校门口了。',
+        text:'Well, here we are. See you later!', zh:'好了，到了。回头见！',
+        options:['See you! Have a good day.','Bye.','Okay.'],
+        nativeLine:'See you later! Have a good day.',
+        intents:[
+          {keys:['see you','see ya','later','have a good day','you too','bye bye','goodbye'],
+           reply:'You too! Later!', emotion:'😄', emoHint:'Timmy 跑进校门。',
+           zh:'你也是！回头见！', quality:'ok', hint:'告别说 See you later! / Have a good day! 都很地道；回 You too! 是标准接法。', aff:1},
+          {keys:['bye','okay','ok','yes'],
+           reply:'Bye!', emotion:'🙂', emoHint:'Timmy 挥挥手。',
+           zh:'拜拜！', quality:'near', hint:'Bye 能用，但 See you! Have a good day. 更自然、更有温度。', aff:0}
+        ],
+        fallback:{text:'Say “See you later!”', emotion:'🙂', emoHint:'Timmy 走了。', zh:'说"See you later!"', quality:'miss', hint:'告别用 See you later!。', aff:0}
+      }
+    ]
+  }
+];
+
+/* 学龄前 4–6 岁 */
+const PRESCHOOL = [
+  {
+    id:'need', age:5, stage:'学龄前 4–6', icon:'🥛', title:'表达需求',
+    desc:'早上 Emma 想要一杯牛奶，学着用礼貌的方式开口要东西。',
+    culture:{title:'I want 与 Can I have', body:'美国小孩在家要东西也常说 Can I have …, please? 或 … , please.。直接说 I want milk. 语法没错，但听起来像在命令，大人会纠正说 “What do you say?”（意思是加上 please）。'},
+    turns:[
+      {
+        npc:'Mom', npcAv:'👩', emotion:'😊', emoHint:'妈妈在厨房，语速慢、声音温柔。',
+        text:'Good morning, Emma! What do you want for breakfast?', zh:'早上好，Emma！早饭想吃什么？',
+        options:['Can I have some milk, please?','Milk, please.','I want milk.'],
+        nativeLine:'Can I have some milk, please?',
+        intents:[
+          {keys:['can i have some milk','can i have milk','milk please','some milk please','i would like milk'],
+           reply:'Of course! Here you go, sweetie.', emotion:'😊', emoHint:'妈妈笑着把牛奶递过来。',
+           zh:'当然！给你，宝贝。', quality:'ok', hint:'Can I have some milk, please? 是母语小孩最自然的说法，礼貌又完整。', aff:1, flag:'polite_ask'},
+          {keys:['i want milk','i want some milk','milk'],
+           reply:'What do you say, Emma?', emotion:'🙂', emoHint:'妈妈温和地提醒你加 please。',
+           zh:'Emma，该说什么呀？', quality:'near', hint:'I want milk. 语法对但听起来像命令。加上 please，或说 Can I have some milk, please? 就地道了。', aff:0}
+        ],
+        fallback:{text:'You can say “Can I have some milk, please?”', emotion:'🙂', emoHint:'妈妈等着你开口。', zh:'你可以说"Can I have some milk, please?"', quality:'miss', hint:'想要东西时用 Can I have …, please?。', aff:0}
+      },
+      {
+        npc:'Mom', npcAv:'👩', emotion:'😐', emoHint:'妈妈语气平常，只是在商量。',
+        text:'We’re out of milk. How about some yogurt?', zh:'牛奶喝完了。喝点酸奶怎么样？',
+        options:['Okay, yogurt is fine.','No, I want milk!','Yogurt?'],
+        nativeLine:'Okay, yogurt is fine. Thank you, Mom.',
+        intents:[
+          {keys:['okay yogurt','ok yogurt is fine','sure','that sounds good','yogurt is fine','yes please'],
+           reply:'Great! I’ll get you some.', emotion:'😊', emoHint:'妈妈松了口气。',
+           zh:'好！我给你拿。', quality:'ok', hint:'接受替代方案说 Okay, that’s fine. 很自然，加一句 Thank you 更讨喜。', aff:1},
+          {keys:['no i want milk','i want milk','no milk','yogurt'],
+           reply:'I know you love milk. We’ll get some tomorrow.', emotion:'🙂', emoHint:'妈妈没有生气，但语气坚定。',
+           zh:'我知道你喜欢牛奶，明天再买。', quality:'near', hint:'想要却得不到时，说 Okay. 或 Can we get some tomorrow? 比哭闹着 I want milk! 更容易被接受。', aff:0}
+        ],
+        fallback:{text:'You can say “Okay, yogurt is fine.”', emotion:'🙂', emoHint:'妈妈等你回答。', zh:'你可以说"Okay, yogurt is fine."', quality:'miss', hint:'接受提议说 Okay, that’s fine.。', aff:0}
+      },
+      {
+        npc:'Mom', npcAv:'👩', emotion:'😊', emoHint:'妈妈把酸奶放到你面前。',
+        text:'Here you go. Can you say thank you?', zh:'给你。能说声谢谢吗？',
+        options:['Thank you, Mom!','Thanks.','Okay.'],
+        nativeLine:'Thank you, Mom!',
+        intents:[
+          {keys:['thank you mom','thank you','thanks mom','thanks'],
+           reply:'You’re welcome, sweetie!', emotion:'😊', emoHint:'妈妈很开心。',
+           zh:'不客气，宝贝！', quality:'ok', hint:'接到东西立刻说 Thank you! 是美国小孩的基本礼貌。', aff:1, flag:'said_thanks'},
+          {keys:['okay','ok','mhm'],
+           reply:'Try saying “Thank you.”', emotion:'🙂', emoHint:'妈妈耐心地等。',
+           zh:'试试说"Thank you."', quality:'near', hint:'妈妈提醒你说谢谢时，要真的说出 Thank you.，而不是只点头。', aff:0}
+        ],
+        fallback:{text:'Say “Thank you, Mom!”', emotion:'🙂', emoHint:'妈妈等着。', zh:'说"Thank you, Mom!"', quality:'miss', hint:'收到东西要说 Thank you.。', aff:0}
+      },
+      {
+        npc:'Dad', npcAv:'👨', emotion:'😊', emoHint:'爸爸在倒水，随口问你。',
+        text:'Do you want some water, too?', zh:'你也想喝点水吗？',
+        options:['Yes, please.','No, thanks.','Water.'],
+        nativeLine:'Yes, please. Thank you, Daddy.',
+        intents:[
+          {keys:['yes please','yes please dad','yes please daddy','sure please'],
+           reply:'Here you go!', emotion:'😊', emoHint:'爸爸把水杯递给你。',
+           zh:'给你！', quality:'ok', hint:'接受用 Yes, please.，比单独 Yes 更礼貌。', aff:1},
+          {keys:['no thanks','no thank you','im good','i’m good','no'],
+           reply:'Okay, let me know if you get thirsty.', emotion:'🙂', emoHint:'爸爸点点头。',
+           zh:'好，渴了跟我说。', quality:'ok', hint:'婉拒用 No, thanks. 或 I’m good.，都很地道。', aff:0},
+          {keys:['water','yes'],
+           reply:'Yes, please — that’s the polite way!', emotion:'🙂', emoHint:'爸爸笑着示范。',
+           zh:'要说 Yes, please — 这才礼貌！', quality:'near', hint:'只说 Water. 或 Yes. 能懂但不够礼貌，加上 please 就对了。', aff:0}
+        ],
+        fallback:{text:'Say “Yes, please.” or “No, thanks.”', emotion:'🙂', emoHint:'爸爸等着。', zh:'说"Yes, please."或"No, thanks."', quality:'miss', hint:'接受 Yes, please.，婉拒 No, thanks.。', aff:0}
+      }
+    ]
+  },
+  {
+    id:'feel', age:6, stage:'学龄前 4–6', icon:'😢', title:'表达情绪',
+    desc:'玩具被哥哥拿走了，Emma 学会说出自己的感受，而不是直接哭闹。',
+    culture:{title:'美国父母爱问“你怎么了”', body:'美国家长鼓励孩子给情绪命名：Are you sad / mad / frustrated? 孩子说 I’m mad. 不会被骂，反而会被表扬“会用语言说出来”。这是美式家庭沟通的底层习惯。'},
+    turns:[
+      {
+        npc:'Mom', npcAv:'👩', emotion:'😟', emoHint:'妈妈蹲下来，看着你的脸。',
+        text:'You look upset. What’s wrong?', zh:'你看起来不高兴。怎么了？',
+        options:['I’m sad.','I’m mad.','Nothing.'],
+        nativeLine:'I’m mad. He took my toy.',
+        intents:[
+          {keys:['i’m sad','im sad','i am sad','i’m mad','im mad','i am mad','i feel sad','i feel mad'],
+           reply:'Thank you for telling me. It’s okay to feel that way.', emotion:'😊', emoHint:'妈妈松了口气，认真在听。',
+           zh:'谢谢你告诉我。有这种感觉没关系。', quality:'ok', hint:'直接说 I’m mad. / I’m sad. 就是母语小孩的表达，不用觉得不好意思。', aff:1, flag:'named_feeling'},
+          {keys:['nothing','nothing much','im fine','i’m fine','no'],
+           reply:'You can tell me. I’m here.', emotion:'🙂', emoHint:'妈妈没有追问，只是等着。',
+           zh:'你可以告诉我，我在这里。', quality:'near', hint:'明明不开心却说 Nothing. 会让对话卡住。试试 I’m mad. 或 I’m sad.。', aff:0}
+        ],
+        fallback:{text:'Try “I’m mad.” or “I’m sad.”', emotion:'🙂', emoHint:'妈妈等着。', zh:'试试"I’m mad."或"I’m sad."', quality:'miss', hint:'先说情绪词：I’m mad. / I’m sad.。', aff:0}
+      },
+      {
+        npc:'Mom', npcAv:'👩', emotion:'🙂', emoHint:'妈妈继续问，语速慢。',
+        text:'Can you tell me why you’re upset?', zh:'能告诉我为什么不开心吗？',
+        options:['He took my toy.','Because.','I don’t know.'],
+        nativeLine:'He took my toy without asking.',
+        intents:[
+          {keys:['he took my toy','he took it','my brother took my toy','he took my toy without asking','because he took'],
+           reply:'I see. That’s frustrating. Did you ask him to give it back?', emotion:'🙂', emoHint:'妈妈点点头，表示听懂了。',
+           zh:'我明白了。那确实让人烦。你让他还给你了吗？', quality:'ok', hint:'用 He took my toy. 说清楚发生了什么，简单又完整。', aff:1},
+          {keys:['because','i dont know','i don’t know','no reason'],
+           reply:'Take your time. You can show me if it’s hard to say.', emotion:'🙂', emoHint:'妈妈不急，耐心等。',
+           zh:'慢慢来，说不出来可以指给我看。', quality:'near', hint:'只说 Because. 没头没尾。试着说完整的句子：He took my toy.。', aff:0}
+        ],
+        fallback:{text:'Try “He took my toy.”', emotion:'🙂', emoHint:'妈妈等着。', zh:'试试"He took my toy."', quality:'miss', hint:'说清楚原因：He took my toy.。', aff:0}
+      },
+      {
+        npc:'Mom', npcAv:'👩', emotion:'😊', emoHint:'妈妈在引导你自己想办法。',
+        text:'It’s okay to be mad. What can you do?', zh:'生气没关系。你能做点什么？',
+        options:['I can tell him to stop.','I don’t know.','I can hit him.'],
+        nativeLine:'I can tell him to give it back.',
+        intents:[
+          {keys:['tell him to stop','tell him to give it back','i can ask him','say stop','i can tell him'],
+           reply:'That’s a great idea. Use your words!', emotion:'😊', emoHint:'妈妈竖起大拇指。',
+           zh:'好主意！用语言说出来！', quality:'ok', hint:'I can tell him to stop. 既表达了主张又不动手，是家长最想听到的答案。', aff:1, flag:'used_words'},
+          {keys:['i don’t know','i dont know','hit him','i can hit'],
+           reply:'Let’s think together. What could you say?', emotion:'🙂', emoHint:'妈妈蹲下来和你一起想。',
+           zh:'我们一起想想。你能说什么？', quality:'near', hint:'动手打人不是好办法。试试 I can tell him to stop.（我可以叫他停）。', aff:0}
+        ],
+        fallback:{text:'Try “I can tell him to stop.”', emotion:'🙂', emoHint:'妈妈等着。', zh:'试试"I can tell him to stop."', quality:'miss', hint:'想解决办法：I can tell him to stop.。', aff:0}
+      },
+      {
+        npc:'Mom', npcAv:'👩', emotion:'🥰', emoHint:'妈妈张开手臂。',
+        text:'Do you want a hug?', zh:'想抱抱吗？',
+        options:['Yes, please.','No, thanks.','Hug.'],
+        nativeLine:'Yes, please. Thank you, Mommy.',
+        intents:[
+          {keys:['yes please','yes please mommy','yes please mom','sure','yes','hug'],
+           reply:'Come here, sweetie. Feeling better?', emotion:'🥰', emoHint:'妈妈紧紧抱了你一下。',
+           zh:'过来，宝贝。好点了吗？', quality:'ok', hint:'接受拥抱说 Yes, please.，得体又自然。', aff:1},
+          {keys:['no thanks','no thank you','im good','i’m good','no'],
+           reply:'Okay. I’m right here if you change your mind.', emotion:'😊', emoHint:'妈妈尊重你的选择。',
+           zh:'好。改主意了我在这儿。', quality:'ok', hint:'不想抱也可以婉拒：No, thanks.。', aff:0}
+        ],
+        fallback:{text:'Say “Yes, please.” or “No, thanks.”', emotion:'🙂', emoHint:'妈妈等着。', zh:'说"Yes, please."或"No, thanks."', quality:'miss', hint:'接受 Yes, please.，婉拒 No, thanks.。', aff:0}
+      }
+    ]
+  },
+  {
+    id:'family', age:6, stage:'学龄前 4–6', icon:'🍽️', title:'和父母日常',
+    desc:'晚饭前帮爸爸摆餐具，睡前和妈妈道晚安——美式家庭的日常小对话。',
+    culture:{title:'帮家务与睡前仪式', body:'美国家庭常请孩子帮忙 set the table（摆餐具）、clear the table（收碗）。孩子做完会得到 Good job! / Thank you!。睡前固定说 Goodnight，加一句 Love you 很常见。'},
+    turns:[
+      {
+        npc:'Dad', npcAv:'👨', emotion:'😊', emoHint:'爸爸在摆盘子，回头看你。',
+        text:'Can you help me set the table?', zh:'能帮我把餐具摆好吗？',
+        options:['Sure!','Okay!','No.'],
+        nativeLine:'Sure! I can help.',
+        intents:[
+          {keys:['sure','sure i can help','okay','yes','of course'],
+           reply:'Thanks, Emma! You’re a big help.', emotion:'😊', emoHint:'爸爸笑了。',
+           zh:'谢谢Emma！你帮大忙了。', quality:'ok', hint:'答应帮忙用 Sure! / Of course!，比单纯 Okay 更有热情。', aff:1, flag:'helped_table'},
+          {keys:['no','i don’t want to','i dont want to','why'],
+           reply:'Just the spoons. It’ll be quick!', emotion:'🙂', emoHint:'爸爸把任务拆小了。',
+           zh:'只要摆勺子，很快的！', quality:'near', hint:'直接说 No. 有点生硬。可以说 Okay! 或 Sure!，小朋友帮小忙是很自然的事。', aff:0}
+        ],
+        fallback:{text:'Try “Sure!”', emotion:'🙂', emoHint:'爸爸等着。', zh:'试试"Sure!"', quality:'miss', hint:'答应帮忙说 Sure!。', aff:0}
+      },
+      {
+        npc:'Dad', npcAv:'👨', emotion:'🙂', emoHint:'爸爸递给你一把勺子。',
+        text:'Can you put the spoons here?', zh:'能把勺子放这里吗？',
+        options:['Here you go.','Okay.','What?'],
+        nativeLine:'Here you go, Daddy.',
+        intents:[
+          {keys:['here you go','here you are','sure','okay here'],
+           reply:'Perfect. Thank you!', emotion:'😊', emoHint:'爸爸把勺子摆好。',
+           zh:'完美。谢谢！', quality:'ok', hint:'递东西时说 Here you go. 是母语者的高频固定说法。', aff:1},
+          {keys:['okay','ok','yes','what','huh'],
+           reply:'Right here, next to the plates.', emotion:'🙂', emoHint:'爸爸指了指位置。',
+           zh:'就这儿，盘子旁边。', quality:'near', hint:'做完别说 Okay. 就完了，加一句 Here you go. 更像母语小孩。', aff:0}
+        ],
+        fallback:{text:'Try “Here you go.”', emotion:'🙂', emoHint:'爸爸等着。', zh:'试试"Here you go."', quality:'miss', hint:'递东西说 Here you go.。', aff:0}
+      },
+      {
+        npc:'Mom', npcAv:'👩', emotion:'🙂', emoHint:'妈妈看了看钟。',
+        text:'It’s almost bedtime. Are you ready?', zh:'快到睡觉时间了。准备好了吗？',
+        options:['Not yet.','Five more minutes!','Yes, I am.'],
+        nativeLine:'Not yet. Can I have five more minutes?',
+        intents:[
+          {keys:['not yet','no not yet','five more minutes please','can i have five more minutes','yes i am','im ready','i’m ready'],
+           reply:'Five more minutes, then bed. Deal?', emotion:'🙂', emoHint:'妈妈笑着跟你拉钩。',
+           zh:'再五分钟，然后睡觉。说定了？', quality:'ok', hint:'想再玩一会儿，说 Can I have five more minutes? 比直接喊 Five more minutes! 更容易被答应。', aff:1},
+          {keys:['five more minutes','no','i dont want to','i don’t want to'],
+           reply:'How about five more minutes, then bed?', emotion:'🙂', emoHint:'妈妈在跟你商量。',
+           zh:'再玩五分钟然后睡觉，好不好？', quality:'near', hint:'Five more minutes! 语气有点急。加 Can I have …? 或 please 会更可爱。', aff:0}
+        ],
+        fallback:{text:'Try “Not yet. Can I have five more minutes?”', emotion:'🙂', emoHint:'妈妈等着。', zh:'试试"Not yet. Can I have five more minutes?"', quality:'miss', hint:'表达还没准备好：Not yet.。', aff:0}
+      },
+      {
+        npc:'Mom', npcAv:'👩', emotion:'🥰', emoHint:'妈妈帮你掖好被子。',
+        text:'Say goodnight to Daddy.', zh:'跟爸爸说晚安。',
+        options:['Goodnight, Daddy. Love you.','Goodnight.','Bye.'],
+        nativeLine:'Goodnight, Daddy. Love you!',
+        intents:[
+          {keys:['goodnight daddy','good night daddy','goodnight dad','love you daddy','goodnight daddy love you'],
+           reply:'Goodnight, sweetheart. Sweet dreams!', emotion:'🥰', emoHint:'爸爸在门口挥手。',
+           zh:'晚安，宝贝。好梦！', quality:'ok', hint:'美式家庭睡前常说 Goodnight + Love you.，自然又亲密。', aff:1, flag:'goodnight'},
+          {keys:['goodnight','good night','bye','night night'],
+           reply:'Goodnight, Emma. Sleep well!', emotion:'😊', emoHint:'妈妈替你关灯。',
+           zh:'晚安Emma，睡个好觉！', quality:'near', hint:'Goodnight. 没错，但加上 Daddy / Love you 更像美国家庭的睡前对话。', aff:0}
+        ],
+        fallback:{text:'Say “Goodnight, Daddy. Love you.”', emotion:'🙂', emoHint:'妈妈等着。', zh:'说"Goodnight, Daddy. Love you."', quality:'miss', hint:'睡前道晚安：Goodnight, Daddy.。', aff:0}
+      }
+    ]
+  }
+];
+
+/* 小升初 11–13 岁 */
+const MIDDLE = [
+  {
+    id:'friendfight', age:12, stage:'小升初 11–13', icon:'💔', title:'友谊小矛盾',
+    desc:'午餐时 Chloe 没等你，你觉得自己被冷落了——第一次学着主动把感受说出来。',
+    culture:{title:'I felt left out', body:'美国孩子表达被冷落最常说的就是 I felt left out.（我觉得被排挤了）。比起冷战或阴阳怪气，直接说 I felt… 会被视为成熟。回应时先承认 I hear you / I didn’t realize，再解释。'},
+    turns:[
+      {
+        npc:'Chloe', npcAv:'👧', emotion:'😒', emoHint:'Chloe 抱着胳膊，语气有点冲。',
+        text:'Why didn’t you sit with us at lunch?', zh:'午饭你为什么没跟我们坐一起？',
+        options:['I didn’t see you.','I was busy.','Whatever.'],
+        nativeLine:'I didn’t see you. I’m sorry.',
+        intents:[
+          {keys:['i didn’t see you','i didnt see you','i didn’t see','i’m sorry i didn’t see you','sorry i didnt see you'],
+           reply:'Oh. I guess you didn’t see me by the door.', emotion:'🙂', emoHint:'Chloe 的语气软了下来。',
+           zh:'哦，我猜你没看到我在门口。', quality:'ok', hint:'先解释 I didn’t see you. 再补一句 I’m sorry. 就很得体。', aff:1, flag:'made_up'},
+          {keys:['i was busy','i was with maya','whatever','i dont know','i don’t know'],
+           reply:'Busy? We were right there.', emotion:'😒', emoHint:'Chloe 更不高兴了。',
+           zh:'忙？我们就在那儿啊。', quality:'near', hint:'I was busy. 听起来像在敷衍。说清楚 I didn’t see you. 更好；Whatever. 会直接激怒对方。', aff:-1}
+        ],
+        fallback:{text:'Try “I didn’t see you. I’m sorry.”', emotion:'🙂', emoHint:'Chloe 等着。', zh:'试试"I didn’t see you. I’m sorry."', quality:'miss', hint:'先解释再道歉，别用 Whatever.。', aff:0}
+      },
+      {
+        npc:'Chloe', npcAv:'👧', emotion:'😕', emoHint:'Chloe 皱着眉，声音低了。',
+        text:'Well, you seemed fine hanging out with Maya.', zh:'可你跟 Maya 玩得看起来挺开心。',
+        options:['I felt left out.','I’m sorry.','So what?'],
+        nativeLine:'Actually, I felt a little left out.',
+        intents:[
+          {keys:['i felt left out','i feel left out','i felt a little left out','i was feeling left out','i felt ignored'],
+           reply:'Really? I had no idea. I’m sorry.', emotion:'😟', emoHint:'Chloe 愣住了，表情软下来。',
+           zh:'真的吗？我不知道。对不起。', quality:'ok', hint:'I felt left out. 是美国孩子表达委屈的标准说法，一说对方就会认真听。', aff:2, flag:'spoke_up'},
+          {keys:['i’m sorry','im sorry','sorry','i’m sorry chloe'],
+           reply:'Sorry for what? I just want to know.', emotion:'😕', emoHint:'Chloe 还是不明白。',
+           zh:'道什么歉？我只是想知道。', quality:'near', hint:'只说 I’m sorry. 没说清问题在哪。试试 I felt left out.。', aff:0},
+          {keys:['so what','who cares','whatever'],
+           reply:'Wow. Okay, forget it.', emotion:'😠', emoHint:'Chloe 转身要走。',
+           zh:'哇。好吧，算了。', quality:'bad', hint:'So what? 在这里非常伤人，会让矛盾升级。想化解就说出自己的感受。', aff:-2}
+        ],
+        fallback:{text:'Try “I felt a little left out.”', emotion:'🙂', emoHint:'Chloe 等着。', zh:'试试"I felt a little left out."', quality:'miss', hint:'用 I felt… 说出感受。', aff:0}
+      },
+      {
+        npc:'Chloe', npcAv:'👧', emotion:'🙂', emoHint:'Chloe 叹了口气，愿意听了。',
+        text:'I just want you to tell me next time.', zh:'我只希望你下次能告诉我。',
+        options:['Okay, I will.','Fine.','You’re right.'],
+        nativeLine:'Okay, I will. Thanks for telling me.',
+        intents:[
+          {keys:['okay i will','ok i will','i will','you’re right','youre right','i will tell you'],
+           reply:'Thanks. That’s all I wanted.', emotion:'😊', emoHint:'Chloe 终于笑了。',
+           zh:'谢谢，我就想听这句。', quality:'ok', hint:'承诺下次说 Okay, I will.；承认对方说得对用 You’re right.，都很自然。', aff:1, flag:'promised_talk'},
+          {keys:['fine','whatever','okay fine','sure'],
+           reply:'“Fine” doesn’t sound fine.', emotion:'😕', emoHint:'Chloe 听出了敷衍。',
+           zh:'"Fine"听着可不像没事。', quality:'near', hint:'Fine. 在美式对话里常带敷衍意味。说 Okay, I will. 更真诚。', aff:0}
+        ],
+        fallback:{text:'Try “Okay, I will.”', emotion:'🙂', emoHint:'Chloe 等着。', zh:'试试"Okay, I will."', quality:'miss', hint:'给出明确承诺：Okay, I will.。', aff:0}
+      },
+      {
+        npc:'Chloe', npcAv:'👧', emotion:'😊', emoHint:'Chloe 拍了拍你肩膀。',
+        text:'Wanna sit together tomorrow?', zh:'明天一起坐吗？',
+        options:['Yeah, definitely.','Sure, I’d love to.','Maybe.'],
+        nativeLine:'Yeah, definitely. See you tomorrow.',
+        intents:[
+          {keys:['yeah definitely','definitely','sure i’d love to','sure id love to','yes please','absolutely'],
+           reply:'It’s a date! Well, a lunch date.', emotion:'😄', emoHint:'Chloe 开玩笑地笑了。',
+           zh:'说定了！好吧，是午饭之约。', quality:'ok', hint:'热情答应：Definitely! / I’d love to.。对方用 wanna 是口语化的 want to。', aff:1},
+          {keys:['maybe','i’m not sure','im not sure','not sure'],
+           reply:'Okay… let me know tonight?', emotion:'😐', emoHint:'Chloe 还有点不确定。',
+           zh:'好吧……今晚告诉我？', quality:'near', hint:'刚和好就说 Maybe. 会让人觉得你还在犹豫。想答应就爽快说 Definitely.。', aff:0}
+        ],
+        fallback:{text:'Try “Yeah, definitely.”', emotion:'🙂', emoHint:'Chloe 等着。', zh:'试试"Yeah, definitely."', quality:'miss', hint:'爽快答应：Definitely.。', aff:0}
+      }
+    ]
+  },
+  {
+    id:'hobby', age:11, stage:'小升初 11–13', icon:'⚽', title:'兴趣爱好',
+    desc:'Billy 问你最近迷上什么——美式闲聊里，聊爱好是交朋友的万能开场。',
+    culture:{title:'What are you into?', body:'What are you into? 是美式口语里问“你最近对什么感兴趣”的高频说法，比 What is your hobby? 自然得多。回答用 I’m into + 名词/动名词，比如 I’m into soccer. / I’m into drawing.'},
+    turns:[
+      {
+        npc:'Billy', npcAv:'👦', emotion:'🙂', emoHint:'Billy 靠在储物柜上，随口聊天。',
+        text:'What are you into these days?', zh:'你最近迷上什么了？',
+        options:['I’m into soccer.','I play soccer.','I like it.'],
+        nativeLine:'I’m into soccer. I practice on Tuesdays.',
+        intents:[
+          {keys:['i’m into soccer','im into soccer','i am into soccer','i’m into drawing','im into music','i’m into gaming','im into gaming','i’m into books'],
+           reply:'Nice! I didn’t know you played.', emotion:'😊', emoHint:'Billy 有点惊讶。',
+           zh:'不错！我都不知道你踢球。', quality:'ok', hint:'I’m into + 名词 完美对应 What are you into?，是最地道的接法。', aff:1, flag:'shared_hobby'},
+          {keys:['i play soccer','i like soccer','soccer','i like it'],
+           reply:'Soccer? Cool. How long have you played?', emotion:'🙂', emoHint:'Billy 接着问。',
+           zh:'足球？酷。踢多久了？', quality:'ok', hint:'I play soccer. 也完全正确；加一句细节对话更容易接下去。', aff:0},
+          {keys:['i like it','i dont know','i don’t know','nothing'],
+           reply:'Hmm, I meant like… games, sports, music?', emotion:'🙂', emoHint:'Billy 换了个问法。',
+           zh:'嗯，我是说……游戏、运动、音乐？', quality:'near', hint:'I like it. 里的 it 指代不明。直接说 I’m into soccer. 清楚又地道。', aff:0}
+        ],
+        fallback:{text:'Try “I’m into soccer.”', emotion:'🙂', emoHint:'Billy 等着。', zh:'试试"I’m into soccer."', quality:'miss', hint:'用 I’m into … 回答。', aff:0}
+      },
+      {
+        npc:'Billy', npcAv:'👦', emotion:'😄', emoHint:'Billy 提起新游戏，眼睛亮了。',
+        text:'The new game looks fun. Have you heard about it?', zh:'那个新游戏看起来不错，你听说了吗？',
+        options:['Really? Tell me more.','Meh.','No.'],
+        nativeLine:'Really? Tell me more!',
+        intents:[
+          {keys:['really tell me more','tell me more','really','that sounds fun','i have not','no but tell me'],
+           reply:'It’s this open-world thing. Kind of addictive!', emotion:'😄', emoHint:'Billy 开始滔滔不绝。',
+           zh:'是个开放世界的游戏，有点上瘾！', quality:'ok', hint:'Really? Tell me more. 是美式闲聊里捧场的标准反应，比单说 Cool 更热情。', aff:1},
+          {keys:['meh','no','not really','i dont care','i don’t care'],
+           reply:'Oh. Okay, never mind then.', emotion:'😐', emoHint:'Billy 收了话头。',
+           zh:'哦。那算了。', quality:'near', hint:'Meh. 显得兴趣缺缺。就算不喜欢，也可以说 Not my thing, but tell me anyway.。', aff:-1}
+        ],
+        fallback:{text:'Try “Really? Tell me more.”', emotion:'🙂', emoHint:'Billy 等着。', zh:'试试"Really? Tell me more."', quality:'miss', hint:'表示好奇：Tell me more.。', aff:0}
+      },
+      {
+        npc:'Billy', npcAv:'👦', emotion:'🙂', emoHint:'Billy 认真起来。',
+        text:'Wanna try out for the team with me?', zh:'要和我一起去参加球队选拔吗？',
+        options:['Sure, why not?','No way.','I have to think about it.'],
+        nativeLine:'Sure, why not? That sounds fun.',
+        intents:[
+          {keys:['sure why not','why not','sure','i’d love to','id love to','yes definitely'],
+           reply:'Awesome! Practice starts Monday.', emotion:'😄', emoHint:'Billy 很兴奋。',
+           zh:'太棒了！周一开始训练。', quality:'ok', hint:'Sure, why not? 是轻松答应的地道说法，语气随意又积极。', aff:1, flag:'joined_tryout'},
+          {keys:['no way','no','i cant','i can’t','im not sure','i’m not sure','i have to think about it'],
+           reply:'No worries. Maybe next time!', emotion:'🙂', emoHint:'Billy 耸耸肩。',
+           zh:'没事。下次吧！', quality:'ok', hint:'婉拒说 I have to think about it. 或 I can’t, sorry. 都行；No way. 语气太硬。', aff:0}
+        ],
+        fallback:{text:'Try “Sure, why not?”', emotion:'🙂', emoHint:'Billy 等着。', zh:'试试"Sure, why not?"', quality:'miss', hint:'答应：Sure, why not?。', aff:0}
+      },
+      {
+        npc:'Billy', npcAv:'👦', emotion:'😊', emoHint:'Billy 掏出手机看时间。',
+        text:'Great! Practice is at 4. See you there?', zh:'太好了！训练四点开始。到时候见？',
+        options:['Got it. See you there.','Okay.','Maybe.'],
+        nativeLine:'Got it. See you there!',
+        intents:[
+          {keys:['got it see you there','got it','see you there','see you','yes i will be there'],
+           reply:'Cool. Don’t forget your water bottle!', emotion:'😊', emoHint:'Billy 挥挥手。',
+           zh:'酷。别忘了带水壶！', quality:'ok', hint:'Got it. 表示“收到/记住了”，是美国学生高频口语。', aff:1},
+          {keys:['okay','ok','maybe','i’ll see','ill see'],
+           reply:'Alright, see you then!', emotion:'🙂', emoHint:'Billy 没多想。',
+           zh:'行，到时候见！', quality:'near', hint:'Okay. 太简短。加一句 See you there. 会让对话自然收尾。', aff:0}
+        ],
+        fallback:{text:'Try “Got it. See you there.”', emotion:'🙂', emoHint:'Billy 等着。', zh:'试试"Got it. See you there."', quality:'miss', hint:'确认约定：See you there.。', aff:0}
+      }
+    ]
+  },
+  {
+    id:'crush', age:13, stage:'小升初 11–13', icon:'💗', title:'初恋萌芽',
+    desc:'Chloe 发现你上课老看 Ryan——第一次聊那种说不出口的小心动。',
+    culture:{title:'have a crush on', body:'美国家长对孩子的好感持开放态度，孩子会大方说 I have a crush on him.。但 13 岁仍以 hang out（一起玩）为主，正式 dating（约会）通常更晚。被起哄时可以说 Stop it! 或 Whatever，不用觉得丢脸。'},
+    turns:[
+      {
+        npc:'Chloe', npcAv:'👧', emotion:'😏', emoHint:'Chloe 用胳膊肘碰了碰你，坏笑。',
+        text:'You were staring at Ryan in class today.', zh:'你今天上课一直盯着 Ryan 看。',
+        options:['No, I wasn’t!','I like him.','So what?'],
+        nativeLine:'Maybe. I think he’s funny.',
+        intents:[
+          {keys:['no i wasn’t','no i wasnt','no i wasn\'t','i was not','i wasn’t staring','i like him','i think he’s funny'],
+           reply:'Ooh! So you DO like him!', emotion:'😆', emoHint:'Chloe 一副“抓到你了”的表情。',
+           zh:'哦～所以你确实喜欢他！', quality:'ok', hint:'被戳穿时说 No, I wasn’t! 很自然；大方承认 I think he’s funny. 也不丢人。', aff:1, flag:'admitted_crush'},
+          {keys:['so what','shut up','whatever','leave me alone'],
+           reply:'Jeez, I was just teasing!', emotion:'😕', emoHint:'Chloe 收回了笑容。',
+           zh:'天哪，我只是开玩笑！', quality:'bad', hint:'Shut up. / Leave me alone. 对朋友太凶了。被调侃可以笑着回 Whatever. 或 No, I wasn’t!。', aff:-1}
+        ],
+        fallback:{text:'Try “No, I wasn’t!” or “I think he’s funny.”', emotion:'🙂', emoHint:'Chloe 等着。', zh:'试试"No, I wasn’t!"或"I think he’s funny."', quality:'miss', hint:'害羞否认或大方承认都可以，别用伤人的话。', aff:0}
+      },
+      {
+        npc:'Chloe', npcAv:'👧', emotion:'😏', emoHint:'Chloe 压低声音，凑过来。',
+        text:'Do you have a crush on him?', zh:'你喜欢上他了？',
+        options:['Maybe. Don’t tell anyone.','Yes, I do.','Shut up.'],
+        nativeLine:'Maybe. Don’t tell anyone, okay?',
+        intents:[
+          {keys:['maybe dont tell anyone','maybe don’t tell anyone','don’t tell anyone','dont tell anyone','yes i do','i do'],
+           reply:'My lips are sealed. Promise!', emotion:'🤐', emoHint:'Chloe 做了个拉拉链的动作。',
+           zh:'我嘴严得很。保证！', quality:'ok', hint:'Maybe. Don’t tell anyone. 完美表达 13 岁的小心思；My lips are sealed 是“我绝不外传”的地道说法。', aff:1, flag:'trusted_chloe'},
+          {keys:['shut up','no','of course not','never'],
+           reply:'Okay, okay. Dropping it!', emotion:'😐', emoHint:'Chloe 举起双手投降。',
+           zh:'好好好，不提了！', quality:'near', hint:'Shut up. 对朋友太冲。害羞可以说 Maybe… 或 I don’t wanna talk about it.。', aff:0}
+        ],
+        fallback:{text:'Try “Maybe. Don’t tell anyone.”', emotion:'🙂', emoHint:'Chloe 等着。', zh:'试试"Maybe. Don’t tell anyone."', quality:'miss', hint:'含蓄承认：Maybe. Don’t tell anyone.。', aff:0}
+      },
+      {
+        npc:'Chloe', npcAv:'👧', emotion:'😊', emoHint:'Chloe 认真起来，语气很朋友。',
+        text:'What do you like about him?', zh:'你喜欢他哪一点？',
+        options:['He’s funny.','I don’t know.','He’s cute.'],
+        nativeLine:'He’s funny. He always makes me laugh.',
+        intents:[
+          {keys:['he’s funny','hes funny','he is funny','he makes me laugh','he’s cute','hes cute','he is nice'],
+           reply:'That’s sweet. You should talk to him sometime.', emotion:'😊', emoHint:'Chloe 鼓励地看着你。',
+           zh:'真好。你该找机会跟他聊聊。', quality:'ok', hint:'说具体理由：He’s funny. / He makes me laugh. 比笼统的 He’s cute. 更真诚。', aff:1},
+          {keys:['i don’t know','i dont know','nothing','never mind'],
+           reply:'That’s okay. You don’t have to figure it out yet.', emotion:'🙂', emoHint:'Chloe 没有逼你。',
+           zh:'没关系，你不用现在就想明白。', quality:'ok', hint:'I don’t know. 在这里完全正常，13 岁本来就说不清。', aff:0}
+        ],
+        fallback:{text:'Try “He’s funny.”', emotion:'🙂', emoHint:'Chloe 等着。', zh:'试试"He’s funny."', quality:'miss', hint:'说一个具体的优点。', aff:0}
+      },
+      {
+        npc:'Chloe', npcAv:'👧', emotion:'😄', emoHint:'Chloe 拍拍你的肩。',
+        text:'Just talk to him at the game, okay?', zh:'比赛的时候跟他搭个话，好不好？',
+        options:['Okay, maybe.','No way!','I will.'],
+        nativeLine:'Okay, maybe. I’ll see how I feel.',
+        intents:[
+          {keys:['okay maybe','ok maybe','maybe','i will','i’ll try','ill try'],
+           reply:'That’s the spirit! No pressure.', emotion:'😄', emoHint:'Chloe 笑着走开。',
+           zh:'这就对了！没压力。', quality:'ok', hint:'Okay, maybe. 很符合这个年纪的犹豫；I’ll see how I feel. 也很地道。', aff:1},
+          {keys:['no way','never','not in a million years'],
+           reply:'Hey, I’m just kidding. Forget I said it.', emotion:'😕', emoHint:'Chloe 连忙退了一步。',
+           zh:'哎，我开玩笑的。当我没说。', quality:'near', hint:'No way! 反应太强烈。朋友只是鼓励你，说 Okay, maybe. 就够了。', aff:0}
+        ],
+        fallback:{text:'Try “Okay, maybe.”', emotion:'🙂', emoHint:'Chloe 等着。', zh:'试试"Okay, maybe."', quality:'miss', hint:'犹豫但开放：Okay, maybe.。', aff:0}
+      }
+    ]
+  },
+  {
+    id:'club', age:12, stage:'小升初 11–13', icon:'🗣️', title:'课后俱乐部',
+    desc:'老师来班里招辩论社成员——美国中学的课后俱乐部是社交和升学的重要一环。',
+    culture:{title:'课后俱乐部（extracurriculars）', body:'美国中学有 debate club、robotics club、drama club 等，学生选课加入叫 sign up / join。老师和同学常问 Are you interested?，答应可以说 I’d love to.。俱乐部经历会写进大学申请，所以老师很鼓励参加。'},
+    turns:[
+      {
+        npc:'Mr. Davis', npcAv:'👨‍🏫', emotion:'😊', emoHint:'老师站在门口发传单，语气热情。',
+        text:'The debate club is signing up. Interested?', zh:'辩论社正在报名。有兴趣吗？',
+        options:['Yes, I am.','What’s that?','No.'],
+        nativeLine:'Yes, I am! What do you do in debate club?',
+        intents:[
+          {keys:['yes i am','yes','i’m interested','im interested','sure','i’d love to','id love to'],
+           reply:'Great! We argue about fun topics and learn to speak clearly.', emotion:'😊', emoHint:'老师眼睛亮了。',
+           zh:'太好了！我们讨论有趣的话题，练习清楚表达。', quality:'ok', hint:'回答 Are you interested? 用 Yes, I am. 或 I’d love to. 最标准。', aff:1, flag:'joined_club'},
+          {keys:['what’s that','what is that','whats that','tell me more','debate what'],
+           reply:'It’s a club where we practice speaking and arguing politely.', emotion:'🙂', emoHint:'老师耐心解释。',
+           zh:'是一个练习表达和有礼貌辩论的社团。', quality:'ok', hint:'不懂就问 What’s that? 完全没问题，比沉默强。', aff:0},
+          {keys:['no','no thanks','im not interested','i’m not interested'],
+           reply:'No worries! Maybe next year.', emotion:'🙂', emoHint:'老师点点头，继续发传单。',
+           zh:'没事！也许明年。', quality:'ok', hint:'婉拒说 No, thanks. 或 I’m not interested, but thanks. 都很得体。', aff:0}
+        ],
+        fallback:{text:'Try “Yes, I am.” or “What’s that?”', emotion:'🙂', emoHint:'老师等着。', zh:'试试"Yes, I am."或"What’s that?"', quality:'miss', hint:'有兴趣就答应，不懂就问。', aff:0}
+      },
+      {
+        npc:'Mr. Davis', npcAv:'👨‍🏫', emotion:'🙂', emoHint:'老师翻了翻日程本。',
+        text:'It meets on Tuesdays after school, from 3 to 4.', zh:'每周二放学后三点到四点活动。',
+        options:['I can make it.','Tuesday is bad for me.','Okay.'],
+        nativeLine:'I can make it. Tuesdays are fine for me.',
+        intents:[
+          {keys:['i can make it','tuesday is fine','tuesdays are fine','that works','that works for me','okay i can'],
+           reply:'Perfect. We’d love to have you.', emotion:'😊', emoHint:'老师在名单上记下你的名字。',
+           zh:'太好了。我们很欢迎你。', quality:'ok', hint:'I can make it. 意思是“我能来”，是应答时间安排的地道说法。', aff:1},
+          {keys:['tuesday is bad','i can’t on tuesday','i cant on tuesday','i have practice on tuesday','thats bad for me'],
+           reply:'That’s okay. We also have a Thursday group.', emotion:'🙂', emoHint:'老师翻到下一页。',
+           zh:'没关系。我们还有周四组。', quality:'ok', hint:'说时间冲突用 I can’t on Tuesdays. 或 Tuesday doesn’t work for me.。', aff:0},
+          {keys:['okay','ok','mhm'],
+           reply:'So, does Tuesday work for you?', emotion:'🙂', emoHint:'老师想确认。',
+           zh:'那周二你可以吗？', quality:'near', hint:'只说 Okay. 老师不确定你到底能不能来。说 I can make it. 更清楚。', aff:0}
+        ],
+        fallback:{text:'Try “I can make it.”', emotion:'🙂', emoHint:'老师等着。', zh:'试试"I can make it."', quality:'miss', hint:'确认能参加：I can make it.。', aff:0}
+      },
+      {
+        npc:'Mr. Davis', npcAv:'👨‍🏫', emotion:'😊', emoHint:'老师拿着报名表看着你。',
+        text:'So, do you want to join?', zh:'那么，你想加入吗？',
+        options:['I’d love to.','Sure, I guess.','Maybe later.'],
+        nativeLine:'I’d love to. It sounds like fun.',
+        intents:[
+          {keys:['i’d love to','id love to','yes please','i do','absolutely','sounds fun'],
+           reply:'Wonderful! Welcome to the team.', emotion:'😄', emoHint:'老师笑着递给你一支笔。',
+           zh:'太好了！欢迎加入。', quality:'ok', hint:'I’d love to. 比 Sure. 更有热情，老师听了会很高兴。', aff:1},
+          {keys:['sure i guess','i guess','maybe later','i’m not sure','im not sure'],
+           reply:'Take your time. You can decide by Friday.', emotion:'🙂', emoHint:'老师给了你空间。',
+           zh:'慢慢来，周五前决定就行。', quality:'near', hint:'Sure, I guess. 听起来不太情愿。想去就说 I’d love to.。', aff:0}
+        ],
+        fallback:{text:'Try “I’d love to.”', emotion:'🙂', emoHint:'老师等着。', zh:'试试"I’d love to."', quality:'miss', hint:'积极答应：I’d love to.。', aff:0}
+      },
+      {
+        npc:'Mr. Davis', npcAv:'👨‍🏫', emotion:'😊', emoHint:'老师把报名表收好。',
+        text:'Great. Your first meeting is next Tuesday.', zh:'很好。第一次活动是下周二。',
+        options:['Thank you! I’ll be there.','Okay.','Thanks.'],
+        nativeLine:'Thank you! I’ll be there.',
+        intents:[
+          {keys:['thank you i’ll be there','thank you ill be there','thanks i’ll be there','i’ll be there','ill be there','thank you so much'],
+           reply:'See you then, Emma!', emotion:'😊', emoHint:'老师朝你挥挥手。',
+           zh:'到时候见，Emma！', quality:'ok', hint:'I’ll be there. 是确认出席的地道说法，加 Thank you 更得体。', aff:1},
+          {keys:['okay','ok','thanks','thank you'],
+           reply:'Great. See you next week!', emotion:'🙂', emoHint:'老师点点头。',
+           zh:'好。下周见！', quality:'near', hint:'Okay. 没错但略冷淡。加一句 I’ll be there. 更积极。', aff:0}
+        ],
+        fallback:{text:'Try “Thank you! I’ll be there.”', emotion:'🙂', emoHint:'老师等着。', zh:'试试"Thank you! I’ll be there."', quality:'miss', hint:'确认并道谢。', aff:0}
+      }
+    ]
+  }
+];
+
+/* 初高中 14–18 岁（rating 为分级锁门槛） */
+const HIGH = [
+  {
+    id:'social', age:15, stage:'初高中 14–18', icon:'🫥', title:'复杂社交',
+    desc:'班里流行起一场传言，大家都在站队——Emma 学会不卷入，也不评判别人。',
+    culture:{title:'drama 与 stay out of it', body:'美国高中生把人际纠纷叫 drama；不想卷入会说 I’m staying out of it. 或 I don’t wanna be in the middle of this.。朋友逼你站队时，不必选边，说 I’d rather not pick sides. 既成熟又安全。'},
+    turns:[
+      {
+        npc:'Jordan', npcAv:'🧑', emotion:'😰', emoHint:'Jordan 凑过来，声音压得很低。',
+        text:'Did you hear what happened? Everyone’s talking about it.', zh:'你听说那件事了吗？大家都在议论。',
+        options:['No, what happened?','I don’t care.','Yeah, I heard.'],
+        nativeLine:'No, what happened? I wasn’t there.',
+        intents:[
+          {keys:['no what happened','what happened','no i didn’t','no i didnt','tell me what happened','i wasn’t there','yeah i heard','i heard'],
+           reply:'Apparently Maya said something about Zoe. It’s a whole thing.', emotion:'😰', emoHint:'Jordan 左右看了看。',
+           zh:'据说 Maya 说了 Zoe 的坏话。事儿闹得挺大。', quality:'ok', hint:'No, what happened? 是自然的追问；加一句 I wasn’t there. 表明你只是听说。', aff:1},
+          {keys:['i don’t care','i dont care','whatever','not interested'],
+           reply:'Oh. Okay. I thought you’d want to know.', emotion:'😕', emoHint:'Jordan 有点尴尬。',
+           zh:'哦。好吧，我以为你会想知道。', quality:'near', hint:'I don’t care. 听着有点冷。如果不感兴趣可以说 I’d rather not get into it.。', aff:0}
+        ],
+        fallback:{text:'Try “No, what happened?”', emotion:'🙂', emoHint:'Jordan 等着。', zh:'试试"No, what happened?"', quality:'miss', hint:'想知道就追问，不想就说 I’d rather not get into it.。', aff:0}
+      },
+      {
+        npc:'Jordan', npcAv:'🧑', emotion:'😟', emoHint:'Jordan 看起来有点为难。',
+        text:'People are taking sides. Which side are you on?', zh:'大家都在站队。你站哪边？',
+        options:['I’m staying out of it.','I’m with you.','I don’t know.'],
+        nativeLine:'I’m staying out of it. It’s not my business.',
+        intents:[
+          {keys:['i’m staying out of it','im staying out of it','staying out of it','i’d rather not pick sides','id rather not pick sides','not my business','i don’t wanna be in the middle'],
+           reply:'Honestly, that’s probably smart.', emotion:'😌', emoHint:'Jordan 松了口气。',
+           zh:'说实话，这大概挺明智的。', quality:'ok', hint:'I’m staying out of it. 是拒绝卷入纠纷最地道的说法，成熟又不得罪人。', aff:2, flag:'stayed_out'},
+          {keys:['i’m with you','im with you','i’m on your side','im on your side','i don’t know','i dont know'],
+           reply:'But I don’t even know what happened fully…', emotion:'😟', emoHint:'Jordan 反而更紧张了。',
+           zh:'可我自己都还没完全搞清楚……', quality:'near', hint:'随便站队会让你也被卷进去。说 I’d rather not pick sides. 更稳妥。', aff:0}
+        ],
+        fallback:{text:'Try “I’m staying out of it.”', emotion:'🙂', emoHint:'Jordan 等着。', zh:'试试"I’m staying out of it."', quality:'miss', hint:'不卷入：I’m staying out of it.。', aff:0}
+      },
+      {
+        npc:'Jordan', npcAv:'🧑', emotion:'😣', emoHint:'Jordan 皱着眉，语气急了。',
+        text:'Come on, you have to pick a side.', zh:'拜托，你必须选一边。',
+        options:['I’d rather not. I like both of them.','Fine, whatever.','Okay, your side.'],
+        nativeLine:'I’d rather not. I’m friends with both of them.',
+        intents:[
+          {keys:['i’d rather not','id rather not','i like both of them','i’m friends with both','im friends with both','i’d rather not pick'],
+           reply:'Yeah… I guess that makes sense.', emotion:'😌', emoHint:'Jordan 终于接受了。',
+           zh:'是啊……好像也有道理。', quality:'ok', hint:'I’d rather not. 是温和但坚定的拒绝；补一句理由会让对方更容易接受。', aff:1},
+          {keys:['fine whatever','whatever','okay your side','your side','fine'],
+           reply:'Wait, are you being serious or just annoyed?', emotion:'😕', emoHint:'Jordan 没听明白。',
+           zh:'等等，你是认真的还是只是烦了？', quality:'near', hint:'Fine, whatever. 会让对方摸不着头脑。说清楚 I’d rather not.。', aff:0}
+        ],
+        fallback:{text:'Try “I’d rather not. I like both of them.”', emotion:'🙂', emoHint:'Jordan 等着。', zh:'试试"I’d rather not. I like both of them."', quality:'miss', hint:'温和拒绝并给理由。', aff:0}
+      },
+      {
+        npc:'Jordan', npcAv:'🧑', emotion:'🙂', emoHint:'Jordan 点点头，话题过去了。',
+        text:'Okay, I get it. Thanks for listening.', zh:'好吧，我明白了。谢谢你听我说。',
+        options:['Thanks for understanding.','Good.','No problem.'],
+        nativeLine:'Sure. Thanks for understanding.',
+        intents:[
+          {keys:['thanks for understanding','sure thanks','no problem','anytime','of course','happy to listen'],
+           reply:'I owe you one. See you at practice!', emotion:'😊', emoHint:'Jordan 笑着走了。',
+           zh:'欠你一个人情。训练见！', quality:'ok', hint:'Thanks for understanding. 回应别人的理解，非常地道。', aff:1},
+          {keys:['good','okay','yep','sure'],
+           reply:'Cool. See you around!', emotion:'🙂', emoHint:'Jordan 挥挥手。',
+           zh:'酷。回头见！', quality:'near', hint:'Good. 在这里像在打分。说 No problem. 或 Anytime. 更自然。', aff:0}
+        ],
+        fallback:{text:'Try “Thanks for understanding.”', emotion:'🙂', emoHint:'Jordan 等着。', zh:'试试"Thanks for understanding."', quality:'miss', hint:'回应感谢：No problem. / Anytime.。', aff:0}
+      }
+    ]
+  },
+  {
+    id:'job', age:16, stage:'初高中 14–18', icon:'☕', title:'兼职打工',
+    desc:'Emma 去咖啡店面试暑假工——美式 teen job 面试该怎样介绍自己。',
+    culture:{title:'美国青少年兼职面试', body:'美国孩子 14–16 岁常做 part-time job（兼职），面试会问 Why do you want to work here? 和 What’s your availability?。回答要具体：I’m available on weekends. / I can work after 3.。直接说 I need money. 太直白，换成 I want to save up for… 更成熟。'},
+    turns:[
+      {
+        npc:'Manager', npcAv:'🧑‍💼', emotion:'🙂', emoHint:'经理翻着简历，职业性地微笑。',
+        text:'So, why do you want to work here?', zh:'那么，你为什么想在这里工作？',
+        options:['I like people and I’m responsible.','I need money.','It’s close to school.'],
+        nativeLine:'I like working with people, and I’m responsible.',
+        intents:[
+          {keys:['i like people','i like working with people','i’m responsible','im responsible','i’m hardworking','im hardworking','i want to learn'],
+           reply:'Good answer. We need reliable people on the team.', emotion:'😊', emoHint:'经理点点头，记了几笔。',
+           zh:'好答案。我们需要可靠的团队成员。', quality:'ok', hint:'面试说 I’m responsible. / I like working with people. 是标准又加分的回答。', aff:1, flag:'good_interview'},
+          {keys:['i need money','need money','for money','i want money'],
+           reply:'Ha. Fair enough, but tell me what you’d bring to the team.', emotion:'🙂', emoHint:'经理笑了一下，继续追问。',
+           zh:'哈，也行，不过说说你能给团队带来什么。', quality:'near', hint:'I need money. 是真心话但面试别直说。改成 I want to save up for something. 更得体。', aff:0},
+          {keys:['it’s close to school','its close to school','close to school','convenient'],
+           reply:'That helps! And what else interests you about the job?', emotion:'🙂', emoHint:'经理继续挖。',
+           zh:'这确实方便！这份工作还有哪里吸引你？', quality:'ok', hint:'说地点方便也行，但最好再补一句你对工作的兴趣。', aff:0}
+        ],
+        fallback:{text:'Try “I like working with people, and I’m responsible.”', emotion:'🙂', emoHint:'经理等着。', zh:'试试"I like working with people, and I’m responsible."', quality:'miss', hint:'给一个积极、具体的理由。', aff:0}
+      },
+      {
+        npc:'Manager', npcAv:'🧑‍💼', emotion:'🙂', emoHint:'经理拿起排班表。',
+        text:'What’s your availability?', zh:'你什么时间能来上班？',
+        options:['I’m available after 3 and on weekends.','Anytime.','I don’t know.'],
+        nativeLine:'I’m available after 3 p.m. and all day on weekends.',
+        intents:[
+          {keys:['i’m available after 3','im available after 3','i’m available on weekends','im available on weekends','after 3 and on weekends','i can work weekends','i can work after school'],
+           reply:'That works well for us. Weekends are our busiest.', emotion:'😊', emoHint:'经理在表上打了勾。',
+           zh:'很合适。周末我们最忙。', quality:'ok', hint:'availability 问的是可上班时间。用 I’m available + 时间 回答最标准。', aff:1},
+          {keys:['anytime','any time','i can anytime','i’m free anytime'],
+           reply:'Any time? Even during school hours?', emotion:'😕', emoHint:'经理有点怀疑。',
+           zh:'随时？连上课时间也行？', quality:'near', hint:'Anytime. 听着不真实。说清楚 I’m available after 3 and on weekends.。', aff:0},
+          {keys:['i don’t know','i dont know','not sure','maybe'],
+           reply:'Take a look at this schedule and let me know.', emotion:'🙂', emoHint:'经理把排班表推过来。',
+           zh:'看看这个排班表再告诉我。', quality:'ok', hint:'不确定可以说 Let me check my schedule. 比 I don’t know. 更专业。', aff:0}
+        ],
+        fallback:{text:'Try “I’m available after 3 and on weekends.”', emotion:'🙂', emoHint:'经理等着。', zh:'试试"I’m available after 3 and on weekends."', quality:'miss', hint:'具体到时间段来回答。', aff:0}
+      },
+      {
+        npc:'Manager', npcAv:'🧑‍💼', emotion:'😐', emoHint:'经理语气公事公办。',
+        text:'Can you work Friday nights? We get busy then.', zh:'周五晚上能来吗？那时候很忙。',
+        options:['Yes, I can.','I have to ask my mom.','No, I can’t.'],
+        nativeLine:'Yes, I can. Friday nights work for me.',
+        intents:[
+          {keys:['yes i can','yes i can work','friday nights work','i can do friday','sure i can'],
+           reply:'Great. That’s a big help.', emotion:'😊', emoHint:'经理笑了。',
+           zh:'太好了，帮大忙了。', quality:'ok', hint:'回答 Can you…? 用 Yes, I can. 最标准。', aff:1},
+          {keys:['i have to ask my mom','i need to ask my mom','let me ask my mom','i have to check with my parents'],
+           reply:'Of course. Let me know by tomorrow.', emotion:'🙂', emoHint:'经理很理解。',
+           zh:'当然。明天前告诉我。', quality:'ok', hint:'需要家长同意就说 I have to ask my mom. 很诚实，面试官能接受。', aff:0},
+          {keys:['no i can’t','no i cant','i can’t fridays','no'],
+           reply:'Okay. Thanks for being upfront.', emotion:'🙂', emoHint:'经理划掉了周五。',
+           zh:'好。谢谢你说清楚。', quality:'ok', hint:'不能就说 No, I can’t. 加一句理由更好。', aff:0}
+        ],
+        fallback:{text:'Try “Yes, I can.” or “I have to ask my mom.”', emotion:'🙂', emoHint:'经理等着。', zh:'试试"Yes, I can."或"I have to ask my mom."', quality:'miss', hint:'先回答能不能，再给理由。', aff:0}
+      },
+      {
+        npc:'Manager', npcAv:'🧑‍💼', emotion:'😄', emoHint:'经理合上文件夹，伸出手。',
+        text:'Well, you’re hired. Welcome to the team!', zh:'嗯，你被录用了。欢迎加入！',
+        options:['Thank you so much!','Cool.','Awesome, thank you!'],
+        nativeLine:'Thank you so much! I’m excited to start.',
+        intents:[
+          {keys:['thank you so much','thanks so much','awesome thank you','i’m excited','im excited','i appreciate it'],
+           reply:'Start next Monday at 3. See you then!', emotion:'😄', emoHint:'经理递给你排班表。',
+           zh:'下周一点钟开始。到时候见！', quality:'ok', hint:'被录用后说 Thank you so much! I’m excited to start. 既礼貌又真诚。', aff:1, flag:'got_job'},
+          {keys:['cool','okay','sure','nice'],
+           reply:'See you Monday!', emotion:'🙂', emoHint:'经理笑着结束面试。',
+           zh:'周一见！', quality:'near', hint:'Cool. 太随意。面试场合说 Thank you so much! 更得体。', aff:0}
+        ],
+        fallback:{text:'Try “Thank you so much! I’m excited to start.”', emotion:'🙂', emoHint:'经理等着。', zh:'试试"Thank you so much! I’m excited to start."', quality:'miss', hint:'被录用要真诚道谢。', aff:0}
+      }
+    ]
+  },
+  {
+    id:'date', age:16, stage:'初高中 14–18', rating:14, icon:'💐', title:'约会',
+    desc:'有人约你周五出去——学怎么分辨 hang out 和 date，以及礼貌又有边界地回应。',
+    culture:{title:'hang out 与 date', body:'美国青少年说 go out / hang out 不一定等于正式约会；直接问 Is this a date? 是可以的。13–16 岁常是 group date（一群人一起）或去商场看电影。约会时自己安排交通、告诉家长去向，是美式青少年的安全常识。'},
+    turns:[
+      {
+        npc:'Alex', npcAv:'🧑', emotion:'🙂', emoHint:'Alex 有点紧张，假装随意。',
+        text:'Do you want to go out this Friday?', zh:'周五想一起出去吗？',
+        options:['Sure, that sounds fun.','Is this a date?','No, thanks.'],
+        nativeLine:'Sure, that sounds fun. What did you have in mind?',
+        intents:[
+          {keys:['sure that sounds fun','that sounds fun','sure','yes i’d love to','id love to','sounds good'],
+           reply:'Awesome! I was thinking we could just hang out.', emotion:'😊', emoHint:'Alex 明显松了口气。',
+           zh:'太好了！我想我们可以就随便逛逛。', quality:'ok', hint:'Sure, that sounds fun. 是答应邀约的经典说法；加一句 What did you have in mind? 能问清安排。', aff:1, flag:'said_yes_date'},
+          {keys:['is this a date','is this a date?','are you asking me out','what do you mean by date'],
+           reply:'Um… maybe? I just want to hang out, really.', emotion:'😳', emoHint:'Alex 脸红了。',
+           zh:'呃……也许？真的就是想一起玩。', quality:'ok', hint:'Is this a date? 可以直接问，不算失礼。美式青少年常先说 hang out 来减轻压力。', aff:0},
+          {keys:['no thanks','no thank you','i can’t friday','i have plans','no'],
+           reply:'No worries! Maybe some other time.', emotion:'🙂', emoHint:'Alex 撑住了笑容。',
+           zh:'没事！下次吧。', quality:'ok', hint:'婉拒说 No, thanks. 或 I have plans.。清楚但不用解释太多。', aff:0}
+        ],
+        fallback:{text:'Try “Sure, that sounds fun.” or “No, thanks.”', emotion:'🙂', emoHint:'Alex 等着。', zh:'试试"Sure, that sounds fun."或"No, thanks."', quality:'miss', hint:'答应或婉拒都要说清楚。', aff:0}
+      },
+      {
+        npc:'Alex', npcAv:'🧑', emotion:'😊', emoHint:'Alex 补充了一句，语气轻松。',
+        text:'Just hanging out at the mall. Is that okay?', zh:'就是去商场逛逛。可以吗？',
+        options:['Yeah, that sounds good.','I’d rather study.','Sure, but let’s tell my mom.'],
+        nativeLine:'Yeah, that sounds good. Let’s tell my mom first.',
+        intents:[
+          {keys:['yeah that sounds good','that sounds good','sounds good','sure but let’s tell my mom','sure but lets tell my mom','let’s tell my mom','lets tell my mom'],
+           reply:'Definitely. I’ll ask my dad too.', emotion:'😊', emoHint:'Alex 也觉得这样最稳妥。',
+           zh:'当然。我也问我爸。', quality:'ok', hint:'Yeah, that sounds good. 表示同意；主动提 Let’s tell my mom. 说明你有边界意识，很成熟。', aff:1, flag:'told_parent'},
+          {keys:['i’d rather study','id rather study','i have homework','no i can’t','i cant'],
+           reply:'Oh, okay. Another time then!', emotion:'🙂', emoHint:'Alex 点点头。',
+           zh:'哦，好吧。那下次！', quality:'ok', hint:'不想去就说 I’d rather study. 或 I have homework.，很自然。', aff:0}
+        ],
+        fallback:{text:'Try “Yeah, that sounds good.”', emotion:'🙂', emoHint:'Alex 等着。', zh:'试试"Yeah, that sounds good."', quality:'miss', hint:'同意安排：That sounds good.。', aff:0}
+      },
+      {
+        npc:'Alex', npcAv:'🧑', emotion:'🙂', emoHint:'Alex 看了看手机。',
+        text:'Cool. Should I pick you up?', zh:'酷。要我去接你吗？',
+        options:['My mom can drive me.','Sure, pick me up.','No, I’ll walk.'],
+        nativeLine:'My mom can drive me. Thanks anyway!',
+        intents:[
+          {keys:['my mom can drive me','my mom will drive me','my dad can pick me up','my mom can pick me up','i’ll get a ride from my mom','ill get a ride from my mom'],
+           reply:'Perfect. See you at the mall at 2?', emotion:'😊', emoHint:'Alex 觉得这样安排很好。',
+           zh:'完美。两点商场见？', quality:'ok', hint:'自己安排交通、告诉家长去向，是安全又成熟的做法。My mom can drive me. 说得很清楚。', aff:1},
+          {keys:['sure pick me up','pick me up','yes pick me up','sure'],
+           reply:'Okay, what’s your address?', emotion:'🙂', emoHint:'Alex 准备问地址。',
+           zh:'好，你地址是多少？', quality:'bad', hint:'让不太熟的同学直接到家接你并不安全。更稳妥的说法是 My mom can drive me. 或 Let’s meet there.。', aff:-1},
+          {keys:['no i’ll walk','no ill walk','i’ll take the bus','ill take the bus'],
+           reply:'It’s kind of far. Are you sure?', emotion:'😕', emoHint:'Alex 有点担心。',
+           zh:'有点远，你确定吗？', quality:'near', hint:'可以自己坐车，但要让家长知道。说 I’ll take the bus, but I’ll tell my mom. 更周全。', aff:0}
+        ],
+        fallback:{text:'Try “My mom can drive me.”', emotion:'🙂', emoHint:'Alex 等着。', zh:'试试"My mom can drive me."', quality:'miss', hint:'安排好交通，并让家长知情。', aff:0}
+      },
+      {
+        npc:'Alex', npcAv:'🧑', emotion:'😄', emoHint:'Alex 笑着挥手。',
+        text:'Sounds good. See you Friday!', zh:'说定了。周五见！',
+        options:['See you then!','Bye.','Okay.'],
+        nativeLine:'See you then! Have a good week.',
+        intents:[
+          {keys:['see you then','see you friday','see you','bye alex','have a good week'],
+           reply:'You too! Bye, Emma.', emotion:'😄', emoHint:'Alex 转身走开。',
+           zh:'你也是！拜拜，Emma。', quality:'ok', hint:'See you then! 是确认约定的地道收尾。', aff:1},
+          {keys:['bye','okay','ok','later'],
+           reply:'Later!', emotion:'🙂', emoHint:'Alex 挥挥手。',
+           zh:'回见！', quality:'near', hint:'Bye. 没错但略冷淡。See you then! 更自然呼应约定。', aff:0}
+        ],
+        fallback:{text:'Try “See you then!”', emotion:'🙂', emoHint:'Alex 等着。', zh:'试试"See you then!"', quality:'miss', hint:'收尾用 See you then.。', aff:0}
+      }
+    ]
+  },
+  {
+    id:'pressure', age:17, stage:'初高中 14–18', icon:'📚', title:'升学压力',
+    desc:'数学跟不上了，Emma 鼓起勇气在答疑时间去办公室找老师求助。',
+    culture:{title:'office hours 与 I’m struggling with', body:'美国中学/大学老师有 office hours（固定答疑时间），学生主动去找老师很正常。求助的标准说法是 I’m struggling with…（我在……上有点吃力）或 I don’t understand…。承认困难不会被看低，反而被视为主动。'},
+    turns:[
+      {
+        npc:'Ms. Rivera', npcAv:'👩‍🏫', emotion:'😟', emoHint:'老师注意到你最近心不在焉。',
+        text:'You seem stressed lately. How are you doing?', zh:'你最近看起来压力挺大。还好吗？',
+        options:['I’m struggling with math.','I’m fine.','I don’t know.'],
+        nativeLine:'Honestly, I’m struggling with math.',
+        intents:[
+          {keys:['i’m struggling with math','im struggling with math','i’m struggling','im struggling','i’m having a hard time','im having a hard time','i’m stressed about math'],
+           reply:'Thanks for telling me. You’re not the only one.', emotion:'😊', emoHint:'老师拉过一把椅子。',
+           zh:'谢谢你告诉我。不是只有你一个人这样。', quality:'ok', hint:'I’m struggling with math. 是美国学生求助的标准说法，比 I’m fine. 真实得多。', aff:1, flag:'asked_help'},
+          {keys:['i’m fine','im fine','i’m okay','im okay','no i’m good','no im good'],
+           reply:'Okay. My door’s open if that changes.', emotion:'🙂', emoHint:'老师没有逼你。',
+           zh:'好。要是改主意了，我随时在。', quality:'near', hint:'明明有困难却说 I’m fine. 会错失帮助。试试 I’m struggling with math.。', aff:0},
+          {keys:['i don’t know','i dont know','i feel weird','everything'],
+           reply:'That’s a lot to carry. Let’s figure out one thing at a time.', emotion:'🙂', emoHint:'老师放慢了语速。',
+           zh:'压力确实不小。我们一次解决一件事。', quality:'ok', hint:'说不清也可以说 I don’t know where to start. 老师会帮你拆开。', aff:0}
+        ],
+        fallback:{text:'Try “I’m struggling with math.”', emotion:'🙂', emoHint:'老师等着。', zh:'试试"I’m struggling with math."', quality:'miss', hint:'求助先说 I’m struggling with…。', aff:0}
+      },
+      {
+        npc:'Ms. Rivera', npcAv:'👩‍🏫', emotion:'🙂', emoHint:'老师翻开你的作业本。',
+        text:'What’s the hardest part for you?', zh:'对你来说最难的是哪部分？',
+        options:['I don’t understand the homework.','Everything.','The teacher.'],
+        nativeLine:'I don’t understand the homework from last week.',
+        intents:[
+          {keys:['i don’t understand the homework','i dont understand the homework','i don’t understand','i dont understand','i don’t get it','i dont get it','the homework is hard'],
+           reply:'Show me the first problem you got stuck on.', emotion:'🙂', emoHint:'老师把本子转向你。',
+           zh:'指给我看你卡住的第一道题。', quality:'ok', hint:'I don’t understand… / I don’t get it. 是课堂求助的高频句，简单直接。', aff:1},
+          {keys:['everything','all of it','i know nothing','i dont know anything','the teacher'],
+           reply:'Let’s start small. What did you try first?', emotion:'🙂', emoHint:'老师耐心地引导。',
+           zh:'我们从小处开始。你先试了什么？', quality:'near', hint:'Everything. 太笼统。说具体一点：I don’t understand the homework.。', aff:0}
+        ],
+        fallback:{text:'Try “I don’t understand the homework.”', emotion:'🙂', emoHint:'老师等着。', zh:'试试"I don’t understand the homework."', quality:'miss', hint:'具体说出卡在哪里。', aff:0}
+      },
+      {
+        npc:'Ms. Rivera', npcAv:'👩‍🏫', emotion:'🙂', emoHint:'老师看了看你。',
+        text:'Have you tried coming to office hours before?', zh:'你以前来过答疑时间吗？',
+        options:['No, but I will.','I can’t.','Yes, once.'],
+        nativeLine:'No, but I’ll start coming every Tuesday.',
+        intents:[
+          {keys:['no but i will','no but i’ll start','i’ll start coming','ill start coming','yes once','i have once','i came once'],
+           reply:'Great. Tuesdays are quiet, so we can work one-on-one.', emotion:'😊', emoHint:'老师在日历上圈了周二。',
+           zh:'好。周二人少，我们可以一对一。', quality:'ok', hint:'No, but I will. 简短又积极；加具体计划更有说服力。', aff:1},
+          {keys:['i can’t','i cant','i can’t come','i have practice after school','i have no time'],
+           reply:'We can find another time. What works for you?', emotion:'🙂', emoHint:'老师拿出日程表。',
+           zh:'我们可以换个时间。你什么时候方便？', quality:'ok', hint:'有冲突就说 I can’t on Tuesdays. 再加一句 What works for you? 会很主动。', aff:0}
+        ],
+        fallback:{text:'Try “No, but I will.”', emotion:'🙂', emoHint:'老师等着。', zh:'试试"No, but I will."', quality:'miss', hint:'给出明确的后续计划。', aff:0}
+      },
+      {
+        npc:'Ms. Rivera', npcAv:'👩‍🏫', emotion:'😊', emoHint:'老师拿起笔，准备开始讲题。',
+        text:'Let’s work through it together, okay?', zh:'我们一起把它做一遍，好吗？',
+        options:['Thank you. That helps a lot.','Okay.','Yes, please.'],
+        nativeLine:'Thank you. That helps a lot.',
+        intents:[
+          {keys:['thank you that helps a lot','thanks that helps','that helps a lot','thank you so much','yes please','i appreciate it'],
+           reply:'Anytime. That’s what I’m here for.', emotion:'😊', emoHint:'老师笑了。',
+           zh:'随时。这就是我的工作。', quality:'ok', hint:'That helps a lot. 是表达“很有帮助”的地道说法，老师听了会很高兴。', aff:1},
+          {keys:['okay','ok','sure','yes','mhm'],
+           reply:'Alright, let’s start here.', emotion:'🙂', emoHint:'老师开始讲第一题。',
+           zh:'好，我们从这里开始。', quality:'near', hint:'Okay. 太单薄。加一句 Thank you. That helps a lot. 更得体。', aff:0}
+        ],
+        fallback:{text:'Try “Thank you. That helps a lot.”', emotion:'🙂', emoHint:'老师等着。', zh:'试试"Thank you. That helps a lot."', quality:'miss', hint:'被帮助后要具体道谢。', aff:0}
+      }
+    ]
+  },
+  {
+    id:'choice', age:18, stage:'初高中 14–18', icon:'🎓', title:'独立决策',
+    desc:'选大学的最后关头，Emma 要给父母一个既坚定又尊重的决定。',
+    culture:{title:'18 岁的独立与商量', body:'美国文化里 18 岁被视为成年，孩子常自己决定大学和专业，但依然会和父母商量。成熟的说法是 I’ve decided to… 加 I’d like your thoughts. 或 That means a lot.。直接说 Leave me alone. 会被认为不成熟。'},
+    turns:[
+      {
+        npc:'Mom', npcAv:'👩', emotion:'🙂', emoHint:'妈妈坐在餐桌边，语气轻松但认真。',
+        text:'Have you thought about college yet?', zh:'你想过大学的事吗？',
+        options:['Yes, I have.','Not really.','Leave me alone.'],
+        nativeLine:'Yes, I have. I’ve been thinking about it a lot.',
+        intents:[
+          {keys:['yes i have','yes i have been thinking','i have been thinking','i’ve been thinking','ive been thinking','yes i have a plan'],
+           reply:'I was wondering. Tell me what you’re thinking.', emotion:'😊', emoHint:'妈妈身体前倾，认真听。',
+           zh:'我也在想。跟我说说你的想法。', quality:'ok', hint:'Yes, I have. 简洁肯定；加一句 I’ve been thinking about it a lot. 让妈妈放心。', aff:1, flag:'talked_college'},
+          {keys:['not really','no not really','i haven’t','i havent','i don’t want to talk about it'],
+           reply:'That’s okay. No rush — just let me know when you’re ready.', emotion:'🙂', emoHint:'妈妈没有催。',
+           zh:'没关系。不着急，准备好了告诉我。', quality:'ok', hint:'Not really. 完全正常，18 岁本来就可以慢慢想。', aff:0},
+          {keys:['leave me alone','stop asking','don’t ask me','dont ask me'],
+           reply:'Ouch. Okay. I’m just asking because I care.', emotion:'😕', emoHint:'妈妈收回了笑容。',
+           zh:'哎。好吧。我只是关心你才问。', quality:'bad', hint:'Leave me alone. 太伤人。妈妈只是关心，说 I’m still thinking. 就够了。', aff:-2}
+        ],
+        fallback:{text:'Try “Yes, I have.” or “Not really.”', emotion:'🙂', emoHint:'妈妈等着。', zh:'试试"Yes, I have."或"Not really."', quality:'miss', hint:'诚实回答就好，不用凶。', aff:0}
+      },
+      {
+        npc:'Mom', npcAv:'👩', emotion:'🙂', emoHint:'妈妈端起杯子，等着听。',
+        text:'What do you want to study?', zh:'你想学什么专业？',
+        options:['I want to study biology.','I don’t know yet.','Whatever you want.'],
+        nativeLine:'I’d like to study biology. It’s what I love.',
+        intents:[
+          {keys:['i want to study biology','i’d like to study biology','id like to study','i want to study','i’m thinking of studying','im thinking of studying'],
+           reply:'Biology! You’ve always loved science.', emotion:'😊', emoHint:'妈妈笑了。',
+           zh:'生物！你一直很喜欢科学。', quality:'ok', hint:'I’d like to study… 比 I want to study…更成熟；加一句理由更好。', aff:1},
+          {keys:['i don’t know yet','i dont know yet','not sure yet','i’m still deciding','im still deciding'],
+           reply:'That’s fine. You have time to figure it out.', emotion:'🙂', emoHint:'妈妈点点头。',
+           zh:'没关系。你有时间慢慢想。', quality:'ok', hint:'I’m still deciding. 比 I don’t know. 显得更有掌控感。', aff:0},
+          {keys:['whatever you want','you decide','whatever mom','up to you'],
+           reply:'Emma, this decision is yours, not mine.', emotion:'😟', emoHint:'妈妈放下杯子。',
+           zh:'Emma，这个决定是你自己的，不是我的。', quality:'near', hint:'这是你的人生决定。说 I’d like to study… 而不是 Whatever you want.。', aff:0}
+        ],
+        fallback:{text:'Try “I’d like to study biology.”', emotion:'🙂', emoHint:'妈妈等着。', zh:'试试"I’d like to study biology."', quality:'miss', hint:'说出你自己的选择。', aff:0}
+      },
+      {
+        npc:'Mom', npcAv:'👩', emotion:'😟', emoHint:'妈妈有点犹豫，声音轻了。',
+        text:'That school is pretty far from home.', zh:'那所学校离家挺远的。',
+        options:['I know, but it’s the right program for me.','So?','I won’t go then.'],
+        nativeLine:'I know it’s far, but it’s the right program for me.',
+        intents:[
+          {keys:['i know but it’s the right program','i know its the right program','it’s the right program for me','its the right program for me','i know it’s far but','i know its far but','i’ve thought about it','ive thought about it'],
+           reply:'You’ve clearly thought this through. I respect that.', emotion:'😊', emoHint:'妈妈的表情放松了。',
+           zh:'你显然想得很清楚。我尊重你。', quality:'ok', hint:'先承认 I know it’s far, but… 再讲理由，既坚定又不否定妈妈的担心。', aff:2, flag:'stood_ground'},
+          {keys:['so?','and?','who cares','so what'],
+           reply:'I’m just worried about you. That’s all.', emotion:'😕', emoHint:'妈妈低下头。',
+           zh:'我只是担心你。就这样。', quality:'bad', hint:'So? 会显得你不在乎妈妈的担心。说 I know, but… 更成熟。', aff:-2},
+          {keys:['i won’t go then','i wont go then','okay i’ll stay','ill stay'],
+           reply:'Don’t give up your dream because of me.', emotion:'😟', emoHint:'妈妈摇摇头。',
+           zh:'别因为我放弃你的梦想。', quality:'near', hint:'不用为了安抚妈妈就放弃。坚定但尊重地表达：I know it’s far, but…。', aff:0}
+        ],
+        fallback:{text:'Try “I know it’s far, but it’s right for me.”', emotion:'🙂', emoHint:'妈妈等着。', zh:'试试"I know it’s far, but it’s right for me."', quality:'miss', hint:'先接住担心，再讲自己的理由。', aff:0}
+      },
+      {
+        npc:'Mom', npcAv:'👩', emotion:'🥰', emoHint:'妈妈握住你的手。',
+        text:'We’re really proud of you, Emma.', zh:'我们真的为你骄傲，Emma。',
+        options:['Thanks, Mom. That means a lot.','Okay.','I know.'],
+        nativeLine:'Thanks, Mom. That means a lot.',
+        intents:[
+          {keys:['thanks mom that means a lot','that means a lot','thank you that means a lot','i appreciate that mom','thanks mom','thank you mom'],
+           reply:'Call me when you land. I love you.', emotion:'🥰', emoHint:'妈妈抱了抱你。',
+           zh:'落地了给我打电话。我爱你。', quality:'ok', hint:'That means a lot. 是回应别人肯定的高级说法，比 I know. 温暖得多。', aff:1},
+          {keys:['okay','ok','i know','thanks'],
+           reply:'I love you. Take care.', emotion:'🙂', emoHint:'妈妈笑了笑。',
+           zh:'我爱你，照顾好自己。', quality:'near', hint:'I know. 在这里显得冷淡。说 Thanks, Mom. That means a lot.。', aff:0}
+        ],
+        fallback:{text:'Try “Thanks, Mom. That means a lot.”', emotion:'🙂', emoHint:'妈妈等着。', zh:'试试"Thanks, Mom. That means a lot."', quality:'miss', hint:'被表扬时温暖地回应。', aff:0}
+      }
+    ]
+  },
+  {
+    id:'party', age:15, stage:'初高中 14–18', rating:14, icon:'🎉', title:'派对',
+    desc:'同学邀请你去周六派对，但听说可能会喝酒——学着在热闹里守住自己的边界。',
+    culture:{title:'美国高中派对文化', body:'美国高中生会办 house party（家里派对），但饮酒对未成年人违法。想拒绝可以说 I’m not comfortable with that. 或 I’ll pass.。朋友施压时，明确但不说教：I’ll come, but I’m not drinking. 是既合群又有边界的说法。'},
+    turns:[
+      {
+        npc:'Taylor', npcAv:'🧑', emotion:'😄', emoHint:'Taylor 一脸兴奋，拍了拍你。',
+        text:'There’s a party Saturday. Are you in?', zh:'周六有个派对。你去吗？',
+        options:['Sounds fun! I’ll be there.','I’m not sure yet.','Count me out.'],
+        nativeLine:'Sounds fun! I’ll be there.',
+        intents:[
+          {keys:['sounds fun i’ll be there','sounds fun','i’ll be there','ill be there','count me in','yes definitely','i’m in','im in'],
+           reply:'Yes! It’s at my cousin’s place.', emotion:'😄', emoHint:'Taylor 很开心。',
+           zh:'好！在我表哥家。', quality:'ok', hint:'Are you in? 是口语化的“你来不来”。答应就说 I’m in. / Count me in.。', aff:1, flag:'going_party'},
+          {keys:['i’m not sure yet','im not sure yet','i’m not sure','im not sure','maybe','let me think'],
+           reply:'Cool. Let me know Thursday, okay?', emotion:'🙂', emoHint:'Taylor 点点头。',
+           zh:'好。周四告诉我，行吗？', quality:'ok', hint:'还没决定就说 I’m not sure yet. 或 Let me think.。', aff:0},
+          {keys:['count me out','no thanks','i’m not going','im not going','no'],
+           reply:'Aw, come on. It’ll be fun!', emotion:'😕', emoHint:'Taylor 有点失望。',
+           zh:'哎呀，来嘛，会很好玩的！', quality:'ok', hint:'不想去说 Count me out. / I’m not going. 很清楚，朋友可能会再劝一次。', aff:0}
+        ],
+        fallback:{text:'Try “Sounds fun! I’ll be there.”', emotion:'🙂', emoHint:'Taylor 等着。', zh:'试试"Sounds fun! I’ll be there."', quality:'miss', hint:'回答 Are you in? 用 I’m in. / Count me out.。', aff:0}
+      },
+      {
+        npc:'Taylor', npcAv:'🧑', emotion:'😅', emoHint:'Taylor 挠了挠头，像是随口一提。',
+        text:'There might be alcohol there. Just so you know.', zh:'那儿可能会有酒。提前跟你说一声。',
+        options:['I’m not comfortable with that.','Whatever.','Sounds good.'],
+        nativeLine:'I’m not comfortable with that. I’ll pass on the drinking.',
+        intents:[
+          {keys:['i’m not comfortable with that','im not comfortable with that','i’m not comfortable','im not comfortable','i’ll pass','ill pass','i’d rather not','id rather not','that makes me uncomfortable'],
+           reply:'Fair. I won’t either, then.', emotion:'🙂', emoHint:'Taylor 表示理解。',
+           zh:'有道理。那我也不喝。', quality:'ok', hint:'I’m not comfortable with that. 是表达边界最标准、最不伤人的说法。', aff:2, flag:'set_boundary'},
+          {keys:['whatever','sounds good','i don’t care','i dont care','cool'],
+           reply:'I’m telling you because it could get you in trouble.', emotion:'😟', emoHint:'Taylor 认真了起来。',
+           zh:'我告诉你是因为这会让你惹上麻烦。', quality:'bad', hint:'饮酒对未成年人违法，不能无所谓。说 I’m not comfortable with that. 才是对自己负责。', aff:-2},
+          {keys:['i’m curious','im curious','maybe i’ll try','maybe ill try'],
+           reply:'It’s your call, but I’d skip it.', emotion:'😕', emoHint:'Taylor 皱了皱眉。',
+           zh:'你自己决定，但我会不喝。', quality:'near', hint:'好奇很正常，但对未成年人来说风险很大。说 I’ll pass. 更安全。', aff:0}
+        ],
+        fallback:{text:'Try “I’m not comfortable with that.”', emotion:'🙂', emoHint:'Taylor 等着。', zh:'试试"I’m not comfortable with that."', quality:'miss', hint:'明确表达不接受。', aff:0}
+      },
+      {
+        npc:'Taylor', npcAv:'🧑', emotion:'😏', emoHint:'Taylor 半开玩笑地激你。',
+        text:'Don’t be boring. Just come and have a drink.', zh:'别这么扫兴。来喝一杯嘛。',
+        options:['I’ll come, but I’m not drinking.','Fine, I’ll drink.','Stop asking me.'],
+        nativeLine:'I’ll come, but I’m not drinking. Is that cool?',
+        intents:[
+          {keys:['i’ll come but i’m not drinking','ill come but im not drinking','i’m not drinking','im not drinking','i’ll pass on the drinking','ill pass on the drinking','i’ll come but no drinking'],
+           reply:'Yeah, that’s fine. I won’t either.', emotion:'😊', emoHint:'Taylor 耸耸肩，接受了。',
+           zh:'行，没关系。我也不喝。', quality:'ok', hint:'I’ll come, but I’m not drinking. 既合群又守住了边界，是最高情商的回应。', aff:2, flag:'held_boundary'},
+          {keys:['fine i’ll drink','fine ill drink','okay i’ll drink','sure i’ll try','sure ill try'],
+           reply:'Really? I thought you didn’t want to.', emotion:'😕', emoHint:'Taylor 反而愣了。',
+           zh:'真的？我以为你不想。', quality:'bad', hint:'别因为朋友激你就违反自己的原则。说 I’ll come, but I’m not drinking.。', aff:-2},
+          {keys:['stop asking me','shut up','leave me alone','stop it'],
+           reply:'Hey, I’m just asking. Chill.', emotion:'😕', emoHint:'Taylor 举起双手。',
+           zh:'嘿，我只是问问。别激动。', quality:'near', hint:'不需要凶。明确说 I’m not drinking, thanks. 就够了。', aff:-1}
+        ],
+        fallback:{text:'Try “I’ll come, but I’m not drinking.”', emotion:'🙂', emoHint:'Taylor 等着。', zh:'试试"I’ll come, but I’m not drinking."', quality:'miss', hint:'合群但守住边界。', aff:0}
+      },
+      {
+        npc:'Taylor', npcAv:'🧑', emotion:'🙂', emoHint:'Taylor 笑了笑，话题翻篇。',
+        text:'Okay, no pressure. See you Saturday!', zh:'好，没压力。周六见！',
+        options:['Thanks for understanding.','Good.','Whatever.'],
+        nativeLine:'Thanks for understanding. See you then!',
+        intents:[
+          {keys:['thanks for understanding','thanks for getting it','i appreciate it','see you then','see you saturday','sounds good'],
+           reply:'Cool. Bring snacks!', emotion:'😄', emoHint:'Taylor 笑着走开。',
+           zh:'酷。带点零食！', quality:'ok', hint:'Thanks for understanding. 感谢对方尊重你的边界，非常得体。', aff:1},
+          {keys:['good','okay','whatever','fine'],
+           reply:'Alright, see you.', emotion:'🙂', emoHint:'Taylor 挥挥手。',
+           zh:'行，回头见。', quality:'near', hint:'Whatever. 在这里像赌气。说 Thanks for understanding. 更成熟。', aff:0}
+        ],
+        fallback:{text:'Try “Thanks for understanding.”', emotion:'🙂', emoHint:'Taylor 等着。', zh:'试试"Thanks for understanding."', quality:'miss', hint:'感谢对方尊重你。', aff:0}
+      }
+    ]
+  },
+  {
+    id:'drink', age:17, stage:'初高中 14–18', rating:16, icon:'🚫🍺', title:'饮酒',
+    desc:'同学递来一罐啤酒——这是全工具最需要勇气的场景：清楚、平静、坚定地说不。',
+    culture:{title:'美国法定饮酒年龄 21 岁', body:'美国法律规定 21 岁以下不得饮酒，未成年人喝酒会影响升学、体育资格甚至留下记录。拒绝的标准说法：No, thanks. I’ll pass. / I’m good. / I’m underage.。朋友说 You’re no fun. 时，不必跟着笑，说 I’m just not into it. 就好。'},
+    turns:[
+      {
+        npc:'Jordan', npcAv:'🧑', emotion:'😏', emoHint:'Jordan 递过来一罐啤酒，试图显得随意。',
+        text:'Want a sip? It’s just beer.', zh:'来一口？就啤酒而已。',
+        options:['No, thanks. I’ll pass.','Sure!','I’m underage.'],
+        nativeLine:'No, thanks. I’ll pass.',
+        intents:[
+          {keys:['no thanks i’ll pass','no thanks ill pass','i’ll pass','ill pass','no thanks','no thank you','i’m good','im good','i’m underage','im underage'],
+           reply:'Suit yourself. More for me.', emotion:'🙂', emoHint:'Jordan 收了回去。',
+           zh:'随你。那我多喝点。', quality:'ok', hint:'No, thanks. I’ll pass. 是最干脆又不得罪人的拒绝；I’m underage. 也是正当理由。', aff:2, flag:'refused_drink'},
+          {keys:['sure','sure why not','yes please','give me one','i’ll try','ill try'],
+           reply:'Really? I didn’t think you’d say yes.', emotion:'😕', emoHint:'Jordan 反而有点意外。',
+           zh:'真的？我还以为你不会答应。', quality:'bad', hint:'未成年饮酒违法且伤身。说 No, thanks. I’ll pass. 才是对自己负责。', aff:-2}
+        ],
+        fallback:{text:'Try “No, thanks. I’ll pass.”', emotion:'🙂', emoHint:'Jordan 等着。', zh:'试试"No, thanks. I’ll pass."', quality:'miss', hint:'干脆拒绝：No, thanks. I’ll pass.。', aff:0}
+      },
+      {
+        npc:'Jordan', npcAv:'🧑', emotion:'😏', emoHint:'Jordan 挑了挑眉，继续施压。',
+        text:'Come on, everyone’s doing it.', zh:'拜托，大家都在喝。',
+        options:['I’d rather not. I’m good.','Okay, fine.','Just one sip.'],
+        nativeLine:'I’d rather not. I’m good, thanks.',
+        intents:[
+          {keys:['i’d rather not','id rather not','i’m good','im good','i’m good thanks','im good thanks','i’ll stick to soda','ill stick to soda','not for me'],
+           reply:'Alright, whatever. Suit yourself.', emotion:'😐', emoHint:'Jordan 耸耸肩。',
+           zh:'行吧，随你。', quality:'ok', hint:'I’d rather not. / I’m good. 是美式最常见的婉拒，语气平静但立场清楚。', aff:2, flag:'resisted_pressure'},
+          {keys:['okay fine','fine ill have one','just one sip','one sip','okay i’ll try'],
+           reply:'That’s the spirit!', emotion:'😄', emoHint:'Jordan 递了过来。',
+           zh:'这就对了！', quality:'bad', hint:'“大家都这样”不是理由。坚持说 I’d rather not. I’m good.。', aff:-2}
+        ],
+        fallback:{text:'Try “I’d rather not. I’m good.”', emotion:'🙂', emoHint:'Jordan 等着。', zh:'试试"I’d rather not. I’m good."', quality:'miss', hint:'平静但坚定地拒绝。', aff:0}
+      },
+      {
+        npc:'Jordan', npcAv:'🧑', emotion:'😒', emoHint:'Jordan 有点不高兴。',
+        text:'You’re no fun. Everyone’s gonna laugh.', zh:'你真扫兴。大家都会笑你。',
+        options:['I’m just not into it. Let’s do something else.','Shut up.','Fine, I’ll drink.'],
+        nativeLine:'I’m just not into it. Let’s go get food instead.',
+        intents:[
+          {keys:['i’m just not into it','im just not into it','i’m not into it','im not into it','let’s do something else','lets do something else','let’s go get food','lets go get food','i’d rather do something else'],
+           reply:'Fine. Pizza sounds okay, I guess.', emotion:'🙂', emoHint:'Jordan 把啤酒放下了。',
+           zh:'行吧。披萨也行。', quality:'ok', hint:'I’m not into it. 意思是“我不感兴趣”，比说教更有力；再提个替代方案就完美了。', aff:2, flag:'redirected'},
+          {keys:['shut up','stop it','leave me alone','who cares'],
+           reply:'Wow. Chill, I was just joking.', emotion:'😕', emoHint:'Jordan 退了一步。',
+           zh:'哇。别激动，我开玩笑的。', quality:'near', hint:'Shut up. 太冲。平静说 I’m just not into it. 就够了。', aff:-1},
+          {keys:['fine i’ll drink','okay i’ll drink','give it to me','i’ll have one'],
+           reply:'Now you’re talking!', emotion:'😄', emoHint:'Jordan 又笑开了。',
+           zh:'这才对嘛！', quality:'bad', hint:'别因为怕被笑就妥协。说 I’m just not into it. Let’s do something else.。', aff:-2}
+        ],
+        fallback:{text:'Try “I’m just not into it. Let’s do something else.”', emotion:'🙂', emoHint:'Jordan 等着。', zh:'试试"I’m just not into it. Let’s do something else."', quality:'miss', hint:'不喝，并提议别的活动。', aff:0}
+      },
+      {
+        npc:'Jordan', npcAv:'🧑', emotion:'🙂', emoHint:'Jordan 收起啤酒，语气缓和了。',
+        text:'Alright. Let’s go get pizza instead.', zh:'行吧。我们去吃披萨吧。',
+        options:['That sounds way better.','Okay.','Fine.'],
+        nativeLine:'That sounds way better. Let’s go!',
+        intents:[
+          {keys:['that sounds way better','sounds way better','that sounds great','sounds good','let’s go','lets go','yes please'],
+           reply:'Lead the way!', emotion:'😄', emoHint:'Jordan 把啤酒扔进了垃圾桶。',
+           zh:'你带路！', quality:'ok', hint:'That sounds way better. 用 way 加强语气，非常地道，说明你是真心觉得这个主意好。', aff:1, flag:'safe_choice'},
+          {keys:['okay','ok','fine','sure'],
+           reply:'Cool. Come on.', emotion:'🙂', emoHint:'Jordan 走在前头。',
+           zh:'酷。走吧。', quality:'near', hint:'Okay. 太淡。说 That sounds way better. 更自然。', aff:0}
+        ],
+        fallback:{text:'Try “That sounds way better.”', emotion:'🙂', emoHint:'Jordan 等着。', zh:'试试"That sounds way better."', quality:'miss', hint:'热情接受替代方案。', aff:0}
+      }
+    ]
+  }
+];
+
+/* 全成长线按年龄顺序合并（稳定排序，同年龄保持剧情顺序） */
+const byAge=(a,b)=>a.age-b.age;
+const SCENES = [...PRESCHOOL, ...PRIMARY, ...MIDDLE, ...HIGH].sort(byAge);
+const STAGES = [
+  {key:'preschool', stage:'学龄前 4–6', icon:'🧸', note:'简单短句 · 需求与情绪表达', list:PRESCHOOL.slice().sort(byAge)},
+  {key:'primary', stage:'小学 7–10', icon:'🎒', note:'同学社交 · 课堂 · 家庭琐事', list:PRIMARY.slice().sort(byAge)},
+  {key:'middle', stage:'小升初 11–13', icon:'⚽', note:'友谊 · 小矛盾 · 兴趣爱好', list:MIDDLE.slice().sort(byAge)},
+  {key:'high', stage:'初高中 14–18', icon:'🎓', note:'复杂社交 · 兼职 · 升学压力', list:HIGH.slice().sort(byAge)}
+];
+
+/* 全成长线时间线（由各阶段数组自动生成） */
+const TIMELINE = STAGES.map(g=>({stage:g.stage,icon:g.icon,note:g.note,
+  scenes:g.list.map(s=>({title:s.title,id:s.id,icon:s.icon,rating:s.rating||0}))}));
+
+/* ============ 状态与存储 ============ */
+const KEY='emma_oral_v1';
+const DEF={done:[],affinity:{},flags:{},wrongbook:[],voiceOn:true,unlocked:['need','school'],ratingCap:0};
+let S=load();
+function load(){try{const r=JSON.parse(localStorage.getItem(KEY));return Object.assign({},DEF,r||{})}catch(e){return Object.assign({},DEF)}}
+/* 迁移：旧存档补上各阶段首个场景的解锁，并规整分级设置 */
+STAGES.forEach(g=>{const id=g.list[0].id;if(S.unlocked.indexOf(id)<0)S.unlocked.push(id)});
+if([0,14,16].indexOf(S.ratingCap)<0)S.ratingCap=0;
+save();
+function allowed(s){return (s.rating||0)<=S.ratingCap}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function norm(s){return String(s||'').toLowerCase().replace(/[’']/g,'’').replace(/[^a-z0-9’\s]/g,' ').replace(/\s+/g,' ').trim()}
+function score(text,intent){const s=norm(text);let sc=0;(intent.keys||[]).forEach(k=>{const kw=norm(k);if(!kw)return;
+  if(kw.indexOf(' ')<0){const w=s.split(' ');if(w.indexOf(kw)>=0)sc+=2;else if(s.indexOf(kw)>=0)sc+=1;}
+  else if(s.indexOf(kw)>=0)sc+=3;});return sc}
+function match(text,turn){let best=null,bs=0;(turn.intents||[]).forEach(it=>{const sc=score(text,it);if(sc>bs){bs=sc;best=it}});
+  return best?best:(turn.fallback||{reply:turn.fallback&&turn.fallback.text||'',quality:'miss',hint:'再想想怎么说。',aff:0})}
+function esc(t){return String(t==null?'':t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+const QUALITY={ok:{cls:'ok',full:'✅ 地道',short:'✅'},near:{cls:'near',full:'⚠️ 语法对但不够地道',short:'⚠️'},
+  miss:{cls:'miss',full:'❌ 理解偏差',short:'❌'},bad:{cls:'bad',full:'❌ 表达不恰当',short:'❌'}};
+function qinfo(q){return QUALITY[q]||QUALITY.miss}
+
+/* ============ TTS ============ */
+let voices=[];
+function loadVoices(){try{voices=window.speechSynthesis.getVoices()||[]}catch(e){voices=[]}}
+if('speechSynthesis' in window){loadVoices();window.speechSynthesis.onvoiceschanged=loadVoices}
+function pickVoice(){const en=voices.filter(v=>/^en/i.test(v.lang));
+  return en.find(v=>/Samantha|Karen|Daniel|Google US English|Microsoft Aria|Microsoft Zira/i.test(v.name))||en[0]||null}
+function speak(text){if(!S.voiceOn||!('speechSynthesis' in window))return;
+  try{window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text.replace(/[’]/g,"'"));
+    u.lang='en-US';u.rate=.92;u.pitch=1;const v=pickVoice();if(v)u.voice=v;window.speechSynthesis.speak(u)}catch(e){}}
+function wakeVoice(){if(!('speechSynthesis' in window)){toast('这个浏览器不支持朗读');return}
+  try{const u=new SpeechSynthesisUtterance('Hi');u.lang='en-US';u.volume=0.01;window.speechSynthesis.speak(u);
+    S.voiceOn=true;save();toast('语音已开启 ✓');render()}catch(e){toast('语音开启失败')}}
+
+/* ============ 界面 ============ */
+const app=document.getElementById('app');
+let view={name:'home',mode:'main'};
+let run=null;
+function go(v){view=Object.assign({},v);render();window.scrollTo(0,0)}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),1900)}
+function topBar(title,sub,back){return `<div class="top"><div class="row">
+    ${back?`<button class="icon-btn btn" data-act="${back.act}">‹</button>`:''}
+    <div style="flex:1"><h1>${esc(title)}</h1>${sub?`<div class="sub">${esc(sub)}</div>`:''}</div>
+    ${view.name==='home'?`<button class="icon-btn btn" data-act="wake" title="开启语音">🔊</button>`:''}
+  </div></div>`}
+
+function render(){
+  if(view.name==='home')renderHome();
+  else if(view.name==='timeline')renderTimeline();
+  else if(view.name==='free')renderFree();
+  else if(view.name==='settings')renderSettings();
+  else if(view.name==='intro')renderIntro();
+  else if(view.name==='chat')renderChat();
+  else if(view.name==='recap')renderRecap();
+  else if(view.name==='wrong')renderWrong();
+  bind();
+}
+
+function renderHome(){
+  const doneN=S.done.length;
+  app.innerHTML=topBar('Emma 的成长口语','跟着美国女孩从 4 岁长到 18 岁',null)+`<div class="wrap">
+    <div class="card hero">
+      <div class="avatar">${HERO.emoji}</div>
+      <div><h2>${HERO.name} · ${HERO.cn}</h2><p>${HERO.city}</p>
+        <div><span class="chip">👨‍👩‍👦 ${HERO.family.split('，')[0]}</span><span class="chip">🐕 金毛</span></div>
+      </div>
+    </div>
+    <div class="banner"><b>现在：${doneN? '成长主线 · '+doneN+'/'+SCENES.length+' 个场景':'从 5 岁的第一句英文开始'}</b>
+      <p>纯本地运行 · 不用联网 · 数据只存在你手机里</p>
+      <button class="btn" data-act="continue">${doneN?'继续成长 →':'开始第一天上学 →'}</button>
+    </div>
+    <div class="seg">
+      <button class="btn ${view.mode==='main'?'on':''}" data-act="mode-main">主线 · 按时序</button>
+      <button class="btn ${view.mode==='free'?'on':''}" data-act="mode-free">自由漫游</button>
+    </div>
+    <div class="sec-title">学习进度</div>
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:8px">
+        <span>全成长线场景</span><span style="color:var(--brand);font-weight:600">${doneN} / ${SCENES.length}</span></div>
+      <div class="progress"><i style="width:${Math.round(doneN/SCENES.length*100)}%"></i></div>
+      <button class="ghost-btn btn" data-act="timeline">🗺️ 查看完整成长时间线（4–18 岁）</button>
+    </div>
+    <div class="card">
+      <button class="scene-item btn" data-act="wrong" style="margin:0;border:0;box-shadow:none">
+        <div class="ic">📕</div><div class="meta"><b>我的错题本</b><span>收集不地道的表达，随时回练</span></div>
+        <div class="go">${S.wrongbook.length} 条 ›</div>
+      </button>
+      <button class="scene-item btn" data-act="settings" style="margin:0;border:0;box-shadow:none">
+        <div class="ic">🔞</div><div class="meta"><b>内容分级设置</b><span>14+ / 16+ 敏感场景默认锁定</span></div>
+        <div class="go">${S.ratingCap?S.ratingCap+'+ 已开':'未开启'} ›</div>
+      </button>
+    </div>
+    <div class="card" style="background:transparent;border-style:dashed;box-shadow:none">
+      <p class="mini-note">💡 用 iPhone 打开时：点输入框 → 按键盘上的麦克风 🎤 说英文 → 文字自动填进来。<br>
+      首次使用点右上角 🔊 开启朗读。所有进度保存在本机，换设备不会同步。</p>
+    </div>
+  </div>`;
+}
+
+function renderTimeline(){
+  let h=topBar('成长时间线','4 → 18 岁 · 一个女孩的连贯故事',{act:'home'})+'<div class="wrap">';
+  TIMELINE.forEach(g=>{
+    h+=`<div class="stage">${g.icon} ${esc(g.stage)} · ${esc(g.note)}</div>`;
+    g.scenes.forEach(sc=>{
+      const s=SCENES.find(x=>x.id===sc.id);
+      const done=sc.id&&S.done.indexOf(sc.id)>=0;
+      const unlocked=sc.id&&S.unlocked.indexOf(sc.id)>=0;
+      const ageLocked=!allowed(s||{rating:sc.rating});
+      const label=ageLocked?`需开启 ${sc.rating}+ · 点此设置`:done?'已完成':unlocked?'待解锁':'按主线解锁';
+      h+=`<button class="scene-item btn ${ageLocked?'lock':''} ${done?'done':''}" ${ageLocked?`data-act="settings"`:(!unlocked?'disabled':`data-act="open" data-id="${sc.id}"`)}>
+        <div class="ic">${done?'✓':ageLocked?'🔒':'📖'}</div>
+        <div class="meta"><b>${esc(sc.title)}</b><span>${label}</span></div>
+        <div class="go">${ageLocked?'🔓':(!unlocked?'':done?'重玩 ›':'开始 ›')}</div></button>`;
+    });
+  });
+  h+=`<p class="mini-note">共 ${SCENES.length} 个场景，按 4 → 18 岁排成连贯主线。带 14+/16+ 标记的场景默认锁定，可在首页「内容分级设置」里开启。</p></div>`;
+  app.innerHTML=h;
+}
+
+function renderSettings(){
+  const rows=[
+    {v:0,t:'全年龄',d:'只显示适合所有年龄的日常与社交场景（推荐）'},
+    {v:14,t:'14+ 已开启',d:'额外显示：约会、派对（含拒绝饮酒的引导）'},
+    {v:16,t:'16+ 已开启',d:'再额外显示：饮酒场景（练习坚定拒绝）'}
+  ];
+  let h=topBar('内容分级','青春期的敏感场景需要你主动开启',{act:'home'})+'<div class="wrap">';
+  h+=`<div class="card"><div class="card-title">🔞 分级开关</div>
+    <p class="k" style="font-size:13px;line-height:1.75;color:var(--ink2);margin:0 0 12px">
+    默认只开放全年龄场景。14+/16+ 场景涉及约会、派对、饮酒等话题，内容价值观正向，但请你按学习者年龄自行决定是否开启。关闭后场景立即隐藏，已完成记录仍保留。</p>`;
+  rows.forEach(r=>{const on=S.ratingCap===r.v;
+    h+=`<button class="scene-item btn" data-act="set-rating" data-v="${r.v}" style="${on?'border-color:var(--brand);background:var(--blue2)':''};margin:8px 0">
+      <div class="ic">${on?'✅':'⬜'}</div><div class="meta"><b>${r.t}</b><span>${r.d}</span></div>
+      <div class="go">${on?'当前':'选择'}</div></button>`});
+  h+=`</div><p class="mini-note">分级只控制场景是否可见，不影响已保存的进度、好感与记忆。</p></div>`;
+  app.innerHTML=h;
+}
+
+function renderFree(){
+  let h=topBar('自由漫游','任意场景，想练哪个练哪个',{act:'home'})+'<div class="wrap">';
+  h+=`<div class="mode-tag">自由模式 · 已开放 ${SCENES.filter(allowed).length} / ${SCENES.length} 个场景</div><div style="height:12px"></div>`;
+  SCENES.forEach(s=>{const done=S.done.indexOf(s.id)>=0;const lock=!allowed(s);
+    h+=`<button class="scene-item btn ${done?'done':''} ${lock?'lock':''}" ${lock?'data-act="settings"':`data-act="open" data-id="${s.id}"`}>
+      <div class="ic">${done?'✓':lock?'🔒':s.icon}</div><div class="meta"><b>${esc(s.title)}${s.rating?' <span style="color:#c0392b;font-size:11px">'+s.rating+'+</span>':''}</b>
+      <span>${lock?'需开启 '+s.rating+'+ · 点此设置':`${s.age} 岁 · ${esc(s.stage)} · ${s.turns.length} 轮对话`}</span></div><div class="go">${lock?'🔓':'进入 ›'}</div></button>`});
+  h+='</div>';app.innerHTML=h;
+}
+
+function nextScene(){
+  for(const s of SCENES){if(S.done.indexOf(s.id)<0&&S.unlocked.indexOf(s.id)>=0&&allowed(s))return s}
+  return SCENES.find(s=>S.done.indexOf(s.id)<0&&allowed(s))||SCENES.find(allowed)||SCENES[0]}
+
+function renderIntro(){
+  const s=SCENES.find(x=>x.id===view.id)||SCENES[0];
+  const recalled=[];const rf={met_teacher:'老师还记得第一次见面时你礼貌地做了自我介绍。',friend_billy:'Billy 记得第一天你就答应和他坐一起。',
+    shared_snack:'Timmy 想起你上次分给他饼干。',thanked_billy:'Billy 还记着你上次谢谢他的三明治。',honest_lunch:'老师记得你上次忘带午餐时诚实说了实话。',
+    polite_ask:'妈妈记得你小时候要牛奶会加上 please。',named_feeling:'妈妈记得你学会说出"I’m mad"，而不是哭闹。',
+    made_up:'Chloe 记得那次午餐矛盾是你先开口和好的。',spoke_up:'Chloe 一直记得你说"I felt left out"。',
+    joined_club:'Davis 老师记得你加入了辩论社。',stayed_out:'Jordan 记得那次流言里你没有站队。',
+    good_interview:'咖啡店经理还记得你面试时的回答。',told_parent:'Alex 记得你说要告诉妈妈行程。',
+    set_boundary:'Taylor 记得你在派对上说"我不舒服"。',refused_drink:'Jordan 记得你坚定的那句"No, thanks. I’ll pass."。',
+    stood_ground:'妈妈记得你选大学时既坚定又尊重她。'};
+  Object.keys(rf).forEach(k=>{if(S.flags[k])recalled.push(rf[k])});
+  let h=topBar(s.title,`${s.age} 岁 · ${s.stage}`,{act:view.from||'home'})+'<div class="wrap">';
+  h+=`<div class="card"><div style="font-size:34px">${s.icon}</div>
+    <h2 style="margin:6px 0">${esc(s.title)}</h2><p style="color:var(--ink2);font-size:14px;margin:0">${esc(s.desc)}</p></div>`;
+  if(recalled.length){h+=`<div class="card" style="background:var(--blue2);border-color:#d3e3ee">
+    <div class="card-title">🧠 Emma 的记忆</div>${recalled.slice(-3).map(x=>`<p class="k" style="font-size:13px;margin:4px 0">· ${esc(x)}</p>`).join('')}</div>`}
+  h+=`<div class="card culture"><div class="card-title">🌎 文化彩蛋 · 点开看看</div>
+    <details><summary style="cursor:pointer;font-size:14px;color:var(--brand)">${esc(s.culture.title)}</summary>
+    <p class="k" style="margin-top:10px">${esc(s.culture.body)}</p></details></div>`;
+  h+=`<button class="big-btn btn" data-act="start">开始对话 →</button>
+    <p class="mini-note">每轮：听 NPC 说 → 你用英文回应（点输入框，按键盘麦克风）→ 看剧情 → 战后复盘</p></div>`;
+  app.innerHTML=h;
+}
+
+function renderChat(){
+  const s=SCENES.find(x=>x.id===run.sceneId);const t=s.turns[run.i];
+  let h=topBar(s.title,`第 ${run.i+1} / ${s.turns.length} 轮`,{act:'quit'})+'<div class="wrap">';
+  h+=`<div class="progress"><i style="width:${Math.round((run.i)/s.turns.length*100)}%"></i></div>`;
+  h+=`<div class="chat-head"><div class="npc-av">${t.npcAv}</div><div><b>${esc(t.npc)}</b>
+    <span>${esc(t.emotion)} ${esc(t.emoHint)}</span></div></div>`;
+  run.log.forEach((m,idx)=>{
+    if(m.who==='npc'){
+      h+=`<div class="bubble npc"><span class="emo">${m.emotion||''}</span>${esc(m.text)}
+        <div class="play-btn btn" data-act="say" data-i="${idx}">🔊 听</div>
+        <div class="zh-toggle btn" data-act="zh" data-i="${idx}">看中文</div>
+        ${run.zhOpen&&run.zhOpen[idx]?`<div class="zh-text">${esc(m.zh)}</div>`:''}</div>`;
+    }else{
+      h+=`<div class="bubble me">${esc(m.text)}</div>`;
+    }
+  });
+  const cur=run.log[run.log.length-1];
+  if(cur&&cur.who==='npc')h+=`<div class="emo-hint">母语小提示：${esc(cur.emoHint)}</div>`;
+  h+=`<div style="height:120px"></div></div>`;
+  if(run.pending)h+=`<div class="say-area"><div class="opts">${t.options.map(o=>`<button class="btn" data-act="opt" data-v="${esc(o)}">${esc(o)}</button>`).join('')}</div>
+    <div class="input-row"><input id="sayInput" type="text" autocomplete="off" autocapitalize="sentences"
+      placeholder="点这里，按键盘 🎤 说英文…" value=""><button class="send btn" data-act="send">发送</button></div>
+    <div class="tip-mic">说不出来？点上面的备选台词参考一下</div></div>`;
+  else h+=`<div class="say-area"><button class="big-btn btn" data-act="next">继续 →</button></div>`;
+  app.innerHTML=h;
+}
+
+function renderRecap(){
+  const s=SCENES.find(x=>x.id===run.sceneId);
+  const okN=run.reviews.filter(r=>r.quality==='ok').length;
+  const head=okN===run.reviews.length?'🎉':okN>=run.reviews.length/2?'👍':'💪';
+  let h=topBar('战后复盘','先演完剧情，再回头看地道不地道',{act:'quit'})+'<div class="wrap">';
+  h+=`<div class="rc-head"><div class="big">${head}</div><h2>${esc(s.title)} 完成！</h2>
+    <p>${okN}/${run.reviews.length} 句说得地道 · 看看哪里能更像母语小孩</p></div>`;
+  run.reviews.forEach((r,i)=>{
+    const qi=qinfo(r.quality);
+    h+=`<div class="rc-row ${qi.cls}"><div class="lv">第 ${i+1} 轮 · ${qi.full}</div>
+      <div class="rc-label">你刚才说：</div><div class="said">${esc(r.said)}</div>
+      <div class="rc-label">母语小孩更可能说：</div><div class="native">${esc(r.native)}</div>
+      <div class="why">${esc(r.hint)}</div></div>`;
+  });
+  const fillers=['like','kinda','y’know','well','I mean','actually'];
+  h+=`<div class="card"><div class="card-title">🗣️ 这个场景的高频口头词</div><div class="fillers">${fillers.map(f=>`<span>${f}</span>`).join('')}</div>
+    <p class="k" style="color:var(--ink3);font-size:12px;margin:6px 0 0">口语里这些填充词很常见，用一两个会更像母语者，但别每句都加。</p></div>`;
+  h+=`<button class="big-btn btn" data-act="recap-done">完成，继续成长 →</button>
+    <button class="ghost-btn btn" data-act="replay">再玩一次这个场景</button></div>`;
+  app.innerHTML=h;
+}
+
+function renderWrong(){
+  let h=topBar('我的错题本','不地道的表达都收在这里',{act:'home'})+'<div class="wrap">';
+  if(!S.wrongbook.length)h+=`<div class="empty">📭 还没有错题<br>去场景里练几句，踩过的坑会自动收进来</div>`;
+  else{S.wrongbook.slice().reverse().forEach((w,i)=>{
+    const qi=qinfo(w.quality);
+    h+=`<div class="rc-row ${qi.cls}"><div class="lv">${qi.short} ${esc(w.scene)}</div>
+      <div class="said">${esc(w.said)}</div><div class="native">→ ${esc(w.native)}</div>
+      <div class="why">${esc(w.hint)}</div></div>`});
+    h+=`<button class="ghost-btn btn" data-act="clear-wrong">清空错题本</button>`}
+  h+='</div>';app.innerHTML=h;
+}
+
+/* ============ 交互 ============ */
+function unlockAudio(){if(!('speechSynthesis' in window))return;
+  try{const u=new SpeechSynthesisUtterance(' ');u.lang='en-US';u.volume=0.01;window.speechSynthesis.speak(u)}catch(e){}}
+function startRun(sceneId){const s=SCENES.find(x=>x.id===sceneId)||SCENES[0];
+  if(!allowed(s)){toast('这个场景需要开启 '+s.rating+'+ 分级');go({name:'settings'});return}
+  unlockAudio();
+  run={sceneId:s.id,i:0,pending:true,log:[{who:'npc',text:s.turns[0].text,emotion:s.turns[0].emotion,zh:s.turns[0].zh,emoHint:s.turns[0].emoHint}],
+    reviews:[],zhOpen:{},reply:null};
+  go({name:'chat'});setTimeout(()=>speak(s.turns[0].text),250)}
+
+function submitAnswer(text){
+  text=String(text||'').trim();if(!text){toast('先说一句英文吧～');return}
+  const s=SCENES.find(x=>x.id===run.sceneId);const t=s.turns[run.i];
+  const m=match(text,t);
+  run.log.push({who:'me',text});
+  run.reply={text:m.reply||t.fallback.text,emotion:m.emotion||t.fallback.emotion,
+    zh:m.zh||t.fallback.zh,emoHint:m.emoHint||t.fallback.emoHint};
+  run.reviews.push({said:text,native:t.nativeLine,quality:m.quality||'miss',hint:m.hint||'',scene:s.title});
+  if((m.quality||'miss')!=='ok'){S.wrongbook.push({scene:s.title,said:text,native:t.nativeLine,quality:m.quality||'miss',hint:m.hint||''});
+    if(S.wrongbook.length>60)S.wrongbook.shift()}
+  const npcName=t.npc;S.affinity[npcName]=(S.affinity[npcName]||0)+(m.aff||0);
+  if(m.flag)S.flags[m.flag]=true;
+  save();
+  run.log.push({who:'npc',text:run.reply.text,emotion:run.reply.emotion,zh:run.reply.zh,emoHint:run.reply.emoHint});
+  run.pending=false;render();setTimeout(()=>speak(run.reply.text),200)}
+
+function nextTurn(){const s=SCENES.find(x=>x.id===run.sceneId);
+  run.i++;run.reply=null;
+  if(run.i>=s.turns.length){go({name:'recap'});return}
+  const t=s.turns[run.i];run.pending=true;
+  run.log.push({who:'npc',text:t.text,emotion:t.emotion,zh:t.zh,emoHint:t.emoHint});
+  render();setTimeout(()=>speak(t.text),200)}
+
+function finishScene(){const s=SCENES.find(x=>x.id===run.sceneId);
+  if(S.done.indexOf(s.id)<0)S.done.push(s.id);
+  const idx=SCENES.findIndex(x=>x.id===s.id);
+  if(idx<SCENES.length-1){const nx=SCENES[idx+1].id;if(S.unlocked.indexOf(nx)<0)S.unlocked.push(nx)}
+  if(S.done.length===SCENES.length){toast('🎉 4–18 岁全成长线完成！')}
+  save();go({name:'home'})}
+
+function bind(){
+  app.querySelectorAll('[data-act]').forEach(el=>{
+    el.addEventListener('click',e=>{
+      const a=el.getAttribute('data-act');
+      if(a==='wake'){wakeVoice();return}
+      if(a==='continue'){startRun(nextScene().id);return}
+      if(a==='mode-main'){view.mode='main';renderHome();bind();return}
+      if(a==='mode-free'){go({name:'free'});return}
+      if(a==='timeline'){go({name:'timeline'});return}
+      if(a==='settings'){go({name:'settings'});return}
+      if(a==='set-rating'){S.ratingCap=+el.getAttribute('data-v');save();render();toast('分级设置已更新');return}
+      if(a==='home'){go({name:'home'});return}
+      if(a==='wrong'){go({name:'wrong'});return}
+      if(a==='clear-wrong'){if(confirm('确定清空错题本？')){S.wrongbook=[];save();renderWrong();bind()}return}
+      if(a==='open'){const t=SCENES.find(x=>x.id===el.getAttribute('data-id'));
+        if(t&&!allowed(t)){toast('这个场景需要开启 '+t.rating+'+ 分级');go({name:'settings'});return}
+        go({name:'intro',id:el.getAttribute('data-id'),from:view.name});return}
+      if(a==='start'){startRun(view.id);return}
+      if(a==='quit'){if(confirm('退出这个场景？进度不会保存。'))go({name:view.mode==='free'?'free':'home'});return}
+      if(a==='say'){const i=+el.getAttribute('data-i');const m=run.log[i];if(m&&m.text)speak(m.text);return}
+      if(a==='zh'){const i=+el.getAttribute('data-i');run.zhOpen[i]=!run.zhOpen[i];render();return}
+      if(a==='opt'){submitAnswer(el.getAttribute('data-v'));return}
+      if(a==='send'){const inp=document.getElementById('sayInput');submitAnswer(inp?inp.value:'');return}
+      if(a==='next'){nextTurn();return}
+      if(a==='recap-done'){finishScene();return}
+      if(a==='replay'){startRun(run.sceneId);return}
+    });
+  });
+  const inp=document.getElementById('sayInput');
+  if(inp)inp.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();submitAnswer(inp.value)}});
+}
+
+render();
+</script>
+</body>
+</html>
